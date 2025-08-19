@@ -18,7 +18,7 @@ export default function Home() {
             Bioinformatics Software Engineer & Data Scientist
           </p>
           <p className="text-lg text-blue-400 font-semibold mb-8">
-            2.5+ Years of Proven Experience | 85% ML Model Accuracy | 500+ Users Supported
+            2.5+ Years of Proven Experience | 85% ML Model Accuracy | 3500+ Users Supported
           </p>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12">
             MS Bioinformatics @ Northeastern University | Building scalable ML/AI solutions for drug discovery, 
@@ -46,7 +46,7 @@ export default function Home() {
                 <li>✓ <strong>85% accuracy</strong> in drug discovery ML models</li>
                 <li>✓ <strong>40% improvement</strong> in processing efficiency</li>
                 <li>✓ <strong>2 published papers</strong> in 2025</li>
-                <li>✓ <strong>500+ users</strong> supported across platforms</li>
+                <li>✓ <strong>3500+ users</strong> supported across platforms</li>
               </ul>
             </div>
 
@@ -98,7 +98,7 @@ export default function Home() {
               <div className="text-4xl mb-4">👥</div>
               <h3 className="text-xl font-bold mb-4 text-orange-400">Leadership Impact</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>Mentored 30+</strong> students</li>
+                <li>✓ <strong>Mentored 75+</strong> students</li>
                 <li>✓ <strong>Led cross-functional</strong> teams</li>
                 <li>✓ <strong>45% improvement</strong> in competency</li>
                 <li>✓ <strong>Published</strong> researcher</li>
@@ -117,7 +117,7 @@ export default function Home() {
                 <div className="text-sm text-blue-200">ML Model Accuracy</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-green-400 mb-2">500+</div>
+                <div className="text-4xl font-bold text-green-400 mb-2">3500+</div>
                 <div className="text-sm text-green-200">Users Supported</div>
               </div>
               <div className="text-center">
