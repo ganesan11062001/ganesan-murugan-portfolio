@@ -104,29 +104,31 @@ export default function Products() {
       icon: "🧬"
     },
     {
-      name: "BioFlow Intelligence Platform",
-      shortName: "Next-Gen Bioinformatics",
-      description: "AI-native bioinformatics workflow platform with autonomous pipeline orchestration",
-      category: "Bioinformatics AI",
-      status: "Concept",
-      statusIcon: "🎯",
-      technologies: ["React 19", "FastAPI", "Vector DB", "MLOps"],
+      name: "SingleCell Insights Pro",
+      shortName: "scRNA-seq Analysis Platform",
+      description: "Advanced single-cell RNA sequencing analysis platform with automated quality control, dimensional reduction, and interactive visualization for multi-omics discovery",
+      category: "Bioinformatics Analysis",
+      status: "Under Development",
+      statusIcon: "⚡",
+      technologies: ["Python", "Scanpy", "React", "Plotly", "Docker", "AWS"],
       features: [
-        "Autonomous workflow orchestration",
-        "Real-time ML quality control",
-        "Intelligent data routing",
-        "Zero-config cloud scaling"
+        "Automated QC & preprocessing",
+        "Interactive UMAP/tSNE visualization",
+        "Cell type classification",
+        "Differential expression analysis",
+        "Trajectory inference",
+        "Multi-sample integration"
       ],
       impact: {
-        pipelines: "∞",
-        processing: "100TB+",
-        models: "50+"
+        version: "v0.1",
+        testing: "Alpha",
+        launch: "Q4"
       },
-      targetUsers: "Research institutions, Biotech companies",
+      targetUsers: "Single-cell researchers, Bioinformaticians, Labs",
       websiteUrl: null,
-      launchDate: "2026",
-      color: "from-cyan-400 to-blue-500",
-      icon: "🔬"
+      launchDate: "Q4 2025",
+      color: "from-emerald-400 to-teal-500",
+      icon: "🧬"
     }
   ];
 
@@ -229,7 +231,7 @@ export default function Products() {
                         
                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                           product.status === 'Published' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/50' :
-                          product.status === 'Under Construction' ? 'bg-orange-500/20 text-orange-300 border border-orange-500/50' :
+                          product.status === 'Under Development' ? 'bg-orange-500/20 text-orange-300 border border-orange-500/50' :
                           'bg-purple-500/20 text-purple-300 border border-purple-500/50'
                         }`}>
                           {product.status}

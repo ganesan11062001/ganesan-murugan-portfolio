@@ -68,13 +68,13 @@ export default function About() {
             <div className="flex flex-wrap justify-center gap-8 mb-12">
               <div className="bg-gray-800/50 backdrop-blur-sm px-8 py-4 rounded-2xl border border-blue-400/30">
                 <div className="text-3xl font-bold text-blue-400">
-                  <AnimatedCounter end={500} suffix="+" />
+                  <AnimatedCounter end={3500} suffix="+" />
                 </div>
                 <div className="text-sm text-blue-200">Users Supported</div>
               </div>
               <div className="bg-gray-800/50 backdrop-blur-sm px-8 py-4 rounded-2xl border border-green-400/30">
                 <div className="text-3xl font-bold text-green-400">
-                  <AnimatedCounter end={30} suffix="+" />
+                  <AnimatedCounter end={75} suffix="+" />
                 </div>
                 <div className="text-sm text-green-200">Students Mentored</div>
               </div>
