@@ -48,6 +48,22 @@ export default function Certifications() {
 
   const certifications = [
     {
+      title: "Oracle Cloud Infrastructure 2025 Certified DevOps Professional",
+      issuer: "Oracle",
+      date: "Aug 2025",
+      year: 2025,
+      month: 8,
+      status: "Certified",
+      description: "Comprehensive DevOps certification covering CI/CD pipelines, infrastructure as code, monitoring, and automation using Oracle Cloud Infrastructure. Validates expertise in streamlining workflows, application deployment, and security in dynamic DevOps environments.",
+      skills: ["DevOps", "CI/CD", "OCI", "Infrastructure as Code", "Automation", "Cloud Security", "Application Deployment"],
+      category: "DevOps",
+      logo: "⚙️",
+      verificationUrl: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=448E98842880E651092E414E13518BC7B2B20F91F0621A48905389D9E79EBE5A",
+      color: "from-orange-500 to-red-500",
+      bgGradient: "bg-gradient-to-br from-orange-500/10 to-red-500/10",
+      expirationDate: "Aug 29, 2027"
+    },
+    {
       title: "Software Engineer Intern",
       issuer: "HackerRank",
       date: "Aug 2025",
@@ -192,15 +208,6 @@ export default function Certifications() {
 
   const upcomingCertifications = [
     {
-      title: "OCI DevOps Professional",
-      issuer: "Oracle Cloud Infrastructure",
-      targetMonth: "August 2025",
-      description: "Advanced DevOps practices and automation on Oracle Cloud Infrastructure",
-      category: "DevOps",
-      logo: "⚙️",
-      color: "from-orange-500 to-red-500"
-    },
-    {
       title: "OCI Data Science Professional",
       issuer: "Oracle Cloud Infrastructure",
       targetMonth: "September 2025",
@@ -220,7 +227,7 @@ export default function Certifications() {
     }
   ];
 
-  const categories = ["All", "Database", "Programming", "Data Science", "Cloud Development", "Leadership", "Bioinformatics"];
+  const categories = ["All", "Database", "Programming", "Data Science", "Cloud Development", "DevOps", "Leadership", "Bioinformatics"];
 
   const filteredCertifications = selectedCategory === 'All' 
     ? certifications 
@@ -233,6 +240,7 @@ export default function Certifications() {
            category === 'Programming' ? 'text-green-400' :
            category === 'Data Science' ? 'text-purple-400' :
            category === 'Cloud Development' ? 'text-cyan-400' :
+           category === 'DevOps' ? 'text-orange-400' :
            category === 'Leadership' ? 'text-yellow-400' :
            'text-pink-400'
   }));
@@ -293,7 +301,7 @@ export default function Certifications() {
             <div className="group">
               <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 hover:border-purple-500/50">
                 <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-                  <AnimatedCounter end={3} />
+                  <AnimatedCounter end={upcomingCertifications.length} />
                 </div>
                 <p className="text-gray-400 text-sm font-medium">Upcoming</p>
                 <div className="w-full bg-gray-700 rounded-full h-2 mt-3">
@@ -438,7 +446,7 @@ export default function Certifications() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {upcomingCertifications.map((cert, index) => (
                 <div key={index} className="group relative">
                   <div className={`bg-gradient-to-br from-gray-800/30 to-gray-900/30 backdrop-blur-sm border border-gray-600/30 rounded-2xl p-6 transition-all duration-500 hover:scale-105 hover:border-purple-500/50`}>
@@ -494,6 +502,7 @@ export default function Certifications() {
                         stat.name === 'Programming' ? 'from-green-400 to-emerald-400' :
                         stat.name === 'Data Science' ? 'from-purple-400 to-pink-400' :
                         stat.name === 'Cloud Development' ? 'from-cyan-400 to-blue-400' :
+                        stat.name === 'DevOps' ? 'from-orange-400 to-red-400' :
                         stat.name === 'Leadership' ? 'from-yellow-400 to-orange-400' :
                         'from-pink-400 to-rose-400'
                       }`}

@@ -24,7 +24,7 @@ export default function Posts() {
               </p>
               <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-500/30 inline-block">
                 <p className="text-blue-400 font-semibold">First Post Expected:</p>
-                <p className="text-white text-xl">August 23, 2025</p>
+                <p className="text-white text-xl">Sep 25, 2025</p>
               </div>
             </div>
           </div>
