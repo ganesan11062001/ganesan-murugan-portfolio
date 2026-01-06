@@ -1,3 +1,5 @@
+'use client';
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
@@ -14,15 +16,16 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
             Hi, I am <span className="text-blue-400">Ganesan Murugan</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-4">
-            Bioinformatics Software Engineer & Data Scientist
+          <p className="text-xl md:text-2xl text-blue-300 mb-4">
+            Turning Data into Intelligence | Building Production ML Systems at Scale
           </p>
           <p className="text-lg text-blue-400 font-semibold mb-8">
-            2.5+ Years of Proven Experience | 85% ML Model Accuracy | 3500+ Users Supported
+            🚀 3+ Years of Experience | 92% Model Accuracy | 3500+ Users Scaled
           </p>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12">
-            MS Bioinformatics @ Northeastern University | Building scalable ML/AI solutions for drug discovery, 
-            structural biology, and genomics with expertise in full-stack development and cloud platforms.
+            Software Engineer | Data Scientist | ML Ops Specialist
+            <br className="hidden md:block" />
+            Specializing in AI infrastructure, LLM deployment, cloud-native solutions, and end-to-end ML systems
           </p>
           <div className="space-x-6">
             <a href="/projects" className="bg-blue-500 hover:bg-blue-600 px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
@@ -40,68 +43,68 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🚀</div>
-              <h3 className="text-xl font-bold mb-4 text-blue-400">Proven Results</h3>
+              <div className="text-4xl mb-4">🤖</div>
+              <h3 className="text-xl font-bold mb-4 text-blue-400">LLM & ML Ops</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>85% accuracy</strong> in drug discovery ML models</li>
-                <li>✓ <strong>40% improvement</strong> in processing efficiency</li>
-                <li>✓ <strong>2 published papers</strong> in 2025</li>
-                <li>✓ <strong>3500+ users</strong> supported across platforms</li>
+                <li>✓ <strong>92% accuracy</strong> in CRISPR ML optimization</li>
+                <li>✓ <strong>85% accuracy</strong> in drug discovery models</li>
+                <li>✓ ML pipeline orchestration & monitoring</li>
+                <li>✓ Model deployment & versioning</li>
               </ul>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-green-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">💼</div>
-              <h3 className="text-xl font-bold mb-4 text-green-400">Industry Experience</h3>
+              <div className="text-4xl mb-4">☁️</div>
+              <h3 className="text-xl font-bold mb-4 text-green-400">Cloud & Infrastructure</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>Boehringer Ingelheim</strong> (Big Pharma)</li>
-                <li>✓ <strong>Northeastern University</strong> (Academia)</li>
-                <li>✓ <strong>Zifo Technologies</strong> (Industry)</li>
-                <li>✓ <strong>2.5+ years</strong> hands-on experience</li>
+                <li>✓ <strong>AWS</strong> (SageMaker, EC2, Lambda, RDS)</li>
+                <li>✓ <strong>HPC & SLURM</strong> cluster management</li>
+                <li>✓ Docker & containerization</li>
+                <li>✓ <strong>40% efficiency</strong> improvement in workflows</li>
               </ul>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🎯</div>
-              <h3 className="text-xl font-bold mb-4 text-purple-400">Full-Stack Expertise</h3>
+              <div className="text-4xl mb-4">🧠</div>
+              <h3 className="text-xl font-bold mb-4 text-purple-400">AI & Deep Learning</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>ML/AI</strong> + Cloud Architecture</li>
-                <li>✓ <strong>React, Django,</strong> Node.js</li>
-                <li>✓ <strong>AWS, Docker,</strong> Jenkins</li>
-                <li>✓ <strong>Bioinformatics</strong> + Software Engineering</li>
+                <li>✓ <strong>TensorFlow & PyTorch</strong> model development</li>
+                <li>✓ Large-scale data processing & feature engineering</li>
+                <li>✓ Advanced ML algorithms & optimization</li>
+                <li>✓ 2 published papers in 2025</li>
               </ul>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-yellow-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🧬</div>
-              <h3 className="text-xl font-bold mb-4 text-yellow-400">Cutting-Edge Skills</h3>
+              <div className="text-4xl mb-4">🏗️</div>
+              <h3 className="text-xl font-bold mb-4 text-yellow-400">Production Systems</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>Spatial Transcriptomics</strong></li>
-                <li>✓ <strong>AlphaFold Integration</strong></li>
-                <li>✓ <strong>Drug Discovery</strong> Pipelines</li>
-                <li>✓ <strong>Multi-omics</strong> Analysis</li>
+                <li>✓ ML pipeline development & deployment</li>
+                <li>✓ CI/CD with Jenkins & GitHub Actions</li>
+                <li>✓ Model monitoring & versioning</li>
+                <li>✓ Served 3500+ users at scale</li>
               </ul>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-cyan-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">📊</div>
-              <h3 className="text-xl font-bold mb-4 text-cyan-400">Academic Excellence</h3>
+              <div className="text-4xl mb-4">💻</div>
+              <h3 className="text-xl font-bold mb-4 text-cyan-400">Software Engineering</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>MS Bioinformatics</strong> (3.917/4 GPA)</li>
-                <li>✓ <strong>BTech Biotechnology</strong> (9.4/10)</li>
-                <li>✓ <strong>Top 5%</strong> performer</li>
-                <li>✓ <strong>8+ Certifications</strong></li>
+                <li>✓ <strong>Python, Django, React,</strong> Node.js</li>
+                <li>✓ PostgreSQL & database design</li>
+                <li>✓ Full-stack ML applications</li>
+                <li>✓ 95% reduction in data entry errors</li>
               </ul>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-orange-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">👥</div>
-              <h3 className="text-xl font-bold mb-4 text-orange-400">Leadership Impact</h3>
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="text-xl font-bold mb-4 text-orange-400">Experience & Impact</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>Mentored 75+</strong> students</li>
-                <li>✓ <strong>Led cross-functional</strong> teams</li>
-                <li>✓ <strong>45% improvement</strong> in competency</li>
-                <li>✓ <strong>Published</strong> researcher</li>
+                <li>✓ <strong>MS Bioinformatics</strong> (3.95/4 GPA)</li>
+                <li>✓ Boehringer Ingelheim & Big Pharma experience</li>
+                <li>✓ Mentored 75+ engineers & scientists</li>
+                <li>✓ Published researcher</li>
               </ul>
             </div>
           </div>
@@ -113,7 +116,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-center mb-8 text-white">Impact at a Glance</h2>
             <div className="grid md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">85%</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">92%</div>
                 <div className="text-sm text-blue-200">ML Model Accuracy</div>
               </div>
               <div className="text-center">
@@ -125,7 +128,7 @@ export default function Home() {
                 <div className="text-sm text-purple-200">Efficiency Boost</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-yellow-400 mb-2">2.5+</div>
+                <div className="text-4xl font-bold text-yellow-400 mb-2">3+</div>
                 <div className="text-sm text-yellow-200">Years Experience</div>
               </div>
             </div>
@@ -138,9 +141,9 @@ export default function Home() {
           
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-blue-400">🤖 AI/ML</h3>
+              <h3 className="text-lg font-semibold mb-4 text-blue-400">🤖 LLM & AI</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {['TensorFlow', 'PyTorch', 'scikit-learn'].map((skill) => (
+                {['LangChain', 'RAG', 'Fine-tuning', 'TensorFlow', 'PyTorch', 'Transformers'].map((skill) => (
                   <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
                     {skill}
                   </span>
@@ -149,9 +152,9 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-green-400">☁️ Cloud</h3>
+              <h3 className="text-lg font-semibold mb-4 text-green-400">☁️ Cloud & Infra</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {['AWS', 'Docker', 'Jenkins'].map((skill) => (
+                {['AWS SageMaker', 'Kubernetes', 'Docker', 'Terraform', 'CI/CD', 'Lambda'].map((skill) => (
                   <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
                     {skill}
                   </span>
@@ -160,9 +163,9 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-purple-400">💻 Full-Stack</h3>
+              <h3 className="text-lg font-semibold mb-4 text-purple-400">📊 Data & ML Ops</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {['React', 'Django', 'Node.js'].map((skill) => (
+                {['Apache Spark', 'Airflow', 'MLflow', 'Prometheus', 'Pandas', 'Scikit-learn'].map((skill) => (
                   <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
                     {skill}
                   </span>
@@ -171,9 +174,9 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-yellow-400">🧬 Bioinformatics</h3>
+              <h3 className="text-lg font-semibold mb-4 text-yellow-400">💻 Software</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {['AlphaFold', 'PyMOL', 'Nextflow'].map((skill) => (
+                {['Python', 'FastAPI', 'PostgreSQL', 'React', 'Git', 'GraphQL'].map((skill) => (
                   <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
                     {skill}
                   </span>
@@ -186,9 +189,9 @@ export default function Home() {
         {/* Call to Action */}
         <section className="text-center">
           <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm p-12 rounded-2xl border border-blue-400/30">
-            <h2 className="text-3xl font-bold mb-6 text-white">Ready to Innovate Together?</h2>
+            <h2 className="text-3xl font-bold mb-6 text-white">Ready to Build Production ML Systems?</h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              From drug discovery to genomics, let's build the future of bioinformatics with proven expertise and cutting-edge technology.
+              From LLM deployment to AI infrastructure, let's scale machine learning systems with proven expertise in ML Ops, cloud architecture, and production-grade systems.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <a href="/projects" className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold transition duration-300 transform hover:scale-105">
