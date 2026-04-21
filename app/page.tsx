@@ -7,104 +7,104 @@ export default function Home() {
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-20 w-32 h-32 bg-blue-400 rounded-full animate-pulse"></div>
         <div className="absolute top-40 right-32 w-24 h-24 bg-purple-400 rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute bottom-32 left-40 w-20 h-20 bg-green-400 rounded-full animate-pulse delay-500"></div>
+        <div className="absolute bottom-32 left-40 w-20 h-20 bg-teal-400 rounded-full animate-pulse delay-500"></div>
       </div>
 
       <div className="container mx-auto px-6 py-20 relative z-10">
         {/* Hero Section */}
         <section className="text-center mb-20">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Hi, I am <span className="text-blue-400">Ganesan Murugan</span>
+            Hi, I&apos;m <span className="text-blue-400">Ganesan Murugan</span>
           </h1>
           <p className="text-xl md:text-2xl text-blue-300 mb-4">
-            Turning Data into Intelligence | Building Production ML Systems at Scale
+            Computational Biology &amp; AI — from protein design to agentic LLM systems
           </p>
           <p className="text-lg text-blue-400 font-semibold mb-8">
-            🚀 3+ Years of Experience | 92% Model Accuracy | 3500+ Users Scaled
+            MS Bioinformatics @ Northeastern &nbsp;·&nbsp; Co-op @ Solid Biosciences &nbsp;·&nbsp; 2 Published Papers
           </p>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12">
-            Software Engineer | Data Scientist | ML Ops Specialist
+            I build end-to-end ML systems across the drug discovery stack — multi-omics platforms, agentic workflows, cloud-native protein design, and full-stack research tools.
             <br className="hidden md:block" />
-            Specializing in AI infrastructure, LLM deployment, cloud-native solutions, and end-to-end ML systems
+            I like working at the intersection of biology and software engineering where both really matter.
           </p>
           <div className="space-x-6">
             <a href="/projects" className="bg-blue-500 hover:bg-blue-600 px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
               View My Work
             </a>
             <a href="mailto:murugan.g@northeastern.edu" className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
-              Contact Me
+              Get in Touch
             </a>
           </div>
         </section>
 
-        {/* Key Selling Points */}
+        {/* What I Focus On */}
         <section className="mb-20">
-          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">Why Choose Me?</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">What I Work On</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
+
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🤖</div>
-              <h3 className="text-xl font-bold mb-4 text-blue-400">LLM & ML Ops</h3>
+              <div className="text-4xl mb-4">🧬</div>
+              <h3 className="text-xl font-bold mb-4 text-blue-400">AI for Drug Discovery</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>92% accuracy</strong> in CRISPR ML optimization</li>
-                <li>✓ <strong>85% accuracy</strong> in drug discovery models</li>
-                <li>✓ ML pipeline orchestration & monitoring</li>
-                <li>✓ Model deployment & versioning</li>
+                <li>✓ Protein design — <strong>RFdiffusion3, ProteinMPNN, Boltz-2</strong></li>
+                <li>✓ Structure prediction — AlphaFold3, ColabFold, Chai-1</li>
+                <li>✓ De-immunization &amp; thermostability (LigandMPNN, ThermoMPNN)</li>
+                <li>✓ <strong>50,000+</strong> variants designed on AWS Batch</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-teal-500/30 hover:scale-105 transition duration-300 text-center">
+              <div className="text-4xl mb-4">🔬</div>
+              <h3 className="text-xl font-bold mb-4 text-teal-400">Multi-Omics &amp; Bioinformatics</h3>
+              <ul className="text-gray-300 space-y-2 text-sm text-left">
+                <li>✓ Single-cell &amp; spatial transcriptomics — <strong>1M+ cells</strong></li>
+                <li>✓ Scanpy, Squidpy, scVelo, CellTypist, Visium</li>
+                <li>✓ SAXS/WAXS scattering analysis — GNNs &amp; attention</li>
+                <li>✓ CRISPR sgRNA efficiency — <strong>92% accuracy</strong></li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 hover:scale-105 transition duration-300 text-center">
+              <div className="text-4xl mb-4">🤖</div>
+              <h3 className="text-xl font-bold mb-4 text-purple-400">Agentic LLM Systems</h3>
+              <ul className="text-gray-300 space-y-2 text-sm text-left">
+                <li>✓ Multi-agent <strong>LangGraph</strong> — supervisor-worker topology</li>
+                <li>✓ RAG with FAISS — biomedical knowledge bases</li>
+                <li>✓ AWS Bedrock, OpenAI APIs, Azure AI Foundry</li>
+                <li>✓ Eliminated <strong>70%</strong> of manual curation</li>
               </ul>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-green-500/30 hover:scale-105 transition duration-300 text-center">
               <div className="text-4xl mb-4">☁️</div>
-              <h3 className="text-xl font-bold mb-4 text-green-400">Cloud & Infrastructure</h3>
+              <h3 className="text-xl font-bold mb-4 text-green-400">Cloud &amp; HPC</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>AWS</strong> (SageMaker, EC2, Lambda, RDS)</li>
-                <li>✓ <strong>HPC & SLURM</strong> cluster management</li>
-                <li>✓ Docker & containerization</li>
-                <li>✓ <strong>40% efficiency</strong> improvement in workflows</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🧠</div>
-              <h3 className="text-xl font-bold mb-4 text-purple-400">AI & Deep Learning</h3>
-              <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>TensorFlow & PyTorch</strong> model development</li>
-                <li>✓ Large-scale data processing & feature engineering</li>
-                <li>✓ Advanced ML algorithms & optimization</li>
-                <li>✓ 2 published papers in 2025</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-yellow-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🏗️</div>
-              <h3 className="text-xl font-bold mb-4 text-yellow-400">Production Systems</h3>
-              <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ ML pipeline development & deployment</li>
-                <li>✓ CI/CD with Jenkins & GitHub Actions</li>
-                <li>✓ Model monitoring & versioning</li>
-                <li>✓ Served 3500+ users at scale</li>
+                <li>✓ <strong>AWS</strong> (Batch, EC2, S3, RDS, SageMaker, CloudWatch)</li>
+                <li>✓ Linux HPC — SLURM, <strong>10,000+ users</strong>, Lustre/NFS</li>
+                <li>✓ Docker, Singularity, multi-GPU deep learning</li>
+                <li>✓ Grafana + Prometheus cluster monitoring</li>
               </ul>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-cyan-500/30 hover:scale-105 transition duration-300 text-center">
               <div className="text-4xl mb-4">💻</div>
-              <h3 className="text-xl font-bold mb-4 text-cyan-400">Software Engineering</h3>
+              <h3 className="text-xl font-bold mb-4 text-cyan-400">Full-Stack Engineering</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>Python, Django, React,</strong> Node.js</li>
-                <li>✓ PostgreSQL & database design</li>
-                <li>✓ Full-stack ML applications</li>
-                <li>✓ 95% reduction in data entry errors</li>
+                <li>✓ <strong>Django, React/TypeScript, Node.js</strong></li>
+                <li>✓ PostgreSQL, MongoDB, REST APIs</li>
+                <li>✓ Interactive UMAP &amp; Visium spatial visualizations</li>
+                <li>✓ <strong>35%</strong> reduction in end-to-end processing time</li>
               </ul>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-orange-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🎯</div>
-              <h3 className="text-xl font-bold mb-4 text-orange-400">Experience & Impact</h3>
+              <div className="text-4xl mb-4">📖</div>
+              <h3 className="text-xl font-bold mb-4 text-orange-400">Research &amp; Teaching</h3>
               <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>MS Bioinformatics</strong> (3.95/4 GPA)</li>
-                <li>✓ Boehringer Ingelheim & Big Pharma experience</li>
-                <li>✓ Mentored 75+ engineers & scientists</li>
-                <li>✓ Published researcher</li>
+                <li>✓ <strong>2 peer-reviewed papers</strong> published (2025)</li>
+                <li>✓ Guided <strong>75+</strong> grad students in ML for biology</li>
+                <li>✓ MS Bioinformatics — <strong>3.94/4.00 GPA</strong></li>
+                <li>✓ BTech Biotechnology — <strong>9.4/10.0 CGPA</strong></li>
               </ul>
             </div>
           </div>
@@ -113,37 +113,36 @@ export default function Home() {
         {/* Quick Stats */}
         <section className="mb-20">
           <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm p-8 rounded-2xl border border-blue-400/30">
-            <h2 className="text-3xl font-bold text-center mb-8 text-white">Impact at a Glance</h2>
+            <h2 className="text-3xl font-bold text-center mb-8 text-white">By the Numbers</h2>
             <div className="grid md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">92%</div>
-                <div className="text-sm text-blue-200">ML Model Accuracy</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">1M+</div>
+                <div className="text-sm text-blue-200">Cells Analyzed</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-green-400 mb-2">3500+</div>
-                <div className="text-sm text-green-200">Users Supported</div>
+                <div className="text-4xl font-bold text-teal-400 mb-2">92%</div>
+                <div className="text-sm text-teal-200">ML Model Accuracy</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-purple-400 mb-2">40%</div>
-                <div className="text-sm text-purple-200">Efficiency Boost</div>
+                <div className="text-4xl font-bold text-purple-400 mb-2">50K+</div>
+                <div className="text-sm text-purple-200">Protein Variants</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-yellow-400 mb-2">3+</div>
-                <div className="text-sm text-yellow-200">Years Experience</div>
+                <div className="text-4xl font-bold text-green-400 mb-2">10K+</div>
+                <div className="text-sm text-green-200">HPC Users Supported</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Tech Stack - Condensed */}
+        {/* Tech Stack */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-center mb-12">Core Tech Stack</h2>
-          
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-blue-400">🤖 LLM & AI</h3>
+              <h3 className="text-lg font-semibold mb-4 text-blue-400">🧬 Protein &amp; Structure</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {['LangChain', 'RAG', 'Fine-tuning', 'TensorFlow', 'PyTorch', 'Transformers'].map((skill) => (
+                {['RFdiffusion3', 'ProteinMPNN', 'AlphaFold3', 'Boltz-2', 'Chai-1', 'ColabFold', 'PyMOL'].map((skill) => (
                   <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
                     {skill}
                   </span>
@@ -152,9 +151,9 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-green-400">☁️ Cloud & Infra</h3>
+              <h3 className="text-lg font-semibold mb-4 text-purple-400">🤖 LLM &amp; ML</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {['AWS SageMaker', 'Kubernetes', 'Docker', 'Terraform', 'CI/CD', 'Lambda'].map((skill) => (
+                {['LangGraph', 'RAG', 'FAISS', 'PyTorch', 'TensorFlow', 'GNNs', 'ViT'].map((skill) => (
                   <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
                     {skill}
                   </span>
@@ -163,9 +162,9 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-purple-400">📊 Data & ML Ops</h3>
+              <h3 className="text-lg font-semibold mb-4 text-green-400">☁️ Cloud &amp; HPC</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {['Apache Spark', 'Airflow', 'MLflow', 'Prometheus', 'Pandas', 'Scikit-learn'].map((skill) => (
+                {['AWS Batch', 'EC2/S3', 'SLURM', 'Docker', 'Singularity', 'Terraform', 'Airflow'].map((skill) => (
                   <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
                     {skill}
                   </span>
@@ -174,9 +173,9 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-yellow-400">💻 Software</h3>
+              <h3 className="text-lg font-semibold mb-4 text-cyan-400">💻 Platforms</h3>
               <div className="flex flex-wrap justify-center gap-2">
-                {['Python', 'FastAPI', 'PostgreSQL', 'React', 'Git', 'GraphQL'].map((skill) => (
+                {['Django', 'React', 'TypeScript', 'PostgreSQL', 'Python', 'Scanpy', 'Squidpy'].map((skill) => (
                   <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
                     {skill}
                   </span>
@@ -189,16 +188,16 @@ export default function Home() {
         {/* Call to Action */}
         <section className="text-center">
           <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm p-12 rounded-2xl border border-blue-400/30">
-            <h2 className="text-3xl font-bold mb-6 text-white">Ready to Build Production ML Systems?</h2>
+            <h2 className="text-3xl font-bold mb-6 text-white">Let&apos;s Build Something That Matters</h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              From LLM deployment to AI infrastructure, let's scale machine learning systems with proven expertise in ML Ops, cloud architecture, and production-grade systems.
+              Whether it&apos;s a multi-agent research platform, a protein design pipeline, or a full-stack bioinformatics tool — I&apos;m interested in work where the biology and the engineering both have to be right.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <a href="/projects" className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold transition duration-300 transform hover:scale-105">
                 See My Projects
               </a>
               <a href="/about" className="border-2 border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-xl font-semibold transition duration-300">
-                Learn More About Me
+                More About Me
               </a>
             </div>
           </div>

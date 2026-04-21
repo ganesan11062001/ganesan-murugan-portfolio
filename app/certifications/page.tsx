@@ -211,22 +211,22 @@ export default function Certifications() {
 
   const upcomingCertifications = [
     {
-      title: "OCI Data Science Professional",
-      issuer: "Oracle Cloud Infrastructure",
-      targetMonth: "September 2025",
-      description: "Machine learning and data science on Oracle Cloud platform",
-      category: "Data Science",
-      logo: "🤖",
-      color: "from-purple-500 to-indigo-500"
-    },
-    {
       title: "AWS Certified Solutions Architect Associate",
       issuer: "Amazon Web Services",
-      targetMonth: "October 2025",
+      targetMonth: "Mid 2026",
       description: "Comprehensive AWS architecture and cloud solution design",
       category: "Cloud Architecture",
       logo: "☁️",
       color: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "AWS Certified Machine Learning – Specialty",
+      issuer: "Amazon Web Services",
+      targetMonth: "Late 2026",
+      description: "Building, training, tuning, and deploying ML models on AWS",
+      category: "ML / Cloud",
+      logo: "🤖",
+      color: "from-purple-500 to-indigo-500"
     }
   ];
 
