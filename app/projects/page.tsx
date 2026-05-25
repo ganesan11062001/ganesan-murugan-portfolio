@@ -1,327 +1,378 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  Bot,
+  Check,
+  Cpu,
+  Database,
+  Dna,
+  FlaskConical,
+} from 'lucide-react';
+import PageShell from '../components/PageShell';
+import {
+  GlassCard,
+  GradientHeading,
+  HeroBadge,
+  SectionLabel,
+  StatTile,
+} from '../components/Section';
 
-function AnimatedCounter({ end, duration = 2000, suffix = "" }: {
+function AnimatedCounter({
+  end,
+  duration = 2000,
+  suffix = '',
+}: {
   end: number;
   duration?: number;
   suffix?: string;
 }) {
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     let startTime: number | undefined;
-    let animationFrame: number;
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentCount = Math.floor(easeOutQuart * end);
-      setCount(currentCount);
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
+    let frame: number;
+    const tick = (t: number) => {
+      if (!startTime) startTime = t;
+      const progress = Math.min((t - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(eased * end));
+      if (progress < 1) frame = requestAnimationFrame(tick);
     };
-
-    animationFrame = requestAnimationFrame(animate);
-    return () => { if (animationFrame) cancelAnimationFrame(animationFrame); };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
   }, [end, duration]);
-
-  return <>{count}{suffix}</>;
+  return (
+    <>
+      {count}
+      {suffix}
+    </>
+  );
 }
 
+type Category = 'Agentic AI' | 'Protein Design' | 'ML/AI' | 'Bioinformatics' | 'Genomics';
+
+type Project = {
+  title: string;
+  type: string;
+  period: string;
+  description: string;
+  achievements: string[];
+  technologies: string[];
+  category: Category;
+};
+
+const categoryStyle: Record<Category, { tint: string; icon: typeof Bot }> = {
+  'Agentic AI': { tint: 'text-violet-300 bg-violet-500/10 ring-violet-400/30', icon: Bot },
+  'Protein Design': { tint: 'text-sky-300 bg-sky-500/10 ring-sky-400/30', icon: Dna },
+  'ML/AI': { tint: 'text-amber-300 bg-amber-500/10 ring-amber-400/30', icon: Cpu },
+  'Bioinformatics': { tint: 'text-emerald-300 bg-emerald-500/10 ring-emerald-400/30', icon: FlaskConical },
+  'Genomics': { tint: 'text-teal-300 bg-teal-500/10 ring-teal-400/30', icon: Database },
+};
+
+const projects: Project[] = [
+  {
+    title: 'Multi-Agentic AI Platform for Multi-Omics Biomarker Discovery',
+    type: 'Industry Project',
+    period: 'Jan 2026 – Present',
+    description:
+      "Architected a production-grade multi-agentic AI platform using LangGraph, FastAPI, and AWS Bedrock — enabling autonomous planning, LLM-driven tool selection, and self-critique workflows that reduced analytical latency by 60%. Fine-tuned base models with QLoRA and DPO on curated omics datasets and agent execution traces, dropping hallucination rates from 34% to 8% across differential expression, FDR correction, and pathway enrichment reasoning. Built a complementary RAG + LLMOps stack with FAISS semantic indexing, context-aware reranking, prompt-versioned retrieval, LangSmith observability, and scoped tool permissions for reproducible biomedical workflows.",
+    achievements: [
+      '60% reduction in analytical latency via multi-agent orchestration',
+      'Hallucination rate cut from 34% → 8% with QLoRA + DPO fine-tuning',
+      'RAG over biomedical literature with FAISS + context-aware reranking',
+      'LangSmith-instrumented LLMOps with scoped tool permissions',
+    ],
+    technologies: ['LangGraph', 'FastAPI', 'AWS Bedrock', 'QLoRA', 'DPO', 'RAG', 'FAISS', 'LangSmith', 'Python'],
+    category: 'Agentic AI',
+  },
+  {
+    title: 'De Novo Peptide Design for Neuromuscular Disease Targets',
+    type: 'Industry Project',
+    period: 'Jan 2026 – Present',
+    description:
+      "Designed and optimized de novo peptide sequences for Duchenne muscular dystrophy (DMD) and Friedreich's ataxia (FA) using ProteinMPNN, ThermoMPNN, Chai-1, and Boltz-2 — applying constrained sequence design and thermostability optimization across 10,000+ candidate variants to improve stability and reduce aggregation propensity. Coupled structural prediction with energy-based scoring and developability filters to triage manufacturable leads.",
+    achievements: [
+      '10,000+ peptide variants designed and screened',
+      'Constrained sequence design via ProteinMPNN + Boltz-2',
+      'Thermostability optimization with ThermoMPNN',
+      'Aggregation-propensity-aware ranking for developability',
+    ],
+    technologies: ['ProteinMPNN', 'ThermoMPNN', 'Chai-1', 'Boltz-2', 'Python', 'Protein Design', 'Structural Biology'],
+    category: 'Protein Design',
+  },
+  {
+    title: 'Autonomous Multi-Agent RAG System for HPC Support',
+    type: 'Academic Research',
+    period: 'Jan 2026 – Present',
+    description:
+      'Architected an autonomous multi-agent RAG system for high-performance computing support using LangGraph, vector search, and internal knowledge bases — enabling intelligent SLURM job diagnostics, automated troubleshooting, and AI-driven research workflows for 12,000+ users. Integrated cluster telemetry (Prometheus + Grafana) so the agent can reason about live GPU/CPU allocation, queue contention, and containerized bioinformatics workloads.',
+    achievements: [
+      'Multi-agent diagnostic system for SLURM job failures',
+      'Serves 12,000+ HPC users (faculty, students, researchers)',
+      'Live cluster telemetry via Prometheus + Grafana',
+      'Retrieval over internal HPC + bioinformatics knowledge bases',
+    ],
+    technologies: ['LangGraph', 'RAG', 'Vector Search', 'SLURM', 'Prometheus', 'Grafana', 'Docker', 'Python'],
+    category: 'Agentic AI',
+  },
+  {
+    title: 'Single-Cell & Spatial Transcriptomics Foundation-Model Platform',
+    type: 'Industry Project',
+    period: 'May 2025 – Aug 2025',
+    description:
+      'Deployed an end-to-end scRNA-seq analysis platform integrating scVI, Harmony batch correction, Leiden clustering, and RNA velocity inference — processing 3M+ cells to characterize transcriptional programs and cell-fate transitions. Fine-tuned scGPT and Geneformer foundation models on 5M+ single-cell transcriptomic profiles for cell-type annotation, gene regulatory network inference, and perturbation-aware representation learning, improving accuracy by 80% across heterogeneous tissues. Built a spatial deconvolution pipeline with cell2location and Squidpy mapping fine-grained cellular compositions across 10x Visium datasets.',
+    achievements: [
+      '3M+ cells processed across single-cell and spatial modalities',
+      'scGPT + Geneformer fine-tuned on 5M+ profiles (+80% accuracy)',
+      'Spatial deconvolution via cell2location + Squidpy on 10x Visium',
+      'RNA velocity inference for cell-fate trajectory analysis',
+    ],
+    technologies: ['scVI', 'scGPT', 'Geneformer', 'Harmony', 'Leiden', 'cell2location', 'Squidpy', '10x Visium', 'Python'],
+    category: 'Bioinformatics',
+  },
+  {
+    title: 'Deep Learning Pipeline for Tau/Tubulin Protein Gel Classification',
+    type: 'Academic Research',
+    period: 'May 2025 – Present',
+    description:
+      "Developed deep learning pipelines with agentic hyperparameter and epoch optimization — combining Vision Transformers, VAE, ResNet, and U-Net segmentation to classify 100,000+ silver-stained tau and tubulin protein gel images for Alzheimer's research. Built a multimodal learning framework integrating GNNs, CNNs, and contrastive learning to jointly analyze X-ray scattering profiles and tau fibril imaging data, identifying amyloid-beta aggregation patterns. Ran HPC-scale protein structure prediction (AlphaFold3, ESMFold, RoseTTAFold, ColabFold) across 20,000+ intrinsically disordered protein structures, with PyMOL + ChimeraX for interface analysis.",
+    achievements: [
+      '100,000+ silver-stained tau / tubulin gel images classified',
+      'Multimodal GNN + CNN fusion of X-ray scattering and imaging',
+      '20,000+ intrinsically disordered protein structures modeled',
+      'Agentic hyperparameter + epoch optimization for the training loop',
+    ],
+    technologies: ['Vision Transformers', 'ResNet', 'U-Net', 'VAE', 'GNN', 'AlphaFold3', 'ESMFold', 'PyMOL', 'PyTorch'],
+    category: 'ML/AI',
+  },
+  {
+    title: 'Multi-Omics Investigation of GATA3 Mutation in ER+ Breast Cancer',
+    type: 'Academic Project',
+    period: 'Jan 2026 – Apr 2026',
+    description:
+      'Integrated transcriptomics, epigenomics, phenomics, and proteomics datasets from TCGA, DepMap, CCLE, and CPTAC BRCA cohorts to characterize the molecular landscape of GATA3-mutant ER-positive breast cancer. Identified synthetic-lethal interactions, dysregulated pathways, and transcriptional programs associated with the mutant phenotype using harmonized multi-omics modeling and pathway enrichment.',
+    achievements: [
+      'Four-modality integration (transcriptomics, epigenomics, phenomics, proteomics)',
+      'Cross-cohort harmonization across TCGA, DepMap, CCLE, CPTAC BRCA',
+      'Synthetic-lethal interaction discovery for GATA3-mutant ER+ tumors',
+      'Pathway- and program-level dysregulation analysis',
+    ],
+    technologies: ['TCGA', 'DepMap', 'CCLE', 'CPTAC', 'Python', 'R', 'Multi-omics', 'Pathway Enrichment'],
+    category: 'Bioinformatics',
+  },
+  {
+    title: 'OnchoGraph: Pan-Cancer Drug Repurposing via Heterogeneous Knowledge Graphs',
+    type: 'Academic Project',
+    period: 'Sep 2025 – Dec 2025',
+    description:
+      'Built a heterogeneous graph neural network for drug repurposing that integrates DrugBank, DisGeNET, and Hetionet under a relation-sensitive multi-head attention scheme to identify novel therapeutic candidates across 33 TCGA cancer types. Achieved 0.96 ROC AUC on cold-start evaluation, demonstrating generalization to drug-disease pairs unseen at training time.',
+    achievements: [
+      '0.96 ROC AUC on cold-start drug-disease evaluation',
+      'Heterogeneous GNN with relation-sensitive multi-head attention',
+      'Cross-source integration of DrugBank + DisGeNET + Hetionet',
+      'Covers all 33 TCGA cancer types',
+    ],
+    technologies: ['GNN', 'PyTorch Geometric', 'DrugBank', 'DisGeNET', 'Hetionet', 'TCGA', 'Multi-head Attention'],
+    category: 'ML/AI',
+  },
+  {
+    title: 'ML-Driven Optimization of CRISPR-Cas9 sgRNA Efficiency',
+    type: 'Academic Project',
+    period: 'Dec 2024 – Jan 2025',
+    description:
+      'Developed an ML pipeline using Random Forest, Gradient Boosting, and Neural Networks to predict CRISPR sgRNA efficiency from 100,000+ sequences, achieving 92% accuracy through sequence-level feature engineering. Compressed experimental screening time by 90% and accelerated candidate identification 7.5x over conventional approaches.',
+    achievements: [
+      '92% prediction accuracy across 100,000+ sgRNA sequences',
+      '90% reduction in experimental screening requirements',
+      '7.5x acceleration in candidate identification',
+      'Sequence-level feature engineering pipeline',
+    ],
+    technologies: ['Random Forest', 'Gradient Boosting', 'Neural Networks', 'scikit-learn', 'CRISPR-Cas9', 'Python'],
+    category: 'ML/AI',
+  },
+  {
+    title: 'RNA-Binding Mechanism Analysis Across Canonical and Moonlighting Proteins',
+    type: 'Academic Research',
+    period: 'Sep 2024 – Apr 2025',
+    description:
+      'Analyzed RNA-binding mechanisms across 250+ canonical and moonlighting proteins using the POOL machine learning method, molecular modeling, and evolutionary conservation analysis with ConSurf, SASA, and Concavity Score — identifying functionally significant residues and surface patches that drive RNA recognition.',
+    achievements: [
+      '250+ canonical and moonlighting proteins analyzed',
+      'POOL-based ML for functional residue prediction',
+      'Evolutionary conservation via ConSurf + structural SASA',
+      'Surface concavity scoring for binding-pocket prioritization',
+    ],
+    technologies: ['POOL', 'ConSurf', 'SASA', 'Concavity Score', 'PyMOL', 'Python', 'Structural Biology'],
+    category: 'Genomics',
+  },
+  {
+    title: 'Quantitative Analysis of Genomic Overlaps Using Cobind',
+    type: 'Academic Project',
+    period: 'Sep 2024 – Dec 2024',
+    description:
+      'Analyzed 500,000+ genomic intervals using Python, Pandas, SciPy, and BX-Python to process ChIP-seq/ATAC-seq BED files with 1M+ intervals. Implemented six statistical metrics to identify 10+ transcriptional cofactors and master regulators from CTCF binding sites and cancer-specific open chromatin regions (OCRs).',
+    achievements: [
+      '500,000+ genomic intervals analyzed',
+      '1M+ intervals processed via custom Python pipelines',
+      '10+ transcriptional cofactors and master regulators identified',
+      'Cancer-specific OCR regulatory analysis',
+    ],
+    technologies: ['Python', 'Cobind', 'Pandas', 'SciPy', 'BX-Python', 'ChIP-seq', 'ATAC-seq'],
+    category: 'Genomics',
+  },
+];
+
+const categories: ('All' | Category)[] = ['All', 'Agentic AI', 'Protein Design', 'ML/AI', 'Bioinformatics', 'Genomics'];
+
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  const projects = [
-    {
-      title: "Multi-Agent LangGraph System for Multi-Omics Target Identification",
-      company: "Solid Biosciences",
-      period: "Jan 2026 – Present",
-      description: "Built a stateful multi-agent system using LangGraph with supervisor-worker topology to orchestrate autonomous multi-omics data ingestion, cross-modal fusion, and biomarker prioritization across 500,000+ measurements. Integrated an RAG pipeline with FAISS vector indexing and OpenAI APIs, adding tool-calling, reranking, and human-in-the-loop review nodes against biomedical knowledge bases — eliminating 70% of manual curation end-to-end.",
-      achievements: [
-        "Conditional routing & supervisor-worker topology across specialized nodes",
-        "500,000+ measurements processed for target identification",
-        "70% reduction in manual curation through end-to-end agentic orchestration",
-        "RAG with FAISS + OpenAI APIs across biomedical knowledge bases"
-      ],
-      technologies: ["LangGraph", "RAG", "FAISS", "OpenAI APIs", "Python", "Multi-omics", "Agentic AI"],
-      category: "Agentic AI",
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "Cloud-Native Protein Design Platform on AWS Batch",
-      company: "Solid Biosciences",
-      period: "Jan 2026 – Present",
-      description: "Containerized and deployed 11 protein design models on AWS Batch, building a production-grade platform for therapeutic engineering across 50,000+ design variants. Applied RFdiffusion3 for de novo binder design, ProteinMPNN for AAV capsid surface loop redesign, and Boltz-2 for nanobody and cyclic peptide design. Extended to clinical-grade use cases: linker sequence design (ColabFold + Chai-1), T-cell epitope removal via de-immunization (LigandMPNN), and thermostability optimization (ThermoMPNN).",
-      achievements: [
-        "11 protein design models containerized on AWS Batch",
-        "50,000+ design variants across RFdiffusion3, ProteinMPNN, Boltz-2",
-        "De-immunization via T-cell epitope removal (LigandMPNN)",
-        "Thermostability optimization for biologics manufacturability (ThermoMPNN)"
-      ],
-      technologies: ["RFdiffusion3", "ProteinMPNN", "Boltz-2", "Chai-1", "LigandMPNN", "ThermoMPNN", "ColabFold", "AWS Batch", "Docker"],
-      category: "Protein Design",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "Single-Cell & Spatial Transcriptomics Platform",
-      company: "Boehringer Ingelheim Pharmaceuticals",
-      period: "May 2025 – Aug 2025",
-      description: "Architected a production platform processing 1,000,000+ cells using Scanpy, Squidpy, Harmony/Scanorama batch correction, Leiden clustering, CellTypist/scType, and scVelo RNA velocity — surfacing transcriptional signatures for drug target identification. Built the full-stack interface (Django, React/TypeScript, PostgreSQL, AWS EC2/S3/RDS) featuring interactive UMAP and Visium spatial visualizations with ML-integrated streaming inference, cutting end-to-end processing time by 35%. Also engineered an LLM-powered biological insight engine via AWS Bedrock with RAG, enabling 10+ research scientists to query differential expression and pathway enrichment in plain language.",
-      achievements: [
-        "1,000,000+ cells processed across single-cell and spatial modalities",
-        "Full-stack platform: Django, React/TypeScript, PostgreSQL, AWS",
-        "35% reduction in end-to-end processing time",
-        "LLM insight engine (AWS Bedrock + RAG) for 10+ research scientists"
-      ],
-      technologies: ["Scanpy", "Squidpy", "scVelo", "CellTypist", "Django", "React", "TypeScript", "PostgreSQL", "AWS Bedrock", "RAG"],
-      category: "Bioinformatics",
-      color: "from-green-500 to-teal-500"
-    },
-    {
-      title: "Deep Learning Pipeline for Protein Gel Image Classification",
-      company: "Lee Makowski Lab, Northeastern University",
-      period: "May 2025 – Present",
-      description: "Developed a deep learning pipeline integrating Vision Transformers (ViT), ResNet, and U-Net segmentation to classify 100,000+ protein gel images from Alzheimer's-associated tau and tubulin experiments — achieving 92% classification accuracy and reducing manual review time by 85%. Also applied Graph Neural Networks (GNNs), attention mechanisms, and contrastive learning to SAXS/WAXS multi-modal X-ray scattering data from tau fibril preparations, extracting conformational signatures across 3,600 spectra per image. Deployed AlphaFold3 to predict IDP binding geometry of tau-tubulin complexes and characterize interface residues with PyMOL and ChimeraX.",
-      achievements: [
-        "92% classification accuracy on 100,000+ protein gel images",
-        "85% reduction in manual review time",
-        "GNNs on SAXS/WAXS data — 3,600 spectra per image",
-        "AlphaFold3 for tau-tubulin IDP binding geometry prediction"
-      ],
-      technologies: ["Vision Transformers", "ResNet", "U-Net", "GNNs", "AlphaFold3", "PyMOL", "ChimeraX", "PyTorch", "SAXS/WAXS"],
-      category: "ML/AI",
-      color: "from-orange-500 to-red-500"
-    },
-    {
-      title: "Machine Learning-Driven Optimization of CRISPR-Cas9 Editing Efficiency",
-      company: "Research Project",
-      period: "Dec 2024 – Jan 2025",
-      description: "Developed an ML pipeline using Random Forest, Gradient Boosting, and Neural Networks to predict CRISPR sgRNA efficiency from 100,000+ sequences, achieving 92% accuracy through feature engineering. Compressed screening time by 90% and accelerated candidate identification 7.5-fold over conventional approaches.",
-      achievements: [
-        "92% prediction accuracy across 100,000+ sgRNA sequences",
-        "90% reduction in experimental screening requirements",
-        "7.5x acceleration in candidate identification",
-        "Feature engineering from sequence-level properties"
-      ],
-      technologies: ["Random Forest", "Gradient Boosting", "Neural Networks", "Python", "scikit-learn", "CRISPR-Cas9", "Feature Engineering"],
-      category: "ML/AI",
-      color: "from-yellow-500 to-orange-500"
-    },
-    {
-      title: "Quantitative Analysis of Genomic Overlaps Using Cobind",
-      company: "Research Project",
-      period: "Sep 2024 – Dec 2024",
-      description: "Analyzed 500,000+ genomic intervals using Python, Pandas, SciPy, and BX-Python to process ChIP-seq/ATAC-seq BED files with 1M+ intervals. Implemented six statistical metrics to identify 10+ transcriptional cofactors and master regulators from CTCF binding sites and cancer-specific open chromatin regions (OCRs).",
-      achievements: [
-        "500,000+ genomic intervals analyzed",
-        "1M+ intervals processed via custom Python pipelines",
-        "10+ transcriptional cofactors and master regulators identified",
-        "Cancer-specific OCR regulatory analysis"
-      ],
-      technologies: ["Python", "Cobind", "Pandas", "SciPy", "BX-Python", "ChIP-seq", "ATAC-seq", "BED files"],
-      category: "Genomics",
-      color: "from-emerald-500 to-green-500"
-    }
-  ];
-
-  const categories = ["All", "Agentic AI", "Protein Design", "ML/AI", "Bioinformatics", "Genomics"];
-  const filteredProjects = activeFilter === 'All'
-    ? projects
-    : projects.filter(project => project.category === activeFilter);
+  const [activeFilter, setActiveFilter] = useState<'All' | Category>('All');
+  const filtered = activeFilter === 'All' ? projects : projects.filter((p) => p.category === activeFilter);
 
   return (
-    <main className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Dynamic Background */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-        <div
-          className="absolute w-64 h-64 bg-gradient-radial from-blue-500/15 via-purple-500/8 to-transparent rounded-full blur-2xl transition-all duration-700"
-          style={{ left: mousePosition.x - 128, top: mousePosition.y - 128 }}
-        ></div>
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-emerald-500/8 to-blue-500/8 rounded-full blur-xl animate-float"></div>
-        <div className="absolute top-3/4 right-1/4 w-40 h-40 bg-gradient-to-r from-purple-500/8 to-pink-500/8 rounded-full blur-xl animate-float-delayed"></div>
-      </div>
+    <PageShell>
+      <div className="container mx-auto px-6 pt-20 pb-24">
+        {/* Hero */}
+        <section className="text-center">
+          <HeroBadge>Projects &amp; Research</HeroBadge>
+          <h1 className="mt-6 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
+            <GradientHeading as="span">Projects</GradientHeading>
+          </h1>
+          <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
+            A mix of industry platforms, academic research, and personal projects — mostly centered on
+            protein design, multi-omics, agentic AI, and genomics.
+          </p>
 
-      <div className="relative z-10">
-        {/* Hero Section */}
-        <section className="pt-20 pb-12">
-          <div className="container mx-auto px-6 text-center">
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-xl border border-blue-500/30 rounded-full px-4 py-2 mb-6 text-sm">
-              <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
-              <span className="font-medium text-gray-300">Projects &amp; Research</span>
-            </div>
-
-            <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient bg-300%">
-                Projects
-              </span>
-            </h1>
-
-            <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              A mix of work-experience platforms, research pipelines, and academic projects —
-              mostly centered on protein design, multi-omics, agentic AI, and genomics.
-            </p>
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
+            <StatTile value={<AnimatedCounter end={11} />} label="Projects" accent="from-blue-300 to-cyan-300" />
+            <StatTile value={<AnimatedCounter end={5} suffix="M+" />} label="Single-cell profiles" accent="from-emerald-300 to-teal-300" />
+            <StatTile value={<AnimatedCounter end={10} suffix="K+" />} label="Peptide variants" accent="from-violet-300 to-pink-300" />
+            <StatTile value={<AnimatedCounter end={60} suffix="%" />} label="Latency reduction" accent="from-amber-300 to-orange-300" />
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="py-8">
-          <div className="container mx-auto px-6">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-4xl mx-auto mb-12">
-              <div className="group">
-                <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 text-center hover:scale-105 transition-all duration-300 hover:border-white/40">
-                  <div className="text-2xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-1">
-                    <AnimatedCounter end={6} duration={2000} />
-                  </div>
-                  <p className="text-gray-400 text-xs font-medium">Projects</p>
-                </div>
-              </div>
-              <div className="group">
-                <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 text-center hover:scale-105 transition-all duration-300 hover:border-white/40">
-                  <div className="text-2xl font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-1">
-                    <AnimatedCounter end={1} suffix="M+" duration={2000} />
-                  </div>
-                  <p className="text-gray-400 text-xs font-medium">Cells / Sequences</p>
-                </div>
-              </div>
-              <div className="group">
-                <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 text-center hover:scale-105 transition-all duration-300 hover:border-white/40">
-                  <div className="text-2xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-1">
-                    <AnimatedCounter end={50} suffix="K+" duration={2000} />
-                  </div>
-                  <p className="text-gray-400 text-xs font-medium">Protein Variants</p>
-                </div>
-              </div>
-              <div className="group">
-                <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 text-center hover:scale-105 transition-all duration-300 hover:border-white/40">
-                  <div className="text-2xl font-black bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent mb-1">
-                    <AnimatedCounter end={92} suffix="%" duration={2000} />
-                  </div>
-                  <p className="text-gray-400 text-xs font-medium">Top Model Accuracy</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Filter Categories */}
-        <section className="py-4">
-          <div className="container mx-auto px-6">
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
-              {categories.map((category) => (
+        {/* Filters */}
+        <section className="mt-16">
+          <div className="flex flex-wrap justify-center gap-2">
+            {categories.map((cat) => {
+              const active = activeFilter === cat;
+              const count = cat === 'All' ? projects.length : projects.filter((p) => p.category === cat).length;
+              return (
                 <button
-                  key={category}
-                  onClick={() => setActiveFilter(category)}
-                  className={`px-4 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 text-sm ${
-                    activeFilter === category
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/25'
-                      : 'bg-white/10 border border-white/20 text-gray-300 hover:border-white/40 hover:bg-white/20'
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                    active
+                      ? 'border-white/30 bg-white text-black'
+                      : 'border-white/10 bg-white/[0.04] text-gray-300 hover:border-white/25 hover:text-white'
                   }`}
                 >
-                  {category}
+                  {cat}
+                  <span
+                    className={`rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${
+                      active ? 'bg-black/10 text-black/70' : 'bg-white/10 text-gray-400'
+                    }`}
+                  >
+                    {count}
+                  </span>
                 </button>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </section>
 
-        {/* Projects Grid */}
-        <section className="py-12">
-          <div className="container mx-auto px-6">
-            <div className="max-w-5xl mx-auto space-y-6">
-              {filteredProjects.map((project, index) => (
-                <div key={index} className="group relative">
-                  <div className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-15 blur-2xl transition-all duration-700 rounded-2xl`}></div>
-
-                  <div className="relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl overflow-hidden group-hover:border-white/40 transition-all duration-500 p-8">
-                    <div className="flex flex-col lg:flex-row gap-8">
-                      <div className="lg:w-2/3">
-                        <div className="flex flex-wrap items-center gap-3 mb-4">
-                          <h2 className="text-xl font-bold text-white">{project.title}</h2>
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap ${
-                            project.category === 'Agentic AI' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' :
-                            project.category === 'Protein Design' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' :
-                            project.category === 'ML/AI' ? 'bg-orange-500/20 text-orange-300 border border-orange-500/30' :
-                            project.category === 'Bioinformatics' ? 'bg-teal-500/20 text-teal-300 border border-teal-500/30' :
-                            'bg-green-500/20 text-green-300 border border-green-500/30'
-                          }`}>
-                            {project.category}
-                          </span>
+        {/* Project list */}
+        <section className="mt-10">
+          <div className="max-w-5xl mx-auto space-y-4">
+            {filtered.map((project) => {
+              const style = categoryStyle[project.category];
+              const Icon = style.icon;
+              return (
+                <GlassCard key={project.title} className="p-7">
+                  <div className="grid lg:grid-cols-3 gap-7">
+                    <div className="lg:col-span-2">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ring-1 ${style.tint}`}>
+                          <Icon className="h-4 w-4" strokeWidth={1.75} />
                         </div>
-
-                        <div className="flex flex-col sm:flex-row gap-2 mb-4 text-sm">
-                          <p className="text-blue-300 font-semibold">{project.company}</p>
-                          <p className="text-gray-400">· {project.period}</p>
-                        </div>
-
-                        <p className="text-gray-300 mb-6 leading-relaxed text-sm">{project.description}</p>
-
-                        <div className="mb-6">
-                          <h3 className="text-base font-semibold mb-3 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">Key Results</h3>
-                          <ul className="space-y-2">
-                            {project.achievements.map((achievement, i) => (
-                              <li key={i} className="text-gray-300 text-sm flex items-start">
-                                <span className="text-green-400 mr-2 flex-shrink-0">✓</span>
-                                {achievement}
-                              </li>
-                            ))}
-                          </ul>
+                        <div className="min-w-0">
+                          <h2 className="text-lg font-semibold text-white leading-snug tracking-tight">
+                            {project.title}
+                          </h2>
+                          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+                            <span className={`inline-flex items-center rounded-full px-2 py-0.5 ring-1 ${style.tint}`}>
+                              {project.category}
+                            </span>
+                            <span className="text-blue-300/80 font-medium">{project.type}</span>
+                            <span className="text-gray-500">· {project.period}</span>
+                          </div>
                         </div>
                       </div>
 
-                      <div className="lg:w-1/3">
-                        <h3 className="text-base font-semibold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Tech Used</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {project.technologies.map((tech, i) => (
-                            <span key={i} className="px-3 py-1 bg-gradient-to-r from-gray-700/50 to-gray-800/50 border border-gray-600/50 rounded-md text-xs font-medium text-gray-300 hover:border-white/30 transition-all">
-                              {tech}
-                            </span>
+                      <p className="text-[14px] text-gray-300/90 leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      <div className="mt-6">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-300/80 mb-2">
+                          Key results
+                        </p>
+                        <ul className="space-y-1.5">
+                          {project.achievements.map((a) => (
+                            <li key={a} className="flex gap-2 text-[13px] text-gray-300/90 leading-relaxed">
+                              <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-400" strokeWidth={2.5} />
+                              <span>{a}</span>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-300/80 mb-2">
+                        Stack
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[11px] font-medium text-gray-300"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                </GlassCard>
+              );
+            })}
           </div>
         </section>
-      </div>
 
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-20px) rotate(1deg); }
-          66% { transform: translateY(-10px) rotate(-0.5deg); }
-        }
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-15px) rotate(-1deg); }
-          66% { transform: translateY(-25px) rotate(0.5deg); }
-        }
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-float-delayed { animation: float-delayed 8s ease-in-out infinite; }
-        .animate-gradient { animation: gradient 3s ease infinite; }
-        .bg-300\\% { background-size: 300% 300%; }
-        .bg-gradient-radial { background: radial-gradient(circle, var(--tw-gradient-stops)); }
-      `}</style>
-    </main>
+        {/* CTA */}
+        <section className="mt-28">
+          <GlassCard className="overflow-hidden">
+            <div className="relative p-10 md:p-14 text-center">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/40 to-transparent" />
+              <SectionLabel tone="purple">Want to dig deeper?</SectionLabel>
+              <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+                Let&apos;s talk
+              </GradientHeading>
+              <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+                Happy to walk through any of these in detail — architecture, results, lessons learned.
+              </p>
+              <div className="mt-8">
+                <a
+                  href="mailto:murugan.g@northeastern.edu"
+                  className="inline-flex items-center gap-2 rounded-lg bg-white text-black px-5 py-2.5 text-sm font-semibold transition-transform hover:scale-[1.02]"
+                >
+                  Get in touch
+                </a>
+              </div>
+            </div>
+          </GlassCard>
+        </section>
+      </div>
+    </PageShell>
   );
 }

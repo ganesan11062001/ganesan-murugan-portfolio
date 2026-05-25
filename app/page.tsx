@@ -1,208 +1,277 @@
 'use client';
 
+import Link from 'next/link';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Bot,
+  BrainCircuit,
+  Cloud,
+  Dna,
+  FlaskConical,
+  GraduationCap,
+  Mail,
+} from 'lucide-react';
+import PageShell from './components/PageShell';
+import {
+  GlassCard,
+  GradientHeading,
+  HeroBadge,
+  SectionLabel,
+  StatTile,
+} from './components/Section';
+
+const focusAreas = [
+  {
+    icon: Bot,
+    title: 'Agentic AI & LLMs',
+    accent: 'text-violet-300',
+    ring: 'ring-violet-400/20',
+    points: [
+      'Multi-agent LangGraph + FastAPI + AWS Bedrock',
+      'QLoRA / DPO fine-tuning — hallucination 34% → 8%',
+      'RAG with FAISS + LangSmith observability',
+      '60% reduction in analytical latency',
+    ],
+  },
+  {
+    icon: Dna,
+    title: 'Protein Design',
+    accent: 'text-sky-300',
+    ring: 'ring-sky-400/20',
+    points: [
+      'De novo peptides via ProteinMPNN, Boltz-2, Chai-1',
+      'Thermostability optimization with ThermoMPNN',
+      'AlphaFold3, ESMFold, RoseTTAFold structure prediction',
+      '10,000+ peptide variants designed & screened',
+    ],
+  },
+  {
+    icon: FlaskConical,
+    title: 'Multi-Omics & Single-Cell',
+    accent: 'text-emerald-300',
+    ring: 'ring-emerald-400/20',
+    points: [
+      'scRNA-seq via scVI, Harmony, Leiden, RNA velocity',
+      'scGPT + Geneformer fine-tuned on 5M+ profiles',
+      'Spatial deconvolution with cell2location + Squidpy',
+      '+80% accuracy on cell-type annotation',
+    ],
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud & HPC',
+    accent: 'text-teal-300',
+    ring: 'ring-teal-400/20',
+    points: [
+      'AWS Bedrock, SageMaker, Batch, EC2, S3, RDS, Lambda',
+      'SLURM scheduling for 12,000+ HPC users',
+      'Docker, Kubernetes, Singularity, Terraform',
+      'Prometheus + Grafana cluster monitoring',
+    ],
+  },
+  {
+    icon: BrainCircuit,
+    title: 'Deep Learning',
+    accent: 'text-amber-300',
+    ring: 'ring-amber-400/20',
+    points: [
+      'Vision Transformers, ResNet, U-Net, VAE',
+      'GNNs + CNNs across multimodal X-ray scattering',
+      'Contrastive learning over 100,000+ images',
+      '20,000+ IDP structures modeled at scale',
+    ],
+  },
+  {
+    icon: GraduationCap,
+    title: 'Research & Teaching',
+    accent: 'text-cyan-300',
+    ring: 'ring-cyan-400/20',
+    points: [
+      '2 peer-reviewed publications',
+      'Mentored 100+ grad students in NGS / ML',
+      'MS Bioinformatics — 3.95/4.00 GPA',
+      'BTech Biotechnology — 9.4/10.0 CGPA',
+    ],
+  },
+];
+
+const stackGroups = [
+  {
+    label: 'Agentic AI / LLMs',
+    items: ['LangGraph', 'LangChain', 'AutoGen', 'CrewAI', 'MCP', 'RAG', 'FAISS', 'Ollama'],
+  },
+  {
+    label: 'Protein & Structure',
+    items: ['RFdiffusion', 'ProteinMPNN', 'ThermoMPNN', 'AlphaFold3', 'Boltz-2', 'Chai-1', 'Protenix'],
+  },
+  {
+    label: 'Cloud & HPC',
+    items: ['AWS Bedrock', 'SageMaker', 'Batch', 'SLURM', 'Docker', 'Kubernetes', 'Terraform'],
+  },
+  {
+    label: 'ML / Programming',
+    items: ['PyTorch', 'TensorFlow', 'XGBoost', 'GNN', 'ViT', 'Python', 'React', 'FastAPI'],
+  },
+];
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-blue-400 rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-32 w-24 h-24 bg-purple-400 rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute bottom-32 left-40 w-20 h-20 bg-teal-400 rounded-full animate-pulse delay-500"></div>
-      </div>
+    <PageShell>
+      <div className="container mx-auto px-6 pt-20 pb-24">
+        {/* Hero */}
+        <section className="mx-auto max-w-4xl text-center">
+          <HeroBadge>Available for full-time roles · Summer 2026</HeroBadge>
 
-      <div className="container mx-auto px-6 py-20 relative z-10">
-        {/* Hero Section */}
-        <section className="text-center mb-20">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Hi, I&apos;m <span className="text-blue-400">Ganesan Murugan</span>
+          <h1 className="mt-6 text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05]">
+            Hi, I&apos;m{' '}
+            <GradientHeading as="h1" className="inline">
+              Ganesan
+            </GradientHeading>
+            <span className="block text-white/90 text-3xl md:text-5xl font-medium mt-3">
+              Computational Biology &times; AI
+            </span>
           </h1>
-          <p className="text-xl md:text-2xl text-blue-300 mb-4">
-            Computational Biology &amp; AI — from protein design to agentic LLM systems
+
+          <p className="mt-6 text-sm md:text-base text-blue-300/80 font-medium tracking-wide">
+            MS Bioinformatics @ Northeastern · Computational Biology Co-op · 2 Published Papers
           </p>
-          <p className="text-lg text-blue-400 font-semibold mb-8">
-            MS Bioinformatics @ Northeastern &nbsp;·&nbsp; Co-op @ Solid Biosciences &nbsp;·&nbsp; 2 Published Papers
+
+          <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
+            I build production-grade ML systems across the drug discovery stack —
+            multi-agentic LLM platforms, multi-omics analysis, de novo protein design,
+            and the HPC and cloud infrastructure to run them at scale.
           </p>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12">
-            I build end-to-end ML systems across the drug discovery stack — multi-omics platforms, agentic workflows, cloud-native protein design, and full-stack research tools.
-            <br className="hidden md:block" />
-            I like working at the intersection of biology and software engineering where both really matter.
-          </p>
-          <div className="space-x-6">
-            <a href="/projects" className="bg-blue-500 hover:bg-blue-600 px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
-              View My Work
+
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-2 rounded-lg bg-white text-black px-5 py-2.5 text-sm font-semibold transition-transform hover:scale-[1.02]"
+            >
+              View my work
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <a
+              href="mailto:murugan.g@northeastern.edu"
+              className="group inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] backdrop-blur px-5 py-2.5 text-sm font-semibold text-white hover:border-white/30 hover:bg-white/[0.08] transition-colors"
+            >
+              <Mail className="h-4 w-4 text-blue-300" />
+              Get in touch
             </a>
-            <a href="mailto:murugan.g@northeastern.edu" className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
-              Get in Touch
-            </a>
           </div>
         </section>
 
-        {/* What I Focus On */}
-        <section className="mb-20">
-          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">What I Work On</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🧬</div>
-              <h3 className="text-xl font-bold mb-4 text-blue-400">AI for Drug Discovery</h3>
-              <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ Protein design — <strong>RFdiffusion3, ProteinMPNN, Boltz-2</strong></li>
-                <li>✓ Structure prediction — AlphaFold3, ColabFold, Chai-1</li>
-                <li>✓ De-immunization &amp; thermostability (LigandMPNN, ThermoMPNN)</li>
-                <li>✓ <strong>50,000+</strong> variants designed on AWS Batch</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-teal-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🔬</div>
-              <h3 className="text-xl font-bold mb-4 text-teal-400">Multi-Omics &amp; Bioinformatics</h3>
-              <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ Single-cell &amp; spatial transcriptomics — <strong>1M+ cells</strong></li>
-                <li>✓ Scanpy, Squidpy, scVelo, CellTypist, Visium</li>
-                <li>✓ SAXS/WAXS scattering analysis — GNNs &amp; attention</li>
-                <li>✓ CRISPR sgRNA efficiency — <strong>92% accuracy</strong></li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">🤖</div>
-              <h3 className="text-xl font-bold mb-4 text-purple-400">Agentic LLM Systems</h3>
-              <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ Multi-agent <strong>LangGraph</strong> — supervisor-worker topology</li>
-                <li>✓ RAG with FAISS — biomedical knowledge bases</li>
-                <li>✓ AWS Bedrock, OpenAI APIs, Azure AI Foundry</li>
-                <li>✓ Eliminated <strong>70%</strong> of manual curation</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-green-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">☁️</div>
-              <h3 className="text-xl font-bold mb-4 text-green-400">Cloud &amp; HPC</h3>
-              <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>AWS</strong> (Batch, EC2, S3, RDS, SageMaker, CloudWatch)</li>
-                <li>✓ Linux HPC — SLURM, <strong>10,000+ users</strong>, Lustre/NFS</li>
-                <li>✓ Docker, Singularity, multi-GPU deep learning</li>
-                <li>✓ Grafana + Prometheus cluster monitoring</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-cyan-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">💻</div>
-              <h3 className="text-xl font-bold mb-4 text-cyan-400">Full-Stack Engineering</h3>
-              <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>Django, React/TypeScript, Node.js</strong></li>
-                <li>✓ PostgreSQL, MongoDB, REST APIs</li>
-                <li>✓ Interactive UMAP &amp; Visium spatial visualizations</li>
-                <li>✓ <strong>35%</strong> reduction in end-to-end processing time</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-orange-500/30 hover:scale-105 transition duration-300 text-center">
-              <div className="text-4xl mb-4">📖</div>
-              <h3 className="text-xl font-bold mb-4 text-orange-400">Research &amp; Teaching</h3>
-              <ul className="text-gray-300 space-y-2 text-sm text-left">
-                <li>✓ <strong>2 peer-reviewed papers</strong> published (2025)</li>
-                <li>✓ Guided <strong>75+</strong> grad students in ML for biology</li>
-                <li>✓ MS Bioinformatics — <strong>3.94/4.00 GPA</strong></li>
-                <li>✓ BTech Biotechnology — <strong>9.4/10.0 CGPA</strong></li>
-              </ul>
-            </div>
+        {/* Stats strip */}
+        <section className="mt-20">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
+            <StatTile value="5M+" label="Single-cell profiles" accent="from-blue-300 to-cyan-300" />
+            <StatTile value="60%" label="Latency reduction" accent="from-emerald-300 to-teal-300" />
+            <StatTile value="10K+" label="Peptide variants" accent="from-violet-300 to-pink-300" />
+            <StatTile value="12K+" label="HPC users supported" accent="from-amber-300 to-orange-300" />
           </div>
         </section>
 
-        {/* Quick Stats */}
-        <section className="mb-20">
-          <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm p-8 rounded-2xl border border-blue-400/30">
-            <h2 className="text-3xl font-bold text-center mb-8 text-white">By the Numbers</h2>
-            <div className="grid md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">1M+</div>
-                <div className="text-sm text-blue-200">Cells Analyzed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-teal-400 mb-2">92%</div>
-                <div className="text-sm text-teal-200">ML Model Accuracy</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-purple-400 mb-2">50K+</div>
-                <div className="text-sm text-purple-200">Protein Variants</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-green-400 mb-2">10K+</div>
-                <div className="text-sm text-green-200">HPC Users Supported</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Tech Stack */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Core Tech Stack</h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-blue-400">🧬 Protein &amp; Structure</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['RFdiffusion3', 'ProteinMPNN', 'AlphaFold3', 'Boltz-2', 'Chai-1', 'ColabFold', 'PyMOL'].map((skill) => (
-                  <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-purple-400">🤖 LLM &amp; ML</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['LangGraph', 'RAG', 'FAISS', 'PyTorch', 'TensorFlow', 'GNNs', 'ViT'].map((skill) => (
-                  <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-green-400">☁️ Cloud &amp; HPC</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['AWS Batch', 'EC2/S3', 'SLURM', 'Docker', 'Singularity', 'Terraform', 'Airflow'].map((skill) => (
-                  <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4 text-cyan-400">💻 Platforms</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['Django', 'React', 'TypeScript', 'PostgreSQL', 'Python', 'Scanpy', 'Squidpy'].map((skill) => (
-                  <span key={skill} className="bg-gray-800 px-3 py-1 rounded-full text-xs">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Call to Action */}
-        <section className="text-center">
-          <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm p-12 rounded-2xl border border-blue-400/30">
-            <h2 className="text-3xl font-bold mb-6 text-white">Let&apos;s Build Something That Matters</h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Whether it&apos;s a multi-agent research platform, a protein design pipeline, or a full-stack bioinformatics tool — I&apos;m interested in work where the biology and the engineering both have to be right.
+        {/* Focus areas */}
+        <section className="mt-28">
+          <div className="text-center mb-12">
+            <SectionLabel tone="blue">What I work on</SectionLabel>
+            <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+              From wet-lab signal to production AI
+            </GradientHeading>
+            <p className="mt-3 text-gray-400 max-w-2xl mx-auto">
+              Six areas where the biology and the engineering both have to be right.
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <a href="/projects" className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold transition duration-300 transform hover:scale-105">
-                See My Projects
-              </a>
-              <a href="/about" className="border-2 border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-xl font-semibold transition duration-300">
-                More About Me
-              </a>
-            </div>
           </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {focusAreas.map((area) => {
+              const Icon = area.icon;
+              return (
+                <GlassCard key={area.title} className="p-6">
+                  <div className={`mb-4 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.04] ring-1 ${area.ring}`}>
+                    <Icon className={`h-4.5 w-4.5 ${area.accent}`} strokeWidth={1.75} />
+                  </div>
+                  <h3 className="text-base font-semibold text-white tracking-tight">
+                    {area.title}
+                  </h3>
+                  <ul className="mt-4 space-y-2">
+                    {area.points.map((p) => (
+                      <li key={p} className="flex gap-2 text-[13px] text-gray-300/90 leading-relaxed">
+                        <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-white/30" />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </GlassCard>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Tech stack */}
+        <section className="mt-28">
+          <div className="text-center mb-10">
+            <SectionLabel tone="purple">Stack</SectionLabel>
+            <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+              Tools I reach for
+            </GradientHeading>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {stackGroups.map((group) => (
+              <GlassCard key={group.label} className="p-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500 mb-3">
+                  {group.label}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-medium text-gray-300"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </GlassCard>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="mt-28">
+          <GlassCard className="overflow-hidden">
+            <div className="relative p-10 md:p-14 text-center">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
+              <SectionLabel tone="green">Open to opportunities</SectionLabel>
+              <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+                Let&apos;s build something that matters
+              </GradientHeading>
+              <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+                Whether it&apos;s a multi-agent research platform, a protein design pipeline,
+                or a full-stack bioinformatics tool — I&apos;m interested in work where
+                the biology and the engineering both have to be right.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <Link
+                  href="/projects"
+                  className="group inline-flex items-center gap-2 rounded-lg bg-white text-black px-5 py-2.5 text-sm font-semibold transition-transform hover:scale-[1.02]"
+                >
+                  See my projects
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+                <Link
+                  href="/about"
+                  className="group inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] backdrop-blur px-5 py-2.5 text-sm font-semibold text-white hover:border-white/30 hover:bg-white/[0.08] transition-colors"
+                >
+                  More about me
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </GlassCard>
         </section>
       </div>
-    </main>
+    </PageShell>
   );
 }
