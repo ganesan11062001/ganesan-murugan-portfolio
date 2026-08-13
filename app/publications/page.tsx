@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { BookOpen, ExternalLink, FileText } from 'lucide-react';
+import { BookOpen, ExternalLink, FileText, GraduationCap } from 'lucide-react';
 import PageShell from '../components/PageShell';
 import {
   GlassCard,
@@ -99,6 +99,17 @@ export default function Publications() {
             <StatTile value={<AnimatedCounter end={2} />} label="Publications" accent="from-blue-300 to-cyan-300" />
             <StatTile value="2025" label="Published" accent="from-emerald-300 to-teal-300" />
           </div>
+
+          <a
+            href="https://scholar.google.com/citations?user=DE6CicUAAAAJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] backdrop-blur px-4 py-2 text-sm font-medium text-gray-300 hover:border-white/25 hover:text-white transition-colors"
+          >
+            <GraduationCap className="h-4 w-4 text-emerald-300" />
+            View on Google Scholar
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
         </section>
 
         {/* List */}

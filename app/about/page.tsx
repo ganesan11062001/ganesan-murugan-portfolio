@@ -54,7 +54,7 @@ const experiences = [
     title: 'Computational Biology, Predictive Sciences Co-op',
     company: 'Solid Biosciences',
     location: 'Charlestown, MA',
-    period: 'Jan 2026 – Present',
+    period: 'Jan 2026 – Aug 2026',
     logo: '/solid-biosciences.png',
     accent: 'text-blue-300',
   },
@@ -70,7 +70,7 @@ const experiences = [
     title: 'Programming Assistant — Lee Makowski Lab',
     company: 'Northeastern University',
     location: 'Boston, MA',
-    period: 'May 2025 – Present',
+    period: 'May 2025 – Aug 2026',
     logo: '/COE.png',
     accent: 'text-cyan-300',
   },
@@ -190,7 +190,7 @@ export default function About() {
                   <div>
                     <p className="font-medium text-white">MS Bioinformatics</p>
                     <p className="text-xs text-blue-300/80">Northeastern University · CGPA 3.95/4.00</p>
-                    <p className="text-xs text-gray-500 mt-0.5">Expected Aug 2026 · ML/AI, Computational Biology, PLMs</p>
+                    <p className="text-xs text-gray-500 mt-0.5">Expected Dec 2026 · ML/AI, Computational Biology, PLMs</p>
                   </div>
                   <div className="h-px bg-white/10" />
                   <div>

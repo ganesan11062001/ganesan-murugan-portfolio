@@ -99,7 +99,7 @@ const focusAreas = [
 const stackGroups = [
   {
     label: 'Agentic AI / LLMs',
-    items: ['LangGraph', 'LangChain', 'AutoGen', 'CrewAI', 'MCP', 'RAG', 'FAISS', 'Ollama'],
+    items: ['LangGraph', 'LangChain', 'AutoGen', 'CrewAI', 'MCP', 'RAG', 'FAISS', 'Ollama', 'OpenAI APIs'],
   },
   {
     label: 'Protein & Structure',
@@ -107,11 +107,11 @@ const stackGroups = [
   },
   {
     label: 'Cloud & HPC',
-    items: ['AWS Bedrock', 'SageMaker', 'Batch', 'SLURM', 'Docker', 'Kubernetes', 'Terraform'],
+    items: ['AWS Bedrock', 'SageMaker', 'Batch', 'Lambda', 'SLURM', 'Docker', 'Kubernetes', 'Terraform', 'Weights & Biases'],
   },
   {
     label: 'ML / Programming',
-    items: ['PyTorch', 'TensorFlow', 'XGBoost', 'GNN', 'ViT', 'Python', 'React', 'FastAPI'],
+    items: ['PyTorch', 'TensorFlow', 'scikit-learn', 'XGBoost', 'GNN', 'ViT', 'Python', 'TypeScript', 'React', 'FastAPI'],
   },
 ];
 
@@ -121,7 +121,7 @@ export default function Home() {
       <div className="container mx-auto px-6 pt-20 pb-24">
         {/* Hero */}
         <section className="mx-auto max-w-4xl text-center">
-          <HeroBadge>Available for full-time roles · Summer 2026</HeroBadge>
+          <HeroBadge>Open to full-time roles · Graduating Dec 2026</HeroBadge>
 
           <h1 className="mt-6 text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05]">
             Hi, I&apos;m{' '}

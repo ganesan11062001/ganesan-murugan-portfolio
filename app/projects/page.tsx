@@ -71,6 +71,21 @@ const categoryStyle: Record<Category, { tint: string; icon: typeof Bot }> = {
 
 const projects: Project[] = [
   {
+    title: 'SafeSelect AI: Multi-Objective Molecular Design',
+    type: 'Pfizer Digital & Technology Hackathon 2026',
+    period: 'May 2026 – Present',
+    description:
+      'Developed a multi-agent reinforcement learning pipeline for oncology ADC payload and small-molecule discovery, orchestrating target selectivity, ADMET prediction, and retrosynthesis agents to jointly optimize on-target binding affinity, off-target safety, and synthetic accessibility.',
+    achievements: [
+      'Multi-agent RL pipeline coordinating selectivity, ADMET, and retrosynthesis agents',
+      'Joint optimization of binding affinity, off-target safety, and synthetic accessibility',
+      'Applied to oncology ADC payload and small-molecule design',
+      'Built for the Pfizer Digital & Technology Hackathon 2026',
+    ],
+    technologies: ['Reinforcement Learning', 'Multi-Agent Systems', 'ADMET Prediction', 'Retrosynthesis', 'Python'],
+    category: 'Agentic AI',
+  },
+  {
     title: 'Multi-Agentic AI Platform for Multi-Omics Biomarker Discovery',
     type: 'Industry Project',
     period: 'Jan 2026 – Present',
@@ -243,7 +258,7 @@ export default function Projects() {
           </p>
 
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
-            <StatTile value={<AnimatedCounter end={11} />} label="Projects" accent="from-blue-300 to-cyan-300" />
+            <StatTile value={<AnimatedCounter end={12} />} label="Projects" accent="from-blue-300 to-cyan-300" />
             <StatTile value={<AnimatedCounter end={5} suffix="M+" />} label="Single-cell profiles" accent="from-emerald-300 to-teal-300" />
             <StatTile value={<AnimatedCounter end={10} suffix="K+" />} label="Peptide variants" accent="from-violet-300 to-pink-300" />
             <StatTile value={<AnimatedCounter end={60} suffix="%" />} label="Latency reduction" accent="from-amber-300 to-orange-300" />
