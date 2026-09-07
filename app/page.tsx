@@ -137,14 +137,21 @@ export default function Home() {
             MS Bioinformatics @ Northeastern · Computational Biology Co-op · 2 Published Papers
           </p>
 
-          <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
-            I build production-grade ML systems across the drug discovery stack -
-            multi-agentic LLM platforms, multi-omics analysis, de novo protein design,
-            and the HPC and cloud infrastructure to run them at scale. Increasingly, I&apos;m
-            drawn to systems that don&apos;t stop at a one-off analysis - agents and models
-            that keep reasoning over new literature and lab results, stay honest about
-            uncertainty, and get sharper with every experiment.
+          <p className="mt-6 mx-auto max-w-xl text-base md:text-lg text-gray-400 leading-relaxed">
+            I build production-grade ML systems across the drug discovery stack,
+            and the infrastructure that runs them at scale.
           </p>
+
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+            {['Agentic AI', 'Protein Design', 'Multi-Omics', 'HPC & Cloud'].map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-white/10 bg-white/[0.04] backdrop-blur px-3 py-1 text-xs font-medium text-gray-300"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link
