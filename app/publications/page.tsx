@@ -1,8 +1,6 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { BookOpen, ExternalLink, FileText, GraduationCap } from 'lucide-react';
 import PageShell from '../components/PageShell';
+import AnimatedCounter from '../components/AnimatedCounter';
 import {
   GlassCard,
   GradientHeading,
@@ -10,39 +8,24 @@ import {
   SectionLabel,
   StatTile,
 } from '../components/Section';
+import { fetchScholarPublications } from '../lib/scholar';
 
-function AnimatedCounter({
-  end,
-  duration = 2000,
-  suffix = '',
-}: {
-  end: number;
-  duration?: number;
-  suffix?: string;
-}) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    let startTime: number | undefined;
-    let frame: number;
-    const tick = (t: number) => {
-      if (!startTime) startTime = t;
-      const progress = Math.min((t - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(eased * end));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [end, duration]);
-  return (
-    <>
-      {count}
-      {suffix}
-    </>
-  );
-}
+export const revalidate = 3600;
 
-const publications = [
+type Publication = {
+  title: string;
+  authors: string;
+  journal: string;
+  year: string;
+  volume?: string;
+  doi: string;
+  abstract?: string;
+  keywords: string[];
+  accent: string;
+  ring: string;
+};
+
+const curatedPublications: Publication[] = [
   {
     title: 'BPS2025 - Metabolic enzymes moonlighting as RNA binding proteins',
     authors:
@@ -72,6 +55,17 @@ const publications = [
   },
 ];
 
+const palette = [
+  { accent: 'from-blue-300 to-cyan-300', ring: 'ring-blue-400/30' },
+  { accent: 'from-violet-300 to-pink-300', ring: 'ring-violet-400/30' },
+  { accent: 'from-emerald-300 to-teal-300', ring: 'ring-emerald-400/30' },
+  { accent: 'from-amber-300 to-orange-300', ring: 'ring-amber-400/30' },
+];
+
+function normalizeTitle(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
 const researchAreas = [
   { label: 'AI for Drug Discovery', desc: 'Protein design, structure prediction, target identification', accent: 'text-blue-300' },
   { label: 'Proteomics & Structural Biology', desc: 'Moonlighting proteins, RNA-binding, electrostatics', accent: 'text-violet-300' },
@@ -81,7 +75,35 @@ const researchAreas = [
   { label: 'Computational Biology', desc: 'Algorithm development, HPC pipelines, workflows', accent: 'text-orange-300' },
 ];
 
-export default function Publications() {
+export default async function Publications() {
+  const scholarPubs = await fetchScholarPublications();
+  const isLive = Boolean(scholarPubs && scholarPubs.length > 0);
+
+  const curatedByTitle = new Map(curatedPublications.map((p) => [normalizeTitle(p.title), p]));
+
+  const publications: Publication[] = isLive
+    ? scholarPubs!.map((sp, i) => {
+        const curated = curatedByTitle.get(normalizeTitle(sp.title));
+        if (curated) return curated;
+        const c = palette[i % palette.length];
+        return {
+          title: sp.title,
+          authors: sp.authors || 'Ganesan Murugan et al.',
+          journal: sp.journal,
+          year: sp.year,
+          doi: sp.link,
+          keywords: [],
+          accent: c.accent,
+          ring: c.ring,
+        };
+      })
+    : curatedPublications;
+
+  const latestYear = publications.reduce((max, p) => {
+    const y = parseInt(p.year, 10);
+    return Number.isFinite(y) && y > max ? y : max;
+  }, 0);
+
   return (
     <PageShell>
       <div className="container mx-auto px-6 pt-20 pb-24">
@@ -92,12 +114,12 @@ export default function Publications() {
             <GradientHeading as="span">Publications</GradientHeading>
           </h1>
           <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
-            Research in computational structural biology, systems biology, and multi-omics - both published in 2025.
+            Research in computational structural biology, systems biology, and multi-omics.
           </p>
 
           <div className="mt-10 grid grid-cols-2 gap-3 max-w-md mx-auto">
-            <StatTile value={<AnimatedCounter end={2} />} label="Publications" accent="from-blue-300 to-cyan-300" />
-            <StatTile value="2025" label="Published" accent="from-emerald-300 to-teal-300" />
+            <StatTile value={<AnimatedCounter end={publications.length} />} label="Publications" accent="from-blue-300 to-cyan-300" />
+            <StatTile value={latestYear ? String(latestYear) : '2025'} label="Latest" accent="from-emerald-300 to-teal-300" />
           </div>
 
           <a
@@ -110,6 +132,10 @@ export default function Publications() {
             View on Google Scholar
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
+
+          <p className="mt-3 text-xs text-gray-500">
+            {isLive ? 'Synced live from Google Scholar' : 'Showing cached publication data'}
+          </p>
         </section>
 
         {/* List */}
@@ -123,20 +149,26 @@ export default function Publications() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <h2 className="text-lg font-semibold text-white leading-snug tracking-tight">{paper.title}</h2>
-                    <p className="mt-1.5 text-xs text-gray-500 italic leading-relaxed">{paper.authors}</p>
+                    {paper.authors && (
+                      <p className="mt-1.5 text-xs text-gray-500 italic leading-relaxed">{paper.authors}</p>
+                    )}
                     <p className={`mt-2 text-xs font-semibold bg-gradient-to-r ${paper.accent} bg-clip-text text-transparent`}>
-                      {paper.journal} · {paper.volume} · {paper.year}
+                      {[paper.journal, paper.volume, paper.year].filter(Boolean).join(' · ')}
                     </p>
 
-                    <p className="mt-4 text-[14px] text-gray-300/90 leading-relaxed">{paper.abstract}</p>
+                    {paper.abstract && (
+                      <p className="mt-4 text-[14px] text-gray-300/90 leading-relaxed">{paper.abstract}</p>
+                    )}
 
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {paper.keywords.map((kw) => (
-                        <span key={kw} className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-gray-300">
-                          {kw}
-                        </span>
-                      ))}
-                    </div>
+                    {paper.keywords.length > 0 && (
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {paper.keywords.map((kw) => (
+                          <span key={kw} className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-gray-300">
+                            {kw}
+                          </span>
+                        ))}
+                      </div>
+                    )}
 
                     <a
                       href={paper.doi}
@@ -144,7 +176,7 @@ export default function Publications() {
                       rel="noopener noreferrer"
                       className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-blue-300 hover:text-blue-200"
                     >
-                      View publication (DOI)
+                      {paper.doi.includes('doi.org') ? 'View publication (DOI)' : 'View on Google Scholar'}
                       <ExternalLink className="h-3 w-3" />
                     </a>
                   </div>
