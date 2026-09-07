@@ -3,7 +3,9 @@
 import { useEffect, useState } from 'react';
 import {
   BadgeCheck,
+  Bot,
   BookOpen,
+  BrainCircuit,
   Cloud,
   Code2,
   Database,
@@ -68,11 +70,153 @@ type Cert = {
   skills: string[];
   category: string;
   icon: LucideIcon;
-  verificationUrl: string;
+  verificationUrl?: string;
+  expires?: string;
+  credentialNote?: string;
   tint: string;
 };
 
 const certifications: Cert[] = [
+  {
+    title: 'Oracle Cloud Infrastructure Certified Architect Associate',
+    issuer: 'Oracle',
+    date: 'Aug 2026',
+    year: 2026,
+    month: 8,
+    status: 'Certified',
+    description:
+      'Associate-level certification validating expertise in architecting solutions on Oracle Cloud Infrastructure - compute, networking, storage, security, and cost optimization.',
+    skills: ['OCI Architecture', 'Cloud Networking', 'Security', 'Cost Optimization', 'IaC'],
+    category: 'Cloud Architecture',
+    icon: Cloud,
+    verificationUrl:
+      'https://catalog-education.oracle.com/pls/certview/sharebadge?id=37A012D9F56E22C96953813BAC674ED0F79325908032198220ECB02D77BC5291',
+    tint: 'text-orange-300 ring-orange-400/30 bg-orange-500/10',
+  },
+  {
+    title: 'AWS Certified AI Practitioner',
+    issuer: 'Amazon Web Services',
+    date: 'Aug 2026',
+    year: 2026,
+    month: 8,
+    status: 'Certified',
+    description:
+      'Foundational AWS certification covering generative AI, machine learning, and responsible AI concepts and use cases on AWS.',
+    skills: ['Generative AI', 'AWS AI/ML Services', 'Responsible AI', 'Prompt Engineering'],
+    category: 'ML / Cloud',
+    icon: Sparkles,
+    verificationUrl: 'https://www.credly.com/badges/45681c75-3861-40c3-8bed-9acbbab5b6eb/public_url',
+    expires: 'Aug 2029',
+    tint: 'text-yellow-300 ring-yellow-400/30 bg-yellow-500/10',
+  },
+  {
+    title: 'Claude Partner Badge - Claude Code',
+    issuer: 'Anthropic',
+    date: 'Jul 2026',
+    year: 2026,
+    month: 7,
+    status: 'Certified',
+    description:
+      "Recognizes verified expertise building with Claude Code, Anthropic's agentic coding tool, across real-world development workflows.",
+    skills: ['Claude Code', 'Agentic Coding', 'Anthropic API', 'AI Pair Programming'],
+    category: 'AI Fluency & Agents',
+    icon: BrainCircuit,
+    verificationUrl: 'https://www.credly.com/badges/31281628-afaf-4cf3-987b-2b7fb7c2bbbd/public_url',
+    expires: 'Jan 2027',
+    tint: 'text-fuchsia-300 ring-fuchsia-400/30 bg-fuchsia-500/10',
+  },
+  {
+    title: 'Oracle AI Database Certified Foundations Associate',
+    issuer: 'Oracle',
+    date: 'Jun 2026',
+    year: 2026,
+    month: 6,
+    status: 'Certified',
+    description:
+      'Foundational certification covering Oracle AI Database capabilities - vector search, AI-powered data management, and integrated ML within the Oracle Database platform.',
+    skills: ['Oracle AI Database', 'Vector Search', 'AI Data Management', 'Oracle DB'],
+    category: 'ML / Cloud',
+    icon: Database,
+    verificationUrl:
+      'https://catalog-education.oracle.com/ords/certview/sharebadge?id=EACCBD138DFD0320D69605525D2EE0C9682E0ABD4909D4213466ABA60F257B18',
+    expires: 'Jun 2028',
+    tint: 'text-rose-300 ring-rose-400/30 bg-rose-500/10',
+  },
+  {
+    title: 'Oracle Cloud Infrastructure Certified AI Foundations Associate',
+    issuer: 'Oracle',
+    date: 'Jun 2026',
+    year: 2026,
+    month: 6,
+    status: 'Certified',
+    description:
+      'Foundational certification covering AI and machine learning services on Oracle Cloud Infrastructure, including OCI AI services, generative AI, and ML fundamentals.',
+    skills: ['OCI AI Services', 'Generative AI', 'Machine Learning', 'Cloud AI'],
+    category: 'ML / Cloud',
+    icon: Cloud,
+    verificationUrl:
+      'https://catalog-education.oracle.com/ords/certview/sharebadge?id=BF626E191C37A653FCEE56F0F52B54181F799CD670DB30DAFEDBCF78531BBE0D',
+    expires: 'Jun 2028',
+    tint: 'text-sky-300 ring-sky-400/30 bg-sky-500/10',
+  },
+  {
+    title: 'Agentic AI Certified Foundations Associate',
+    issuer: 'Oracle',
+    date: 'Jun 2026',
+    year: 2026,
+    month: 6,
+    status: 'Certified',
+    description:
+      'Foundational certification covering agentic AI concepts - autonomous agents, tool use, and multi-agent orchestration patterns on Oracle Cloud Infrastructure.',
+    skills: ['Agentic AI', 'Multi-Agent Systems', 'Tool Use', 'OCI'],
+    category: 'AI Fluency & Agents',
+    icon: Bot,
+    verificationUrl:
+      'https://catalog-education.oracle.com/pls/certview/sharebadge?id=EFB32EC7E4E32D44448F57983FD860D4E59FE5FF989204116E697BA0103BB490',
+    expires: 'Jun 2028',
+    tint: 'text-lime-300 ring-lime-400/30 bg-lime-500/10',
+  },
+  {
+    title: 'Anthropic Academy - AI Fluency & Claude Agent Skills',
+    issuer: 'Anthropic',
+    date: 'May 2026',
+    year: 2026,
+    month: 5,
+    status: 'Completed',
+    description:
+      'Ten Anthropic Academy courses spanning the AI Fluency framework, Claude fundamentals, and agentic tooling - from foundational AI fluency to building with subagents and agent skills.',
+    skills: [
+      'AI Fluency Framework & Foundations',
+      'Claude 101',
+      'AI Capabilities and Limitations',
+      'Introduction to Subagents',
+      'Introduction to Agent Skills',
+      'AI Fluency for Educators',
+      'AI Fluency for Students',
+      'AI Fluency for Small Businesses',
+      'AI Fluency for Nonprofits',
+      'Teaching the AI Fluency Framework',
+    ],
+    category: 'AI Fluency & Agents',
+    icon: BrainCircuit,
+    credentialNote: '10 Anthropic Academy credentials',
+    tint: 'text-violet-300 ring-violet-400/30 bg-violet-500/10',
+  },
+  {
+    title: 'Databricks Academy - Generative AI & Agent Fundamentals',
+    issuer: 'Databricks',
+    date: 'May 2026',
+    year: 2026,
+    month: 5,
+    status: 'Completed',
+    description:
+      'Databricks Academy courses covering generative AI foundations and building AI agents on the Databricks platform.',
+    skills: ['Generative AI Fundamentals', 'AI Agent Fundamentals'],
+    category: 'ML / Cloud',
+    icon: Bot,
+    credentialNote: '2 Databricks Academy credentials',
+    tint: 'text-red-300 ring-red-400/30 bg-red-500/10',
+  },
   {
     title: 'Oracle Cloud Infrastructure 2025 Certified DevOps Professional',
     issuer: 'Oracle',
@@ -238,7 +382,19 @@ const upcoming = [
   },
 ];
 
-const categories = ['All', 'Database', 'Programming', 'Data Science', 'Cloud Development', 'DevOps', 'Leadership', 'Bioinformatics'];
+const categories = [
+  'All',
+  'Database',
+  'Programming',
+  'Data Science',
+  'Cloud Development',
+  'Cloud Architecture',
+  'ML / Cloud',
+  'AI Fluency & Agents',
+  'DevOps',
+  'Leadership',
+  'Bioinformatics',
+];
 
 export default function Certifications() {
   const [selected, setSelected] = useState('All');
@@ -255,7 +411,7 @@ export default function Certifications() {
             <GradientHeading as="span">Certifications</GradientHeading>
           </h1>
           <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
-            Continuous learning across databases, programming, cloud, bioinformatics, and leadership.
+            Continuous learning across databases, programming, cloud, AI/agentic systems, bioinformatics, and leadership.
           </p>
 
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
@@ -341,16 +497,23 @@ export default function Certifications() {
                     )}
                   </div>
 
-                  <div className="mt-5 flex items-center justify-between text-xs">
-                    <span className="text-gray-500">{cert.date}</span>
-                    <a
-                      href={cert.verificationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-blue-300 hover:text-blue-200"
-                    >
-                      Verify <ExternalLink className="h-3 w-3" />
-                    </a>
+                  <div className="mt-5 flex items-center justify-between gap-2 text-xs">
+                    <span className="text-gray-500">
+                      {cert.date}
+                      {cert.expires && <span className="text-gray-600"> · Expires {cert.expires}</span>}
+                    </span>
+                    {cert.verificationUrl ? (
+                      <a
+                        href={cert.verificationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex flex-shrink-0 items-center gap-1 text-blue-300 hover:text-blue-200"
+                      >
+                        Verify <ExternalLink className="h-3 w-3" />
+                      </a>
+                    ) : cert.credentialNote ? (
+                      <span className="flex-shrink-0 text-gray-500">{cert.credentialNote}</span>
+                    ) : null}
                   </div>
                 </GlassCard>
               );
