@@ -229,7 +229,7 @@ const certifications: Cert[] = [
     skills: ['AI Agents', 'Agent Orchestration', 'Databricks Platform'],
     category: 'ML / Cloud',
     icon: Bot,
-    credentialNote: 'Credential ID 182181159',
+    verificationUrl: 'https://credentials.databricks.com/d4feaa0c-715d-4815-99e9-dd030bf18574',
     tint: 'text-red-300 ring-red-400/30 bg-red-500/10',
   },
   {
