@@ -7,7 +7,6 @@ import {
   Check,
   Dna,
   ExternalLink,
-  FlaskConical,
   Globe,
   HeartPulse,
   Lock,
@@ -147,27 +146,12 @@ const products: Product[] = [
     icon: ShieldCheck,
     tint: 'text-slate-300 ring-slate-400/30 bg-slate-500/10',
   },
-  {
-    name: 'SingleCell Insights Pro',
-    shortName: 'scRNA-seq Analysis Platform',
-    description:
-      'Single-cell RNA sequencing platform with automated QC, dimensional reduction, and interactive visualization for multi-omics discovery.',
-    category: 'Bioinformatics Analysis',
-    status: 'Under Development',
-    technologies: ['Python', 'Scanpy', 'React', 'Plotly', 'Docker', 'AWS'],
-    features: ['Automated QC', 'UMAP / tSNE', 'Cell type classification', 'DE analysis', 'Trajectory inference', 'Multi-sample integration'],
-    impact: { version: 'v0.1', testing: 'Alpha', launch: 'Q4' },
-    websiteUrl: null,
-    launchDate: 'Q4 2025',
-    icon: FlaskConical,
-    tint: 'text-teal-300 ring-teal-400/30 bg-teal-500/10',
-  },
 ];
 
 const stats = [
-  { value: 5, label: 'Total products', accent: 'from-emerald-300 to-teal-300' },
+  { value: 4, label: 'Total products', accent: 'from-emerald-300 to-teal-300' },
   { value: 4, label: 'Published', accent: 'from-blue-300 to-cyan-300' },
-  { value: 1, label: 'In development', accent: 'from-amber-300 to-orange-300' },
+  { value: 0, label: 'In development', accent: 'from-amber-300 to-orange-300' },
   { value: 100, suffix: '%', label: 'Success rate', accent: 'from-violet-300 to-pink-300' },
 ];
 
