@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import {
+  Activity,
   ArrowUpRight,
   Check,
   Dna,
@@ -9,7 +10,9 @@ import {
   FlaskConical,
   Globe,
   HeartPulse,
+  Lock,
   Rocket,
+  ShieldCheck,
   Sparkles,
   Target,
 } from 'lucide-react';
@@ -101,6 +104,50 @@ const products: Product[] = [
     tint: 'text-blue-300 ring-blue-400/30 bg-blue-500/10',
   },
   {
+    name: 'FCS/FCCS Analysis App',
+    shortName: 'Fluorescence Correlation Spectroscopy Tool',
+    description:
+      'A local, cross-platform tool for analyzing Fluorescence Correlation/Cross-Correlation Spectroscopy (FCS/FCCS) traces exported from an ISS VistaVision instrument, with no VistaVision license required. Runs single- or dual-channel autocorrelation, diffusion-model fitting, FCCS bound-fraction calculation, and Kd fitting from concentration series — all locally, with nothing leaving the machine.',
+    category: 'Biophysics Software',
+    status: 'Published',
+    technologies: ['Python', 'Streamlit', 'Multi-tau Correlation', 'pytest', 'NumPy/SciPy'],
+    features: [
+      'Single/dual-channel autocorrelation & cross-correlation',
+      'Diffusion-model fitting per channel',
+      'FCCS bound-fraction calculation',
+      'Kd fitting from concentration series',
+      'Batch / time-course processing',
+      'Built-in validation suite (FFT cross-check + synthetic recovery)',
+    ],
+    impact: { pages: '5', tests: 'Full suite', data: '100% local' },
+    websiteUrl: 'https://makowski-lab-fcs-analysis.streamlit.app/',
+    launchDate: 'Live Now',
+    icon: Activity,
+    tint: 'text-indigo-300 ring-indigo-400/30 bg-indigo-500/10',
+  },
+  {
+    name: 'Enterprise LIMS/ELN Platforms',
+    shortName: 'Laboratory Informatics for Pharma',
+    description:
+      'Engineered and validated 21 CFR Part 11-compliant LIMS/ELN platforms (LabVantage, Benchling, LabWare) for pharmaceutical clients — covering sample accessioning, audit trails, electronic signatures, and workflow automation at enterprise scale.',
+    category: 'Enterprise Software',
+    status: 'Published',
+    technologies: ['LabVantage', 'Benchling', 'LabWare', 'Python', 'REST APIs', 'SQL/PL-SQL', 'Terraform'],
+    features: [
+      'Sample accessioning & barcode tracking',
+      'Audit trails & electronic signatures',
+      '21 CFR Part 11 validation',
+      'CoA generation',
+      'Inventory & master data management',
+      'Agile SDLC with CI/CD delivery',
+    ],
+    impact: { scientists: '5,500+', samples: '1M+', clients: '3+' },
+    websiteUrl: null,
+    launchDate: 'Jan 2023 – Aug 2024',
+    icon: ShieldCheck,
+    tint: 'text-slate-300 ring-slate-400/30 bg-slate-500/10',
+  },
+  {
     name: 'SingleCell Insights Pro',
     shortName: 'scRNA-seq Analysis Platform',
     description:
@@ -118,8 +165,8 @@ const products: Product[] = [
 ];
 
 const stats = [
-  { value: 3, label: 'Total products', accent: 'from-emerald-300 to-teal-300' },
-  { value: 2, label: 'Published', accent: 'from-blue-300 to-cyan-300' },
+  { value: 5, label: 'Total products', accent: 'from-emerald-300 to-teal-300' },
+  { value: 4, label: 'Published', accent: 'from-blue-300 to-cyan-300' },
   { value: 1, label: 'In development', accent: 'from-amber-300 to-orange-300' },
   { value: 100, suffix: '%', label: 'Success rate', accent: 'from-violet-300 to-pink-300' },
 ];
@@ -230,7 +277,7 @@ export default function Products() {
                         Launch:{' '}
                         <span
                           className={`font-semibold ${
-                            product.launchDate === 'Live Now' ? 'text-emerald-300' : 'text-amber-300'
+                            product.status === 'Published' ? 'text-emerald-300' : 'text-amber-300'
                           }`}
                         >
                           {product.launchDate}
@@ -251,6 +298,11 @@ export default function Products() {
                         Visit live
                         <ExternalLink className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                       </a>
+                    ) : product.status === 'Published' ? (
+                      <span className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-gray-400">
+                        <Lock className="h-3.5 w-3.5" />
+                        Deployed internally
+                      </span>
                     ) : (
                       <span className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-gray-400">
                         <Rocket className="h-3.5 w-3.5" />
