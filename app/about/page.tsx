@@ -227,7 +227,10 @@ export default function About() {
                 </div>
                 <p className="text-[13px] text-gray-400 leading-relaxed">
                   I&apos;m most interested in problems where the biology is hard and the engineering is hard at the
-                  same time. Drug discovery is a good place for that — models need to be correct, fast, and
+                  same time. Lately that means thinking about drug discovery less as a pipeline of one-off analyses
+                  and more as a closed loop — agents that reason over literature and experimental data, models that
+                  stay uncertain until the evidence says otherwise, and systems that get a little sharper with every
+                  new result. Drug discovery is a good place for that: models need to be correct, fast, and
                   trustworthy. I want to keep building in this space.
                 </p>
               </GlassCard>

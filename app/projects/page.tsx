@@ -176,6 +176,21 @@ const projects: Project[] = [
     category: 'Bioinformatics',
   },
   {
+    title: 'WGCNA: Hub Gene Discovery for Cellular Quiescence',
+    type: 'Academic Research · Published in 3 Biotech',
+    period: '2025',
+    description:
+      'Performed weighted gene co-expression network analysis (WGCNA) across S. cerevisiae, M. musculus, and H. sapiens transcriptomic datasets to identify hub genes and conserved molecular mechanisms underlying cellular quiescence, revealing a cross-species regulatory core validated through comparative network analysis.',
+    achievements: [
+      'Cross-species WGCNA across yeast, mouse, and human transcriptomes',
+      'Identified conserved hub genes (EP300, EGF, EHMT2, EZH2) driving quiescence',
+      'Published in 3 Biotech (2025)',
+      'Network-based framework generalizable to other conserved cellular programs',
+    ],
+    technologies: ['WGCNA', 'R', 'Gene Co-expression Networks', 'Systems Biology', 'Transcriptomics', 'Python'],
+    category: 'Bioinformatics',
+  },
+  {
     title: 'OnchoGraph: Pan-Cancer Drug Repurposing via Heterogeneous Knowledge Graphs',
     type: 'Academic Project',
     period: 'Sep 2025 – Dec 2025',
@@ -258,7 +273,7 @@ export default function Projects() {
           </p>
 
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
-            <StatTile value={<AnimatedCounter end={12} />} label="Projects" accent="from-blue-300 to-cyan-300" />
+            <StatTile value={<AnimatedCounter end={13} />} label="Projects" accent="from-blue-300 to-cyan-300" />
             <StatTile value={<AnimatedCounter end={5} suffix="M+" />} label="Single-cell profiles" accent="from-emerald-300 to-teal-300" />
             <StatTile value={<AnimatedCounter end={10} suffix="K+" />} label="Peptide variants" accent="from-violet-300 to-pink-300" />
             <StatTile value={<AnimatedCounter end={60} suffix="%" />} label="Latency reduction" accent="from-amber-300 to-orange-300" />
