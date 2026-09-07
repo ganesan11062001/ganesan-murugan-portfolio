@@ -12,7 +12,6 @@ const navItems = [
   { label: 'Products', href: '/products' },
   { label: 'Publications', href: '/publications' },
   { label: 'Certifications', href: '/certifications' },
-  { label: 'Posts', href: '/posts' },
   { label: 'Contact', href: '/contact' },
 ];
 

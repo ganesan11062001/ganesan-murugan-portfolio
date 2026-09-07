@@ -44,7 +44,7 @@ function AnimatedCounter({
 
 const publications = [
   {
-    title: 'BPS2025 — Metabolic enzymes moonlighting as RNA binding proteins',
+    title: 'BPS2025 - Metabolic enzymes moonlighting as RNA binding proteins',
     authors:
       'Emberling, G., Curtis, N., Tu, T., Zhang, K., Lokhandwala, A., Tajuddin, Z., Murugan, G., Ondrechen, M. J., & Jeffery, C.',
     journal: 'Biophysical Journal',
@@ -52,7 +52,7 @@ const publications = [
     volume: '124(3)',
     doi: 'https://doi.org/10.1016/j.bpj.2024.11.2284',
     abstract:
-      'Investigation of metabolic enzymes with dual functionality as RNA-binding proteins using computational structural biology approaches — POOL analysis, YASARA, and Schrödinger — identifying high-confidence moonlighting candidates from structural and electrostatic features.',
+      'Investigation of metabolic enzymes with dual functionality as RNA-binding proteins using computational structural biology approaches - POOL analysis, YASARA, and Schrödinger - identifying high-confidence moonlighting candidates from structural and electrostatic features.',
     keywords: ['RNA-Binding Proteins', 'Metabolic Enzymes', 'Moonlighting', 'Computational Structural Biology', 'POOL'],
     accent: 'from-blue-300 to-cyan-300',
     ring: 'ring-blue-400/30',
@@ -92,7 +92,7 @@ export default function Publications() {
             <GradientHeading as="span">Publications</GradientHeading>
           </h1>
           <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
-            Research in computational structural biology, systems biology, and multi-omics — both published in 2025.
+            Research in computational structural biology, systems biology, and multi-omics - both published in 2025.
           </p>
 
           <div className="mt-10 grid grid-cols-2 gap-3 max-w-md mx-auto">

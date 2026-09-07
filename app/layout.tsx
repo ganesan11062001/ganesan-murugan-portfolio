@@ -16,12 +16,12 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ganesan Murugan — Computational Biology & AI",
+  title: "Ganesan Murugan - Computational Biology & AI",
   description:
-    "MS Bioinformatics @ Northeastern — building agentic AI platforms, de novo protein design pipelines, and multi-omics infrastructure for drug discovery.",
+    "MS Bioinformatics @ Northeastern - building agentic AI platforms, de novo protein design pipelines, and multi-omics infrastructure for drug discovery.",
   metadataBase: new URL("https://ganesanmurugan.dev"),
   openGraph: {
-    title: "Ganesan Murugan — Computational Biology & AI",
+    title: "Ganesan Murugan - Computational Biology & AI",
     description:
       "Agentic AI, protein design, multi-omics, and the HPC/cloud to run them.",
     type: "website",

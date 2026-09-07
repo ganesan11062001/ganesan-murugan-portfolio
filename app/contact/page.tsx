@@ -14,7 +14,7 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import type { SVGProps } from 'react';
 
-// lucide-react dropped brand/logo icons (Github, Linkedin) — inline SVGs instead
+// lucide-react dropped brand/logo icons (Github, Linkedin) - inline SVGs instead
 function GithubIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>

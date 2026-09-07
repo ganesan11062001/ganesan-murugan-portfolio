@@ -90,7 +90,7 @@ const projects: Project[] = [
     type: 'Industry Project',
     period: 'Jan 2026 – Present',
     description:
-      "Architected a production-grade multi-agentic AI platform using LangGraph, FastAPI, and AWS Bedrock — enabling autonomous planning, LLM-driven tool selection, and self-critique workflows that reduced analytical latency by 60%. Fine-tuned base models with QLoRA and DPO on curated omics datasets and agent execution traces, dropping hallucination rates from 34% to 8% across differential expression, FDR correction, and pathway enrichment reasoning. Built a complementary RAG + LLMOps stack with FAISS semantic indexing, context-aware reranking, prompt-versioned retrieval, LangSmith observability, and scoped tool permissions for reproducible biomedical workflows.",
+      "Architected a production-grade multi-agentic AI platform using LangGraph, FastAPI, and AWS Bedrock - enabling autonomous planning, LLM-driven tool selection, and self-critique workflows that reduced analytical latency by 60%. Fine-tuned base models with QLoRA and DPO on curated omics datasets and agent execution traces, dropping hallucination rates from 34% to 8% across differential expression, FDR correction, and pathway enrichment reasoning. Built a complementary RAG + LLMOps stack with FAISS semantic indexing, context-aware reranking, prompt-versioned retrieval, LangSmith observability, and scoped tool permissions for reproducible biomedical workflows.",
     achievements: [
       '60% reduction in analytical latency via multi-agent orchestration',
       'Hallucination rate cut from 34% → 8% with QLoRA + DPO fine-tuning',
@@ -105,7 +105,7 @@ const projects: Project[] = [
     type: 'Industry Project',
     period: 'Jan 2026 – Present',
     description:
-      "Designed and optimized de novo peptide sequences for Duchenne muscular dystrophy (DMD) and Friedreich's ataxia (FA) using ProteinMPNN, ThermoMPNN, Chai-1, and Boltz-2 — applying constrained sequence design and thermostability optimization across 10,000+ candidate variants to improve stability and reduce aggregation propensity. Coupled structural prediction with energy-based scoring and developability filters to triage manufacturable leads.",
+      "Designed and optimized de novo peptide sequences for Duchenne muscular dystrophy (DMD) and Friedreich's ataxia (FA) using ProteinMPNN, ThermoMPNN, Chai-1, and Boltz-2 - applying constrained sequence design and thermostability optimization across 10,000+ candidate variants to improve stability and reduce aggregation propensity. Coupled structural prediction with energy-based scoring and developability filters to triage manufacturable leads.",
     achievements: [
       '10,000+ peptide variants designed and screened',
       'Constrained sequence design via ProteinMPNN + Boltz-2',
@@ -120,7 +120,7 @@ const projects: Project[] = [
     type: 'Academic Research',
     period: 'Jan 2026 – Present',
     description:
-      'Architected an autonomous multi-agent RAG system for high-performance computing support using LangGraph, vector search, and internal knowledge bases — enabling intelligent SLURM job diagnostics, automated troubleshooting, and AI-driven research workflows for 12,000+ users. Integrated cluster telemetry (Prometheus + Grafana) so the agent can reason about live GPU/CPU allocation, queue contention, and containerized bioinformatics workloads.',
+      'Architected an autonomous multi-agent RAG system for high-performance computing support using LangGraph, vector search, and internal knowledge bases - enabling intelligent SLURM job diagnostics, automated troubleshooting, and AI-driven research workflows for 12,000+ users. Integrated cluster telemetry (Prometheus + Grafana) so the agent can reason about live GPU/CPU allocation, queue contention, and containerized bioinformatics workloads.',
     achievements: [
       'Multi-agent diagnostic system for SLURM job failures',
       'Serves 12,000+ HPC users (faculty, students, researchers)',
@@ -135,7 +135,7 @@ const projects: Project[] = [
     type: 'Industry Project',
     period: 'May 2025 – Aug 2025',
     description:
-      'Deployed an end-to-end scRNA-seq analysis platform integrating scVI, Harmony batch correction, Leiden clustering, and RNA velocity inference — processing 3M+ cells to characterize transcriptional programs and cell-fate transitions. Fine-tuned scGPT and Geneformer foundation models on 5M+ single-cell transcriptomic profiles for cell-type annotation, gene regulatory network inference, and perturbation-aware representation learning, improving accuracy by 80% across heterogeneous tissues. Built a spatial deconvolution pipeline with cell2location and Squidpy mapping fine-grained cellular compositions across 10x Visium datasets.',
+      'Deployed an end-to-end scRNA-seq analysis platform integrating scVI, Harmony batch correction, Leiden clustering, and RNA velocity inference - processing 3M+ cells to characterize transcriptional programs and cell-fate transitions. Fine-tuned scGPT and Geneformer foundation models on 5M+ single-cell transcriptomic profiles for cell-type annotation, gene regulatory network inference, and perturbation-aware representation learning, improving accuracy by 80% across heterogeneous tissues. Built a spatial deconvolution pipeline with cell2location and Squidpy mapping fine-grained cellular compositions across 10x Visium datasets.',
     achievements: [
       '3M+ cells processed across single-cell and spatial modalities',
       'scGPT + Geneformer fine-tuned on 5M+ profiles (+80% accuracy)',
@@ -150,7 +150,7 @@ const projects: Project[] = [
     type: 'Academic Research',
     period: 'May 2025 – Present',
     description:
-      "Developed deep learning pipelines with agentic hyperparameter and epoch optimization — combining Vision Transformers, VAE, ResNet, and U-Net segmentation to classify 100,000+ silver-stained tau and tubulin protein gel images for Alzheimer's research. Built a multimodal learning framework integrating GNNs, CNNs, and contrastive learning to jointly analyze X-ray scattering profiles and tau fibril imaging data, identifying amyloid-beta aggregation patterns. Ran HPC-scale protein structure prediction (AlphaFold3, ESMFold, RoseTTAFold, ColabFold) across 20,000+ intrinsically disordered protein structures, with PyMOL + ChimeraX for interface analysis.",
+      "Developed deep learning pipelines with agentic hyperparameter and epoch optimization - combining Vision Transformers, VAE, ResNet, and U-Net segmentation to classify 100,000+ silver-stained tau and tubulin protein gel images for Alzheimer's research. Built a multimodal learning framework integrating GNNs, CNNs, and contrastive learning to jointly analyze X-ray scattering profiles and tau fibril imaging data, identifying amyloid-beta aggregation patterns. Ran HPC-scale protein structure prediction (AlphaFold3, ESMFold, RoseTTAFold, ColabFold) across 20,000+ intrinsically disordered protein structures, with PyMOL + ChimeraX for interface analysis.",
     achievements: [
       '100,000+ silver-stained tau / tubulin gel images classified',
       'Multimodal GNN + CNN fusion of X-ray scattering and imaging',
@@ -225,7 +225,7 @@ const projects: Project[] = [
     type: 'Academic Research',
     period: 'Sep 2024 – Apr 2025',
     description:
-      'Analyzed RNA-binding mechanisms across 250+ canonical and moonlighting proteins using the POOL machine learning method, molecular modeling, and evolutionary conservation analysis with ConSurf, SASA, and Concavity Score — identifying functionally significant residues and surface patches that drive RNA recognition.',
+      'Analyzed RNA-binding mechanisms across 250+ canonical and moonlighting proteins using the POOL machine learning method, molecular modeling, and evolutionary conservation analysis with ConSurf, SASA, and Concavity Score - identifying functionally significant residues and surface patches that drive RNA recognition.',
     achievements: [
       '250+ canonical and moonlighting proteins analyzed',
       'POOL-based ML for functional residue prediction',
@@ -268,7 +268,7 @@ export default function Projects() {
             <GradientHeading as="span">Projects</GradientHeading>
           </h1>
           <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
-            A mix of industry platforms, academic research, and personal projects — mostly centered on
+            A mix of industry platforms, academic research, and personal projects - mostly centered on
             protein design, multi-omics, agentic AI, and genomics.
           </p>
 
@@ -389,7 +389,7 @@ export default function Projects() {
                 Let&apos;s talk
               </GradientHeading>
               <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
-                Happy to walk through any of these in detail — architecture, results, lessons learned.
+                Happy to walk through any of these in detail - architecture, results, lessons learned.
               </p>
               <div className="mt-8">
                 <a

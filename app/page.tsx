@@ -29,7 +29,7 @@ const focusAreas = [
     ring: 'ring-violet-400/20',
     points: [
       'Multi-agent LangGraph + FastAPI + AWS Bedrock',
-      'QLoRA / DPO fine-tuning — hallucination 34% → 8%',
+      'QLoRA / DPO fine-tuning - hallucination 34% → 8%',
       'RAG with FAISS + LangSmith observability',
       '60% reduction in analytical latency',
     ],
@@ -90,8 +90,8 @@ const focusAreas = [
     points: [
       '2 peer-reviewed publications',
       'Mentored 100+ grad students in NGS / ML',
-      'MS Bioinformatics — 3.95/4.00 GPA',
-      'BTech Biotechnology — 9.4/10.0 CGPA',
+      'MS Bioinformatics - 3.95/4.00 GPA',
+      'BTech Biotechnology - 9.4/10.0 CGPA',
     ],
   },
 ];
@@ -138,10 +138,10 @@ export default function Home() {
           </p>
 
           <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
-            I build production-grade ML systems across the drug discovery stack —
+            I build production-grade ML systems across the drug discovery stack -
             multi-agentic LLM platforms, multi-omics analysis, de novo protein design,
             and the HPC and cloud infrastructure to run them at scale. Increasingly, I&apos;m
-            drawn to systems that don&apos;t stop at a one-off analysis — agents and models
+            drawn to systems that don&apos;t stop at a one-off analysis - agents and models
             that keep reasoning over new literature and lab results, stay honest about
             uncertainty, and get sharper with every experiment.
           </p>
@@ -252,7 +252,7 @@ export default function Home() {
               </GradientHeading>
               <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
                 Whether it&apos;s a multi-agent research platform, a protein design pipeline,
-                or a full-stack bioinformatics tool — I&apos;m interested in work where
+                or a full-stack bioinformatics tool - I&apos;m interested in work where
                 the biology and the engineering both have to be right.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

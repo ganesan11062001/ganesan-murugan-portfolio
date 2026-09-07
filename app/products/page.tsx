@@ -107,7 +107,7 @@ const products: Product[] = [
     name: 'FCS/FCCS Analysis App',
     shortName: 'Fluorescence Correlation Spectroscopy Tool',
     description:
-      'A local, cross-platform tool for analyzing Fluorescence Correlation/Cross-Correlation Spectroscopy (FCS/FCCS) traces exported from an ISS VistaVision instrument, with no VistaVision license required. Runs single- or dual-channel autocorrelation, diffusion-model fitting, FCCS bound-fraction calculation, and Kd fitting from concentration series — all locally, with nothing leaving the machine.',
+      'A local, cross-platform tool for analyzing Fluorescence Correlation/Cross-Correlation Spectroscopy (FCS/FCCS) traces exported from an ISS VistaVision instrument, with no VistaVision license required. Runs single- or dual-channel autocorrelation, diffusion-model fitting, FCCS bound-fraction calculation, and Kd fitting from concentration series - all locally, with nothing leaving the machine.',
     category: 'Biophysics Software',
     status: 'Published',
     technologies: ['Python', 'Streamlit', 'Multi-tau Correlation', 'pytest', 'NumPy/SciPy'],
@@ -129,7 +129,7 @@ const products: Product[] = [
     name: 'Enterprise LIMS/ELN Platforms',
     shortName: 'Laboratory Informatics for Pharma',
     description:
-      'Engineered and validated 21 CFR Part 11-compliant LIMS/ELN platforms (LabVantage, Benchling, LabWare) for pharmaceutical clients — covering sample accessioning, audit trails, electronic signatures, and workflow automation at enterprise scale.',
+      'Engineered and validated 21 CFR Part 11-compliant LIMS/ELN platforms (LabVantage, Benchling, LabWare) for pharmaceutical clients - covering sample accessioning, audit trails, electronic signatures, and workflow automation at enterprise scale.',
     category: 'Enterprise Software',
     status: 'Published',
     technologies: ['LabVantage', 'Benchling', 'LabWare', 'Python', 'REST APIs', 'SQL/PL-SQL', 'Terraform'],

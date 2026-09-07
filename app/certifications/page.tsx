@@ -221,7 +221,7 @@ const certifications: Cert[] = [
 
 const upcoming = [
   {
-    title: 'AWS Certified Solutions Architect — Associate',
+    title: 'AWS Certified Solutions Architect - Associate',
     issuer: 'Amazon Web Services',
     targetMonth: 'Mid 2026',
     description: 'AWS architecture and cloud solution design.',
@@ -229,7 +229,7 @@ const upcoming = [
     icon: Cloud,
   },
   {
-    title: 'AWS Certified Machine Learning — Specialty',
+    title: 'AWS Certified Machine Learning - Specialty',
     issuer: 'Amazon Web Services',
     targetMonth: 'Late 2026',
     description: 'Building, training, tuning, and deploying ML models on AWS.',

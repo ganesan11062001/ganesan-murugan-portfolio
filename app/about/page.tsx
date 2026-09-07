@@ -59,7 +59,7 @@ const experiences = [
     accent: 'text-blue-300',
   },
   {
-    title: 'Graduate Research Assistant — Research Computing',
+    title: 'Graduate Research Assistant - Research Computing',
     company: 'Northeastern University',
     location: 'Boston, MA',
     period: 'Jan 2026 – Present',
@@ -67,7 +67,7 @@ const experiences = [
     accent: 'text-rose-300',
   },
   {
-    title: 'Programming Assistant — Lee Makowski Lab',
+    title: 'Programming Assistant - Lee Makowski Lab',
     company: 'Northeastern University',
     location: 'Boston, MA',
     period: 'May 2025 – Aug 2026',
@@ -91,7 +91,7 @@ const experiences = [
     accent: 'text-violet-300',
   },
   {
-    title: 'Graduate Research Assistant — Ondrechen Research Group',
+    title: 'Graduate Research Assistant - Ondrechen Research Group',
     company: 'Northeastern University',
     location: 'Boston, MA',
     period: 'Sep 2024 – Apr 2025',
@@ -123,12 +123,12 @@ export default function About() {
       <div className="container mx-auto px-6 pt-20 pb-24">
         {/* Hero */}
         <section className="text-center">
-          <HeroBadge>About — Computational Biology &amp; AI</HeroBadge>
+          <HeroBadge>About - Computational Biology &amp; AI</HeroBadge>
           <h1 className="mt-6 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
             <GradientHeading as="span">About me</GradientHeading>
           </h1>
           <p className="mt-6 mx-auto max-w-3xl text-base md:text-lg text-gray-400 leading-relaxed">
-            MS Bioinformatics student at Northeastern building AI systems for drug discovery —
+            MS Bioinformatics student at Northeastern building AI systems for drug discovery -
             <span className="text-blue-300 font-medium"> agentic LLM platforms, multi-omics, protein design</span>,
             and the infrastructure to run them at scale.
           </p>
@@ -156,14 +156,14 @@ export default function About() {
                 <p>
                   I started out as a{' '}
                   <strong className="text-white">Biotechnology student at Anna University (9.4/10 CGPA)</strong>,
-                  where I got pulled into bioinformatics and data science. I liked the combination —
+                  where I got pulled into bioinformatics and data science. I liked the combination -
                   you actually need to understand the biology to build the right software.
                 </p>
                 <p>
                   Now I&apos;m doing my{' '}
                   <strong className="text-blue-300">MS in Bioinformatics at Northeastern (3.95/4.00)</strong>,
                   building production-grade multi-agentic AI platforms with LangGraph, FastAPI and AWS Bedrock for
-                  multi-omics biomarker discovery — fine-tuning LLMs with QLoRA and DPO to cut hallucination rates
+                  multi-omics biomarker discovery - fine-tuning LLMs with QLoRA and DPO to cut hallucination rates
                   from 34% to 8%, and designing de novo peptide sequences with ProteinMPNN, ThermoMPNN, Chai-1
                   and Boltz-2 across 10,000+ variants.
                 </p>
@@ -228,7 +228,7 @@ export default function About() {
                 <p className="text-[13px] text-gray-400 leading-relaxed">
                   I&apos;m most interested in problems where the biology is hard and the engineering is hard at the
                   same time. Lately that means thinking about drug discovery less as a pipeline of one-off analyses
-                  and more as a closed loop — agents that reason over literature and experimental data, models that
+                  and more as a closed loop - agents that reason over literature and experimental data, models that
                   stay uncertain until the evidence says otherwise, and systems that get a little sharper with every
                   new result. Drug discovery is a good place for that: models need to be correct, fast, and
                   trustworthy. I want to keep building in this space.
