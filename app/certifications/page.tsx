@@ -380,20 +380,28 @@ const certifications: Cert[] = [
 
 const upcoming = [
   {
-    title: 'AWS Certified Solutions Architect - Associate',
-    issuer: 'Amazon Web Services',
-    targetMonth: 'Mid 2026',
-    description: 'AWS architecture and cloud solution design.',
-    category: 'Cloud Architecture',
-    icon: Cloud,
+    title: 'Claude Certified Architect - Foundations',
+    issuer: 'Anthropic',
+    targetMonth: 'Late 2026',
+    description: 'Foundational certification covering architecture patterns for building with Claude and the Claude Developer Platform.',
+    category: 'AI Fluency & Agents',
+    icon: BrainCircuit,
   },
   {
-    title: 'AWS Certified Machine Learning - Specialty',
+    title: 'Claude Certified Architect - Professional',
+    issuer: 'Anthropic',
+    targetMonth: 'Early 2027',
+    description: 'Professional-level certification covering advanced architecture and deployment patterns for production Claude-based systems.',
+    category: 'AI Fluency & Agents',
+    icon: BrainCircuit,
+  },
+  {
+    title: 'AWS Cloud Practitioner',
     issuer: 'Amazon Web Services',
     targetMonth: 'Late 2026',
-    description: 'Building, training, tuning, and deploying ML models on AWS.',
-    category: 'ML / Cloud',
-    icon: Sparkles,
+    description: 'Foundational certification covering core AWS services, cloud concepts, security, and billing.',
+    category: 'Cloud Development',
+    icon: Cloud,
   },
 ];
 
@@ -544,7 +552,7 @@ export default function Certifications() {
               Upcoming
             </GradientHeading>
           </div>
-          <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {upcoming.map((cert) => {
               const Icon = cert.icon;
               return (
