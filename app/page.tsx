@@ -9,8 +9,8 @@ import {
   Cloud,
   Dna,
   FlaskConical,
-  GraduationCap,
   Mail,
+  ShieldCheck,
 } from 'lucide-react';
 import PageShell from './components/PageShell';
 import {
@@ -83,15 +83,15 @@ const focusAreas = [
     ],
   },
   {
-    icon: GraduationCap,
-    title: 'Research & Teaching',
-    accent: 'text-cyan-300',
-    ring: 'ring-cyan-400/20',
+    icon: ShieldCheck,
+    title: 'Laboratory Informatics (LIMS/ELN)',
+    accent: 'text-rose-300',
+    ring: 'ring-rose-400/20',
     points: [
-      '2 peer-reviewed publications',
-      'Mentored 100+ grad students in NGS / ML',
-      'MS Bioinformatics - 3.95/4.00 GPA',
-      'BTech Biotechnology - 9.4/10.0 CGPA',
+      'LabVantage, Benchling, LabWare deployments',
+      '21 CFR Part 11 compliance & audit trails',
+      '1M+ sample accessioning workflows',
+      '5,500+ scientists across 3+ pharma clients',
     ],
   },
 ];
