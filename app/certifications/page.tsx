@@ -6,6 +6,7 @@ import {
   Bot,
   BookOpen,
   BrainCircuit,
+  ChevronDown,
   Cloud,
   Code2,
   Database,
@@ -500,19 +501,20 @@ export default function Certifications() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((cert, idx) => {
               const Icon = cert.icon;
+              const isOpen = expanded === idx;
               return (
-                <GlassCard key={cert.title} className="p-6">
-                  <div className="flex items-start justify-between mb-4">
+                <GlassCard key={cert.title} className="p-6 flex flex-col items-center text-center">
+                  <div className="relative">
                     {cert.badge ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={cert.badge} alt={`${cert.title} badge`} className="h-14 w-14 object-contain" />
+                      <img src={cert.badge} alt={`${cert.title} badge`} className="h-28 w-28 object-contain" />
                     ) : (
-                      <div className={`flex h-9 w-9 items-center justify-center rounded-lg ring-1 ${cert.tint}`}>
-                        <Icon className="h-4 w-4" strokeWidth={1.75} />
+                      <div className={`flex h-20 w-20 items-center justify-center rounded-2xl ring-1 ${cert.tint}`}>
+                        <Icon className="h-8 w-8" strokeWidth={1.5} />
                       </div>
                     )}
                     <span
-                      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 ${
+                      className={`absolute -top-1 -right-1 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 backdrop-blur-sm ${
                         cert.status === 'Certified'
                           ? 'bg-emerald-500/10 text-emerald-300 ring-emerald-400/30'
                           : 'bg-blue-500/10 text-blue-300 ring-blue-400/30'
@@ -523,46 +525,51 @@ export default function Certifications() {
                     </span>
                   </div>
 
-                  <h3 className="text-[15px] font-semibold text-white tracking-tight leading-snug">
+                  <h3 className="mt-4 text-[15px] font-semibold text-white tracking-tight leading-snug">
                     {cert.title}
                   </h3>
                   <p className="mt-1 text-xs font-medium text-blue-300/80">{cert.issuer}</p>
-                  <p className="mt-3 text-[13px] text-gray-400 leading-relaxed">{cert.description}</p>
 
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {(expanded === idx ? cert.skills : cert.skills.slice(0, 3)).map((s) => (
-                      <span key={s} className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-gray-300">
-                        {s}
-                      </span>
-                    ))}
-                    {cert.skills.length > 3 && expanded !== idx && (
-                      <button
-                        onClick={() => setExpanded(idx)}
-                        className="rounded-md border border-blue-400/30 bg-blue-500/10 px-2 py-0.5 text-[11px] font-medium text-blue-300 hover:bg-blue-500/20"
-                      >
-                        +{cert.skills.length - 3}
-                      </button>
-                    )}
-                  </div>
+                  <button
+                    onClick={() => setExpanded(isOpen ? null : idx)}
+                    className="mt-3 inline-flex items-center gap-1 text-[11px] font-medium text-gray-500 hover:text-gray-300"
+                  >
+                    {isOpen ? 'Show less' : 'Details'}
+                    <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                  </button>
 
-                  <div className="mt-5 flex items-center justify-between gap-2 text-xs">
-                    <span className="text-gray-500">
-                      {cert.date}
-                      {cert.expires && <span className="text-gray-600"> · Expires {cert.expires}</span>}
-                    </span>
-                    {cert.verificationUrl ? (
-                      <a
-                        href={cert.verificationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex flex-shrink-0 items-center gap-1 text-blue-300 hover:text-blue-200"
-                      >
-                        Verify <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ) : cert.credentialNote ? (
-                      <span className="flex-shrink-0 text-gray-500">{cert.credentialNote}</span>
-                    ) : null}
-                  </div>
+                  {isOpen && (
+                    <div className="mt-4 w-full border-t border-white/10 pt-4 text-left">
+                      <p className="text-[13px] text-gray-400 leading-relaxed">{cert.description}</p>
+
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {cert.skills.map((s) => (
+                          <span key={s} className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-gray-300">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="mt-4 flex items-center justify-between gap-2 text-xs">
+                        <span className="text-gray-500">
+                          {cert.date}
+                          {cert.expires && <span className="text-gray-600"> · Expires {cert.expires}</span>}
+                        </span>
+                        {cert.verificationUrl ? (
+                          <a
+                            href={cert.verificationUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex flex-shrink-0 items-center gap-1 text-blue-300 hover:text-blue-200"
+                          >
+                            Verify <ExternalLink className="h-3 w-3" />
+                          </a>
+                        ) : cert.credentialNote ? (
+                          <span className="flex-shrink-0 text-gray-500">{cert.credentialNote}</span>
+                        ) : null}
+                      </div>
+                    </div>
+                  )}
                 </GlassCard>
               );
             })}
