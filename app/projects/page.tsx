@@ -287,20 +287,9 @@ const projects: Project[] = [
 
 const categories: ('All' | Category)[] = ['All', 'Agentic AI', 'Protein Design', 'ML/AI', 'Bioinformatics', 'Genomics'];
 
-const imageCredits = [
-  { label: 'Antibody-drug conjugate structure', href: 'https://commons.wikimedia.org/wiki/File:Antibody-drug_conjugate_structure.svg', license: 'CC BY-SA 4.0' },
-  { label: 'Artificial neural network', href: 'https://commons.wikimedia.org/wiki/File:Artificial_neural_network.svg', license: 'CC BY-SA 3.0' },
-  { label: 'Liraglutide peptide structure (PDB 4APD)', href: 'https://commons.wikimedia.org/wiki/File:Liraglutide_cartoon_4APD.png', license: 'Public domain' },
-  { label: 'Cray-2 supercomputer', href: 'https://commons.wikimedia.org/wiki/File:Cray_2_Supercomputer_-_GPN-2000-001633.jpg', license: 'Public domain, NASA' },
-  { label: 'Fluorescent cell microscopy', href: 'https://commons.wikimedia.org/wiki/File:FluorescentCells.jpg', license: 'Public domain, NIH' },
-  { label: 'Gel electrophoresis', href: 'https://commons.wikimedia.org/wiki/File:Gel_electrophoresis_2.jpg', license: 'CC BY-SA 2.0' },
-  { label: 'DNA double helix', href: 'https://commons.wikimedia.org/wiki/File:DNA_Double_Helix_by_NHGRI.jpg', license: 'Public domain, NHGRI' },
-  { label: 'Network community structure', href: 'https://commons.wikimedia.org/wiki/File:Network_Community_Structure.svg', license: 'CC BY-SA 3.0' },
-  { label: 'Biomedical knowledge graph', href: 'https://commons.wikimedia.org/wiki/File:Biomedical_Knowledge_Graph_in_Wikidata.svg', license: 'CC BY 4.0' },
-  { label: 'CRISPR-Cas9 genome editing diagram', href: 'https://commons.wikimedia.org/wiki/File:Genome_Editing_with_the_CRISPR-Cas9-Method,_schematic_diagram.svg', license: 'CC BY-SA 4.0' },
-  { label: 'ADAR2 deaminase domain / RNA co-crystal (PDB 5ED1)', href: 'https://commons.wikimedia.org/wiki/File:ADAR2_deaminase_domain_RNA_co-crystal_PDB_5ED1.png', license: 'CC BY-SA 4.0' },
-  { label: 'ChIP-seq vs ChIP-chip diagram', href: 'https://commons.wikimedia.org/wiki/File:ChIP-seq_vs_ChIP-chip.png', license: 'CC BY-SA 4.0' },
-];
+// Tile images are sourced from Wikimedia Commons / public domain.
+// Several are CC BY / CC BY-SA, which requires attribution - see
+// public/projects/CREDITS.md for the source + license of each file.
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<'All' | Category>('All');
@@ -429,24 +418,6 @@ export default function Projects() {
               );
             })}
           </div>
-        </section>
-
-        {/* Image credits */}
-        <section className="mt-6 max-w-6xl mx-auto">
-          <details className="text-xs text-gray-500">
-            <summary className="cursor-pointer select-none hover:text-gray-300">Tile image credits</summary>
-            <ul className="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-1 pl-4 list-disc">
-              {imageCredits.map((c) => (
-                <li key={c.label}>
-                  {c.label} -{' '}
-                  <a href={c.href} target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-300">
-                    Wikimedia Commons
-                  </a>{' '}
-                  ({c.license})
-                </li>
-              ))}
-            </ul>
-          </details>
         </section>
 
         {/* CTA */}

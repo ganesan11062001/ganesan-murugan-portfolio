@@ -74,6 +74,8 @@ type Cert = {
   expires?: string;
   credentialNote?: string;
   tint: string;
+  badge?: string;
+  featured?: boolean;
 };
 
 const certifications: Cert[] = [
@@ -92,6 +94,8 @@ const certifications: Cert[] = [
     verificationUrl:
       'https://catalog-education.oracle.com/pls/certview/sharebadge?id=37A012D9F56E22C96953813BAC674ED0F79325908032198220ECB02D77BC5291',
     tint: 'text-orange-300 ring-orange-400/30 bg-orange-500/10',
+    badge: '/badges/oci-architect-associate.png',
+    featured: true,
   },
   {
     title: 'AWS Certified AI Practitioner',
@@ -108,6 +112,8 @@ const certifications: Cert[] = [
     verificationUrl: 'https://www.credly.com/badges/45681c75-3861-40c3-8bed-9acbbab5b6eb/public_url',
     expires: 'Aug 2029',
     tint: 'text-yellow-300 ring-yellow-400/30 bg-yellow-500/10',
+    badge: '/badges/aws-ai-practitioner.png',
+    featured: true,
   },
   {
     title: 'Claude Partner Badge - Claude Code',
@@ -124,6 +130,8 @@ const certifications: Cert[] = [
     verificationUrl: 'https://www.credly.com/badges/31281628-afaf-4cf3-987b-2b7fb7c2bbbd/public_url',
     expires: 'Jan 2027',
     tint: 'text-fuchsia-300 ring-fuchsia-400/30 bg-fuchsia-500/10',
+    badge: '/badges/claude-partner-badge.png',
+    featured: true,
   },
   {
     title: 'Oracle AI Database Certified Foundations Associate',
@@ -141,6 +149,7 @@ const certifications: Cert[] = [
       'https://catalog-education.oracle.com/ords/certview/sharebadge?id=EACCBD138DFD0320D69605525D2EE0C9682E0ABD4909D4213466ABA60F257B18',
     expires: 'Jun 2028',
     tint: 'text-rose-300 ring-rose-400/30 bg-rose-500/10',
+    badge: '/badges/oracle-ai-database-foundations.png',
   },
   {
     title: 'Oracle Cloud Infrastructure Certified AI Foundations Associate',
@@ -158,6 +167,7 @@ const certifications: Cert[] = [
       'https://catalog-education.oracle.com/ords/certview/sharebadge?id=BF626E191C37A653FCEE56F0F52B54181F799CD670DB30DAFEDBCF78531BBE0D',
     expires: 'Jun 2028',
     tint: 'text-sky-300 ring-sky-400/30 bg-sky-500/10',
+    badge: '/badges/oci-ai-foundations.png',
   },
   {
     title: 'Agentic AI Certified Foundations Associate',
@@ -175,6 +185,8 @@ const certifications: Cert[] = [
       'https://catalog-education.oracle.com/pls/certview/sharebadge?id=EFB32EC7E4E32D44448F57983FD860D4E59FE5FF989204116E697BA0103BB490',
     expires: 'Jun 2028',
     tint: 'text-lime-300 ring-lime-400/30 bg-lime-500/10',
+    badge: '/badges/agentic-ai-foundations.png',
+    featured: true,
   },
   {
     title: 'Anthropic Academy - AI Fluency & Claude Agent Skills',
@@ -216,6 +228,7 @@ const certifications: Cert[] = [
     icon: Bot,
     verificationUrl: 'https://credentials.databricks.com/13dbb8f8-3287-4370-8bf1-75c544094a52',
     tint: 'text-red-300 ring-red-400/30 bg-red-500/10',
+    badge: '/badges/databricks-genai-fundamentals.png',
   },
   {
     title: 'AI Agent Fundamentals',
@@ -231,6 +244,7 @@ const certifications: Cert[] = [
     icon: Bot,
     verificationUrl: 'https://credentials.databricks.com/d4feaa0c-715d-4815-99e9-dd030bf18574',
     tint: 'text-red-300 ring-red-400/30 bg-red-500/10',
+    badge: '/badges/databricks-ai-agent-fundamentals.png',
   },
   {
     title: 'Oracle Cloud Infrastructure 2025 Certified DevOps Professional',
@@ -247,6 +261,8 @@ const certifications: Cert[] = [
     verificationUrl:
       'https://catalog-education.oracle.com/ords/certview/sharebadge?id=448E98842880E651092E414E13518BC7B2B20F91F0621A48905389D9E79EBE5A',
     tint: 'text-orange-300 ring-orange-400/30 bg-orange-500/10',
+    badge: '/badges/oci-devops-professional.png',
+    featured: true,
   },
   {
     title: 'Software Engineer Intern',
@@ -291,6 +307,7 @@ const certifications: Cert[] = [
     verificationUrl:
       'https://catalog-education.oracle.com/ords/certview/sharebadge?id=DC9C6BC5EFA430548883137FB81F0E1521744124B9093B205EE2A7FFBA07841A',
     tint: 'text-violet-300 ring-violet-400/30 bg-violet-500/10',
+    badge: '/badges/oracle-apex-professional.png',
   },
   {
     title: 'Python',
@@ -376,7 +393,10 @@ const certifications: Cert[] = [
     verificationUrl: 'https://drive.google.com/file/d/1j2wGGY1zNBsuOO0m37jNPQnSA7S5aFCo/view',
     tint: 'text-pink-300 ring-pink-400/30 bg-pink-500/10',
   },
-].sort((a, b) => (a.year !== b.year ? b.year - a.year : b.month - a.month)) as Cert[];
+].sort((a, b) => {
+  if (Boolean(a.featured) !== Boolean(b.featured)) return a.featured ? -1 : 1;
+  return a.year !== b.year ? b.year - a.year : b.month - a.month;
+}) as Cert[];
 
 const upcoming = [
   {
@@ -483,9 +503,14 @@ export default function Certifications() {
               return (
                 <GlassCard key={cert.title} className="p-6">
                   <div className="flex items-start justify-between mb-4">
-                    <div className={`flex h-9 w-9 items-center justify-center rounded-lg ring-1 ${cert.tint}`}>
-                      <Icon className="h-4 w-4" strokeWidth={1.75} />
-                    </div>
+                    {cert.badge ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={cert.badge} alt={`${cert.title} badge`} className="h-14 w-14 object-contain" />
+                    ) : (
+                      <div className={`flex h-9 w-9 items-center justify-center rounded-lg ring-1 ${cert.tint}`}>
+                        <Icon className="h-4 w-4" strokeWidth={1.75} />
+                      </div>
+                    )}
                     <span
                       className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 ${
                         cert.status === 'Certified'
