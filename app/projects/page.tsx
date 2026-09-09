@@ -59,14 +59,35 @@ type Project = {
   achievements: string[];
   technologies: string[];
   category: Category;
+  image: string;
 };
 
-const categoryStyle: Record<Category, { tint: string; icon: typeof Bot }> = {
-  'Agentic AI': { tint: 'text-violet-300 bg-violet-500/10 ring-violet-400/30', icon: Bot },
-  'Protein Design': { tint: 'text-sky-300 bg-sky-500/10 ring-sky-400/30', icon: Dna },
-  'ML/AI': { tint: 'text-amber-300 bg-amber-500/10 ring-amber-400/30', icon: Cpu },
-  'Bioinformatics': { tint: 'text-emerald-300 bg-emerald-500/10 ring-emerald-400/30', icon: FlaskConical },
-  'Genomics': { tint: 'text-teal-300 bg-teal-500/10 ring-teal-400/30', icon: Database },
+const categoryStyle: Record<Category, { tint: string; icon: typeof Bot; cover: string }> = {
+  'Agentic AI': {
+    tint: 'text-violet-300 bg-violet-500/10 ring-violet-400/30',
+    icon: Bot,
+    cover: 'from-violet-500/25 via-fuchsia-500/10 to-transparent',
+  },
+  'Protein Design': {
+    tint: 'text-sky-300 bg-sky-500/10 ring-sky-400/30',
+    icon: Dna,
+    cover: 'from-sky-500/25 via-cyan-500/10 to-transparent',
+  },
+  'ML/AI': {
+    tint: 'text-amber-300 bg-amber-500/10 ring-amber-400/30',
+    icon: Cpu,
+    cover: 'from-amber-500/25 via-orange-500/10 to-transparent',
+  },
+  'Bioinformatics': {
+    tint: 'text-emerald-300 bg-emerald-500/10 ring-emerald-400/30',
+    icon: FlaskConical,
+    cover: 'from-emerald-500/25 via-teal-500/10 to-transparent',
+  },
+  'Genomics': {
+    tint: 'text-teal-300 bg-teal-500/10 ring-teal-400/30',
+    icon: Database,
+    cover: 'from-teal-500/25 via-cyan-500/10 to-transparent',
+  },
 };
 
 const projects: Project[] = [
@@ -84,6 +105,7 @@ const projects: Project[] = [
     ],
     technologies: ['Reinforcement Learning', 'Multi-Agent Systems', 'ADMET Prediction', 'Retrosynthesis', 'Python'],
     category: 'Agentic AI',
+    image: '/projects/safeselect-adc-structure.svg',
   },
   {
     title: 'Multi-Agentic AI Platform for Multi-Omics Biomarker Discovery',
@@ -99,6 +121,7 @@ const projects: Project[] = [
     ],
     technologies: ['LangGraph', 'FastAPI', 'AWS Bedrock', 'QLoRA', 'DPO', 'RAG', 'FAISS', 'LangSmith', 'Python'],
     category: 'Agentic AI',
+    image: '/projects/multi-agentic-neural-network.svg',
   },
   {
     title: 'De Novo Peptide Design for Neuromuscular Disease Targets',
@@ -114,6 +137,7 @@ const projects: Project[] = [
     ],
     technologies: ['ProteinMPNN', 'ThermoMPNN', 'Chai-1', 'Boltz-2', 'Python', 'Protein Design', 'Structural Biology'],
     category: 'Protein Design',
+    image: '/projects/peptide-design-liraglutide-structure.png',
   },
   {
     title: 'Autonomous Multi-Agent RAG System for HPC Support',
@@ -129,6 +153,7 @@ const projects: Project[] = [
     ],
     technologies: ['LangGraph', 'RAG', 'Vector Search', 'SLURM', 'Prometheus', 'Grafana', 'Docker', 'Python'],
     category: 'Agentic AI',
+    image: '/projects/hpc-rag-supercomputer.jpg',
   },
   {
     title: 'Single-Cell & Spatial Transcriptomics Foundation-Model Platform',
@@ -144,6 +169,7 @@ const projects: Project[] = [
     ],
     technologies: ['scVI', 'scGPT', 'Geneformer', 'Harmony', 'Leiden', 'cell2location', 'Squidpy', '10x Visium', 'Python'],
     category: 'Bioinformatics',
+    image: '/projects/single-cell-fluorescent-cells.jpg',
   },
   {
     title: 'Deep Learning Pipeline for Tau/Tubulin Protein Gel Classification',
@@ -159,6 +185,7 @@ const projects: Project[] = [
     ],
     technologies: ['Vision Transformers', 'ResNet', 'U-Net', 'VAE', 'GNN', 'AlphaFold3', 'ESMFold', 'PyMOL', 'PyTorch'],
     category: 'ML/AI',
+    image: '/projects/tau-tubulin-gel-electrophoresis.jpg',
   },
   {
     title: 'Multi-Omics Investigation of GATA3 Mutation in ER+ Breast Cancer',
@@ -174,6 +201,7 @@ const projects: Project[] = [
     ],
     technologies: ['TCGA', 'DepMap', 'CCLE', 'CPTAC', 'Python', 'R', 'Multi-omics', 'Pathway Enrichment'],
     category: 'Bioinformatics',
+    image: '/projects/gata3-dna-double-helix.jpg',
   },
   {
     title: 'WGCNA: Hub Gene Discovery for Cellular Quiescence',
@@ -189,6 +217,7 @@ const projects: Project[] = [
     ],
     technologies: ['WGCNA', 'R', 'Gene Co-expression Networks', 'Systems Biology', 'Transcriptomics', 'Python'],
     category: 'Bioinformatics',
+    image: '/projects/wgcna-network-community.svg',
   },
   {
     title: 'OnchoGraph: Pan-Cancer Drug Repurposing via Heterogeneous Knowledge Graphs',
@@ -204,6 +233,7 @@ const projects: Project[] = [
     ],
     technologies: ['GNN', 'PyTorch Geometric', 'DrugBank', 'DisGeNET', 'Hetionet', 'TCGA', 'Multi-head Attention'],
     category: 'ML/AI',
+    image: '/projects/onchograph-knowledge-graph.svg',
   },
   {
     title: 'ML-Driven Optimization of CRISPR-Cas9 sgRNA Efficiency',
@@ -219,6 +249,7 @@ const projects: Project[] = [
     ],
     technologies: ['Random Forest', 'Gradient Boosting', 'Neural Networks', 'scikit-learn', 'CRISPR-Cas9', 'Python'],
     category: 'ML/AI',
+    image: '/projects/crispr-sgrna-diagram.svg',
   },
   {
     title: 'RNA-Binding Mechanism Analysis Across Canonical and Moonlighting Proteins',
@@ -234,6 +265,7 @@ const projects: Project[] = [
     ],
     technologies: ['POOL', 'ConSurf', 'SASA', 'Concavity Score', 'PyMOL', 'Python', 'Structural Biology'],
     category: 'Genomics',
+    image: '/projects/rna-binding-adar2-structure.png',
   },
   {
     title: 'Quantitative Analysis of Genomic Overlaps Using Cobind',
@@ -249,10 +281,26 @@ const projects: Project[] = [
     ],
     technologies: ['Python', 'Cobind', 'Pandas', 'SciPy', 'BX-Python', 'ChIP-seq', 'ATAC-seq'],
     category: 'Genomics',
+    image: '/projects/cobind-chipseq-diagram.png',
   },
 ];
 
 const categories: ('All' | Category)[] = ['All', 'Agentic AI', 'Protein Design', 'ML/AI', 'Bioinformatics', 'Genomics'];
+
+const imageCredits = [
+  { label: 'Antibody-drug conjugate structure', href: 'https://commons.wikimedia.org/wiki/File:Antibody-drug_conjugate_structure.svg', license: 'CC BY-SA 4.0' },
+  { label: 'Artificial neural network', href: 'https://commons.wikimedia.org/wiki/File:Artificial_neural_network.svg', license: 'CC BY-SA 3.0' },
+  { label: 'Liraglutide peptide structure (PDB 4APD)', href: 'https://commons.wikimedia.org/wiki/File:Liraglutide_cartoon_4APD.png', license: 'Public domain' },
+  { label: 'Cray-2 supercomputer', href: 'https://commons.wikimedia.org/wiki/File:Cray_2_Supercomputer_-_GPN-2000-001633.jpg', license: 'Public domain, NASA' },
+  { label: 'Fluorescent cell microscopy', href: 'https://commons.wikimedia.org/wiki/File:FluorescentCells.jpg', license: 'Public domain, NIH' },
+  { label: 'Gel electrophoresis', href: 'https://commons.wikimedia.org/wiki/File:Gel_electrophoresis_2.jpg', license: 'CC BY-SA 2.0' },
+  { label: 'DNA double helix', href: 'https://commons.wikimedia.org/wiki/File:DNA_Double_Helix_by_NHGRI.jpg', license: 'Public domain, NHGRI' },
+  { label: 'Network community structure', href: 'https://commons.wikimedia.org/wiki/File:Network_Community_Structure.svg', license: 'CC BY-SA 3.0' },
+  { label: 'Biomedical knowledge graph', href: 'https://commons.wikimedia.org/wiki/File:Biomedical_Knowledge_Graph_in_Wikidata.svg', license: 'CC BY 4.0' },
+  { label: 'CRISPR-Cas9 genome editing diagram', href: 'https://commons.wikimedia.org/wiki/File:Genome_Editing_with_the_CRISPR-Cas9-Method,_schematic_diagram.svg', license: 'CC BY-SA 4.0' },
+  { label: 'ADAR2 deaminase domain / RNA co-crystal (PDB 5ED1)', href: 'https://commons.wikimedia.org/wiki/File:ADAR2_deaminase_domain_RNA_co-crystal_PDB_5ED1.png', license: 'CC BY-SA 4.0' },
+  { label: 'ChIP-seq vs ChIP-chip diagram', href: 'https://commons.wikimedia.org/wiki/File:ChIP-seq_vs_ChIP-chip.png', license: 'CC BY-SA 4.0' },
+];
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<'All' | Category>('All');
@@ -273,7 +321,7 @@ export default function Projects() {
           </p>
 
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
-            <StatTile value={<AnimatedCounter end={13} />} label="Projects" accent="from-blue-300 to-cyan-300" />
+            <StatTile value={<AnimatedCounter end={12} />} label="Projects" accent="from-blue-300 to-cyan-300" />
             <StatTile value={<AnimatedCounter end={5} suffix="M+" />} label="Single-cell profiles" accent="from-emerald-300 to-teal-300" />
             <StatTile value={<AnimatedCounter end={10} suffix="K+" />} label="Peptide variants" accent="from-violet-300 to-pink-300" />
             <StatTile value={<AnimatedCounter end={60} suffix="%" />} label="Latency reduction" accent="from-amber-300 to-orange-300" />
@@ -310,73 +358,95 @@ export default function Projects() {
           </div>
         </section>
 
-        {/* Project list */}
+        {/* Project tiles */}
         <section className="mt-10">
-          <div className="max-w-5xl mx-auto space-y-4">
+          <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((project) => {
               const style = categoryStyle[project.category];
               const Icon = style.icon;
               return (
-                <GlassCard key={project.title} className="p-7">
-                  <div className="grid lg:grid-cols-3 gap-7">
-                    <div className="lg:col-span-2">
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ring-1 ${style.tint}`}>
-                          <Icon className="h-4 w-4" strokeWidth={1.75} />
-                        </div>
-                        <div className="min-w-0">
-                          <h2 className="text-lg font-semibold text-white leading-snug tracking-tight">
-                            {project.title}
-                          </h2>
-                          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-                            <span className={`inline-flex items-center rounded-full px-2 py-0.5 ring-1 ${style.tint}`}>
-                              {project.category}
-                            </span>
-                            <span className="text-blue-300/80 font-medium">{project.type}</span>
-                            <span className="text-gray-500">· {project.period}</span>
-                          </div>
-                        </div>
-                      </div>
+                <GlassCard key={project.title} className="flex flex-col overflow-hidden">
+                  {/* Cover */}
+                  <div className={`relative h-40 shrink-0 overflow-hidden bg-gradient-to-br ${style.cover} bg-[#0b0b10] flex items-center justify-center p-4`}>
+                    <div
+                      className="absolute inset-0 opacity-30"
+                      style={{
+                        backgroundImage: 'radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)',
+                        backgroundSize: '14px 14px',
+                      }}
+                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={project.image}
+                      alt=""
+                      className="relative max-h-full max-w-full rounded-md object-contain shadow-lg"
+                    />
+                    <div className={`absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-lg ring-1 backdrop-blur-sm ${style.tint}`}>
+                      <Icon className="h-4 w-4" strokeWidth={1.75} />
+                    </div>
+                    <span className={`absolute top-3 right-3 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 backdrop-blur-sm ${style.tint}`}>
+                      {project.category}
+                    </span>
+                  </div>
 
-                      <p className="text-[14px] text-gray-300/90 leading-relaxed">
-                        {project.description}
-                      </p>
+                  {/* Content */}
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-gray-500">
+                      <span className="font-medium text-blue-300/80">{project.type}</span>
+                      <span>· {project.period}</span>
+                    </div>
+                    <h2 className="mt-1.5 text-[15px] font-semibold text-white leading-snug tracking-tight line-clamp-2">
+                      {project.title}
+                    </h2>
+                    <p className="mt-2 text-[13px] text-gray-400 leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
 
-                      <div className="mt-6">
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-300/80 mb-2">
-                          Key results
-                        </p>
-                        <ul className="space-y-1.5">
-                          {project.achievements.map((a) => (
-                            <li key={a} className="flex gap-2 text-[13px] text-gray-300/90 leading-relaxed">
-                              <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-400" strokeWidth={2.5} />
-                              <span>{a}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-medium text-gray-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 4 && (
+                        <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-medium text-gray-500">
+                          +{project.technologies.length - 4}
+                        </span>
+                      )}
                     </div>
 
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-300/80 mb-2">
-                        Stack
+                    <div className="mt-auto pt-4 border-t border-white/5">
+                      <p className="flex items-start gap-1.5 text-[12px] text-gray-300/90">
+                        <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-400" strokeWidth={2.5} />
+                        <span className="line-clamp-2">{project.achievements[0]}</span>
                       </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[11px] font-medium text-gray-300"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 </GlassCard>
               );
             })}
           </div>
+        </section>
+
+        {/* Image credits */}
+        <section className="mt-6 max-w-6xl mx-auto">
+          <details className="text-xs text-gray-500">
+            <summary className="cursor-pointer select-none hover:text-gray-300">Tile image credits</summary>
+            <ul className="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-1 pl-4 list-disc">
+              {imageCredits.map((c) => (
+                <li key={c.label}>
+                  {c.label} -{' '}
+                  <a href={c.href} target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-300">
+                    Wikimedia Commons
+                  </a>{' '}
+                  ({c.license})
+                </li>
+              ))}
+            </ul>
+          </details>
         </section>
 
         {/* CTA */}
