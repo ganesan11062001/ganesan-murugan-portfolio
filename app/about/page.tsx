@@ -51,15 +51,7 @@ function AnimatedCounter({
 
 const experiences = [
   {
-    title: 'Computational Biology, Predictive Sciences Co-op',
-    company: 'Solid Biosciences',
-    location: 'Charlestown, MA',
-    period: 'Jan 2026 – Aug 2026',
-    logo: '/solid-biosciences.png',
-    accent: 'text-blue-300',
-  },
-  {
-    title: 'Graduate Research Assistant - Research Computing',
+    title: 'Lead Graduate Research Assistant - Research Computing',
     company: 'Northeastern University',
     location: 'Boston, MA',
     period: 'Jan 2026 – Present',
@@ -70,9 +62,17 @@ const experiences = [
     title: 'Programming Assistant - Lee Makowski Lab',
     company: 'Northeastern University',
     location: 'Boston, MA',
-    period: 'May 2025 – Aug 2026',
+    period: 'May 2025 – Present',
     logo: '/COE.png',
     accent: 'text-cyan-300',
+  },
+  {
+    title: 'Computational Biology, Predictive Sciences Co-op',
+    company: 'Solid Biosciences',
+    location: 'Charlestown, MA',
+    period: 'Jan 2026 – Aug 2026',
+    logo: '/solid-biosciences.png',
+    accent: 'text-blue-300',
   },
   {
     title: 'Digital Transformation, Biotherapeutics Research Data & Automation',
