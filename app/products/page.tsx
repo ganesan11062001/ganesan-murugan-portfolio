@@ -72,7 +72,7 @@ const products: Product[] = [
     deployment: 'Internal deployment',
     technologies: ['ProteinMPNN', 'ThermoMPNN', 'Chai-1', 'Boltz-2', 'Python'],
     features: ['Constrained sequence design', 'Structure prediction', 'Stability scoring', 'Candidate ranking'],
-    impact: { variants: '10K+', models: '4+', deploy: 'Cloud' },
+    impact: { variants: '10K+', models: '12+', deploy: 'Cloud' },
     websiteUrl: null,
     launchDate: 'Live',
     icon: Dna,
@@ -473,11 +473,11 @@ export default function Products() {
 
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-16 pb-16">
+      <div className="container mx-auto px-6 pt-10 pb-12">
         {/* Hero */}
         <section className="text-center">
           <HeroBadge>Shipped software · Built to be used</HeroBadge>
-          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
             <GradientHeading as="span">Products &amp; Solutions</GradientHeading>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 md:text-lg">
@@ -497,10 +497,10 @@ export default function Products() {
         </section>
 
         {/* AI platforms */}
-        <section className="mt-16">
+        <section className="mt-12">
           <div className="mb-8 text-center">
             <SectionLabel tone="purple">AI platforms</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
               Agents &amp; models in production
             </GradientHeading>
             <p className="mx-auto mt-3 max-w-2xl text-gray-400">
@@ -515,7 +515,7 @@ export default function Products() {
         </section>
 
         {/* Featured product */}
-        <section className="mt-20">
+        <section className="mt-14">
           <div className="mb-6 flex items-center gap-2">
             <Sparkles className="h-4 w-4" style={{ color: featured.accent }} />
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-400">Featured product</p>
@@ -604,10 +604,10 @@ export default function Products() {
         </section>
 
         {/* Other products */}
-        <section className="mt-16">
+        <section className="mt-12">
           <div className="mb-8 text-center">
             <SectionLabel tone="blue">More products</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
               Web &amp; scientific software
             </GradientHeading>
           </div>
@@ -619,7 +619,7 @@ export default function Products() {
         </section>
 
         {/* Built with */}
-        <section className="mt-20">
+        <section className="mt-14">
           <p className="mb-4 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-500">
             Built with
           </p>
@@ -636,10 +636,10 @@ export default function Products() {
         </section>
 
         {/* Philosophy */}
-        <section className="mt-20">
-          <div className="mb-10 text-center">
+        <section className="mt-14">
+          <div className="mb-7 text-center">
             <SectionLabel tone="amber">Innovation philosophy</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
               Bio-solutions for tomorrow
             </GradientHeading>
           </div>
@@ -681,13 +681,13 @@ export default function Products() {
         </section>
 
         {/* CTA */}
-        <section className="mt-20">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10 p-10 text-center backdrop-blur-xl md:p-14">
+        <section className="mt-14">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10 p-7 text-center backdrop-blur-xl md:p-10">
             <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl" />
             <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-violet-500/20 blur-3xl" />
             <div className="relative">
               <SectionLabel tone="blue">Ready to innovate?</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-5xl">
+              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
                 Let&apos;s build together
               </GradientHeading>
               <p className="mx-auto mt-4 max-w-2xl text-gray-400">Custom solutions for your research and product needs.</p>

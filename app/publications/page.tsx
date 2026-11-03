@@ -151,11 +151,11 @@ export default async function Publications() {
 
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-16 pb-16">
+      <div className="container mx-auto px-6 pt-10 pb-12">
         {/* Hero */}
         <section className="text-center">
           <HeroBadge>Peer-Reviewed Research</HeroBadge>
-          <h1 className="mt-6 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
+          <h1 className="mt-6 text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]">
             <GradientHeading as="span">Publications</GradientHeading>
           </h1>
           <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
@@ -184,7 +184,7 @@ export default async function Publications() {
         </section>
 
         {/* List */}
-        <section className="mt-16">
+        <section className="mt-12">
           <div className="mx-auto max-w-5xl space-y-5">
             {publications.map((paper, idx) => {
               const [c1, c2] = ACCENT_HEX[paper.accent] ?? ['#60a5fa', '#22d3ee'];
@@ -285,10 +285,10 @@ export default async function Publications() {
         </section>
 
         {/* Research Areas */}
-        <section className="mt-24">
-          <div className="text-center mb-10">
+        <section className="mt-16">
+          <div className="text-center mb-7">
             <SectionLabel tone="blue">Research areas</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+            <GradientHeading as="h2" className="mt-4 text-3xl md:text-3xl font-semibold">
               What I work on
             </GradientHeading>
           </div>
@@ -312,12 +312,12 @@ export default async function Publications() {
         </section>
 
         {/* CTA */}
-        <section className="mt-24">
+        <section className="mt-16">
           <GlassCard className="overflow-hidden">
-            <div className="relative p-10 md:p-14 text-center">
+            <div className="relative p-7 md:p-10 text-center">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
               <SectionLabel tone="blue">Read more</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+              <GradientHeading as="h2" className="mt-4 text-3xl md:text-3xl font-semibold">
                 Curious about the work?
               </GradientHeading>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

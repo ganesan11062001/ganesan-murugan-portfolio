@@ -1,53 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import {
-  Award,
-  GraduationCap,
-  Heart,
-  Mail,
-  Sparkles,
-} from 'lucide-react';
+import Link from 'next/link';
+import { ArrowUpRight, GraduationCap, Mail, MapPin, Quote, Sparkles } from 'lucide-react';
 import PageShell from '../components/PageShell';
+import AnimatedCounter from '../components/AnimatedCounter';
 import JourneyTimeline, { type JourneyItem } from '../components/JourneyTimeline';
-import {
-  GlassCard,
-  GradientHeading,
-  HeroBadge,
-  SectionLabel,
-  StatTile,
-} from '../components/Section';
-
-function AnimatedCounter({
-  end,
-  duration = 2000,
-  suffix = '',
-}: {
-  end: number;
-  duration?: number;
-  suffix?: string;
-}) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    let startTime: number | undefined;
-    let frame: number;
-    const tick = (t: number) => {
-      if (!startTime) startTime = t;
-      const progress = Math.min((t - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(eased * end));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [end, duration]);
-  return (
-    <>
-      {count}
-      {suffix}
-    </>
-  );
-}
+import { SpotlightCard } from '../components/Effects';
+import { GradientHeading, HeroBadge, SectionLabel } from '../components/Section';
+import { SOCIALS } from '../lib/site';
 
 const journey: JourneyItem[] = [
   {
@@ -145,7 +105,7 @@ const journey: JourneyItem[] = [
     start: 'Jan 2026',
     end: 'Present',
     kind: 'work',
-    logo: '/COE.png',
+    logo: '/northeastern-rc.png',
     accent: '#f472b6',
     status: 'current',
   },
@@ -162,183 +122,262 @@ const journey: JourneyItem[] = [
 ];
 
 const highlights = [
-  '2 peer-reviewed publications (Biophysical Journal, 3 Biotech)',
-  'LLM hallucination cut from 34% → 8% via QLoRA + DPO fine-tuning',
-  '60% reduction in analytical latency through multi-agent orchestration',
-  '10,000+ de novo peptide variants designed with ProteinMPNN / Boltz-2',
-  'scGPT & Geneformer fine-tuned on 5M+ single-cell profiles (+80% acc.)',
-  'HPC support for 12,000+ users (SLURM, GPU clusters)',
+  { end: 2, suffix: '', label: 'Peer-reviewed publications', sub: 'Biophysical Journal · 3 Biotech', c: '#60a5fa' },
+  { end: 8, suffix: '%', label: 'LLM hallucination', sub: 'down from 34% with QLoRA + DPO', c: '#a78bfa' },
+  { end: 60, suffix: '%', label: 'Faster analysis', sub: 'via multi-agent orchestration', c: '#f472b6' },
+  { end: 10, suffix: 'K+', label: 'Peptide variants', sub: 'designed with protein models', c: '#34d399' },
+  { end: 5, suffix: 'M+', label: 'Single-cell profiles', sub: 'for scGPT & Geneformer', c: '#2dd4bf' },
+  { end: 12, suffix: 'K+', label: 'HPC users', sub: 'served by agentic RAG', c: '#fbbf24' },
 ];
+
+const chapters = [
+  {
+    n: '01',
+    title: 'Biology first',
+    c: '#f87171',
+    body: (
+      <>
+        Biotechnology at <strong className="text-white">Anna University (9.4/10)</strong> pulled me into
+        bioinformatics. You have to understand the biology to build the right software.
+      </>
+    ),
+  },
+  {
+    n: '02',
+    title: 'Then software',
+    c: '#a3e635',
+    body: (
+      <>
+        I started as a <strong className="text-white">full-stack developer</strong> at Zifo and Boehringer
+        Ingelheim - which is why I think of agents as software systems first.
+      </>
+    ),
+  },
+  {
+    n: '03',
+    title: 'Now, AI for drug discovery',
+    c: '#a78bfa',
+    body: (
+      <>
+        MS Bioinformatics at <strong className="text-white">Northeastern (3.95/4.00)</strong>, building agentic AI,
+        fine-tuned LLMs and protein language models aimed at one goal: discovering better drugs, faster.
+      </>
+    ),
+  },
+];
+
+const education = [
+  { degree: 'MS Bioinformatics', school: 'Northeastern University', meta: 'GPA 3.95/4.00 · Dec 2026', logo: '/NCOS.jpg', c: '#fb7185' },
+  { degree: 'BTech Biotechnology', school: 'Anna University', meta: 'CGPA 9.4/10 · Top 5% · 2023', logo: '/anna-university.png', c: '#f87171' },
+];
+
+const links = [
+  { label: 'LinkedIn', href: SOCIALS.linkedin },
+  { label: 'GitHub', href: SOCIALS.github },
+  { label: 'Scholar', href: SOCIALS.scholar },
+];
+
+function Heading({ label, tone, children }: { label: string; tone: 'blue' | 'purple' | 'green' | 'amber'; children: string }) {
+  return (
+    <div className="mb-6 text-center">
+      <SectionLabel tone={tone}>{label}</SectionLabel>
+      <GradientHeading as="h2" className="mt-3 text-2xl font-semibold md:text-3xl">
+        {children}
+      </GradientHeading>
+    </div>
+  );
+}
 
 export default function About() {
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-16 pb-16">
+      <div className="container mx-auto px-6 pt-10 pb-12">
         {/* Hero */}
-        <section className="text-center">
-          <HeroBadge>About - AI/ML · Agentic AI · Biology</HeroBadge>
-          <h1 className="mt-6 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
-            <GradientHeading as="span">About me</GradientHeading>
-          </h1>
-          <p className="mt-6 mx-auto max-w-3xl text-base md:text-lg text-gray-400 leading-relaxed">
-            AI/ML engineer focused on <span className="text-violet-300 font-medium">agentic AI</span> -
-            multi-agent LLM systems, fine-tuning, and RAG - applied to biology through{' '}
-            <span className="text-emerald-300 font-medium">protein language models</span> and single-cell foundation
-            models. MS Bioinformatics at Northeastern.
-          </p>
+        <section className="grid items-center gap-8 lg:grid-cols-[1.25fr_1fr]">
+          <div className="text-center lg:text-left">
+            <HeroBadge>About - AI/ML for Drug Discovery</HeroBadge>
+            <h1 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
+              <GradientHeading as="span">About me</GradientHeading>
+            </h1>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-400 md:text-lg lg:mx-0 mx-auto">
+              AI/ML engineer passionate about <span className="font-medium text-blue-300">drug discovery</span>. I build{' '}
+              <span className="font-medium text-violet-300">agentic AI</span>, fine-tuned LLMs and{' '}
+              <span className="font-medium text-emerald-300">protein language models</span> - grounded in real biology.
+            </p>
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {highlights.slice(1, 4).map((h) => (
+                <SpotlightCard key={h.label} accent={h.c} className="p-3.5 text-center">
+                  <p className="text-2xl font-bold tracking-tight" style={{ color: h.c }}>
+                    <AnimatedCounter end={h.end} suffix={h.suffix} />
+                  </p>
+                  <p className="mt-0.5 text-[11px] font-medium text-gray-400">{h.label}</p>
+                </SpotlightCard>
+              ))}
+            </div>
+          </div>
 
-          <div className="mt-10 grid grid-cols-3 gap-3 max-w-2xl mx-auto">
-            <StatTile value={<AnimatedCounter end={60} suffix="%" />} label="Latency cut by agents" accent="from-violet-300 to-pink-300" />
-            <StatTile value={<AnimatedCounter end={10} suffix="K+" />} label="PLM-designed peptides" accent="from-emerald-300 to-teal-300" />
-            <StatTile value={<AnimatedCounter end={12} suffix="K+" />} label="Users served by agentic RAG" accent="from-blue-300 to-cyan-300" />
+          {/* Profile card */}
+          <SpotlightCard accent="#a78bfa" className="rounded-3xl p-6">
+            <div className="flex items-center gap-4">
+              <div className="relative flex-shrink-0">
+                <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-blue-400 via-violet-400 to-cyan-400 opacity-80 blur-[2px]" />
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-[#0b0f1a] text-xl font-bold text-white">
+                  GM
+                </div>
+                <span className="absolute bottom-0 right-0 h-4 w-4 rounded-full bg-emerald-400 ring-4 ring-[#0b0f1a]" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-lg font-semibold tracking-tight text-white">Ganesan Murugan</p>
+                <p className="text-sm font-medium text-violet-300">AI/ML for Drug Discovery</p>
+                <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-gray-500">
+                  <MapPin className="h-3 w-3" /> Boston, MA
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-5 rounded-xl border border-emerald-400/20 bg-emerald-500/[0.06] px-3.5 py-2.5 text-xs text-emerald-200">
+              <span className="font-semibold text-emerald-300">Open to full-time roles</span> · Graduating Dec 2026
+            </div>
+
+            <div className="mt-4 space-y-2">
+              {education.map((e) => (
+                <div key={e.degree} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-2.5">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-white p-1">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={e.logo} alt={e.school} className="h-full w-full object-contain" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-white">{e.degree}</p>
+                    <p className="truncate text-[11px] text-gray-400">
+                      {e.school} · <span style={{ color: e.c }}>{e.meta}</span>
+                    </p>
+                  </div>
+                  <GraduationCap className="h-4 w-4 flex-shrink-0 text-gray-600" />
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              {links.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/l inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-gray-300 transition-colors hover:border-white/30 hover:text-white"
+                >
+                  {l.label}
+                  <ArrowUpRight className="h-3 w-3 transition-transform group-hover/l:-translate-y-0.5 group-hover/l:translate-x-0.5" />
+                </a>
+              ))}
+              <a
+                href="mailto:murugan.g@northeastern.edu"
+                className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-black transition-transform hover:scale-105"
+              >
+                <Mail className="h-3 w-3" /> Email
+              </a>
+            </div>
+          </SpotlightCard>
+        </section>
+
+        {/* Story */}
+        <section className="mt-14">
+          <Heading label="My Story" tone="blue">
+            Biology, then software, now AI for drug discovery
+          </Heading>
+          <div className="grid gap-4 lg:grid-cols-5">
+            <div className="grid gap-3 lg:col-span-3">
+              {chapters.map((ch) => (
+                <SpotlightCard key={ch.n} accent={ch.c} className="p-5">
+                  <div className="flex gap-4">
+                    <span className="font-mono text-2xl font-bold leading-none" style={{ color: ch.c }}>
+                      {ch.n}
+                    </span>
+                    <div>
+                      <h3 className="text-sm font-semibold text-white">{ch.title}</h3>
+                      <p className="mt-1 text-[14px] leading-relaxed text-gray-400">{ch.body}</p>
+                    </div>
+                  </div>
+                </SpotlightCard>
+              ))}
+            </div>
+
+            {/* Pull quote */}
+            <div className="relative overflow-hidden rounded-2xl p-px lg:col-span-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/50 via-violet-400/30 to-cyan-400/50" />
+              <div className="relative flex h-full flex-col rounded-2xl bg-[#0a0d16] p-6">
+                <Quote className="h-8 w-8 text-violet-300/70" strokeWidth={1.5} />
+                <p className="mt-3 text-[15px] leading-relaxed text-gray-200">
+                  I want drug discovery to work less like a pipeline of one-off analyses and more like a{' '}
+                  <span className="font-semibold text-violet-300">closed loop</span> - agents that reason over
+                  literature and experimental data, models that stay uncertain until the evidence says otherwise, and
+                  systems that get a little sharper with every new result.
+                </p>
+                <p className="mt-auto pt-5 text-xs font-semibold uppercase tracking-widest text-gray-500">
+                  What I care about
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Journey */}
-        <section className="mt-20">
-          <div className="text-center mb-10">
-            <SectionLabel tone="blue">My Story</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
-              From wet-lab beginnings to production AI
-            </GradientHeading>
-          </div>
-
-          <div className="grid lg:grid-cols-5 gap-6">
-            {/* Story + values */}
-            <div className="lg:col-span-3 flex flex-col gap-4">
-              <GlassCard className="p-7">
-                <div className="space-y-4 text-[15px] text-gray-300 leading-relaxed">
-                  <p>
-                    I started out as a{' '}
-                    <strong className="text-white">Biotechnology student at Anna University (9.4/10 CGPA)</strong>,
-                    where I got pulled into bioinformatics and data science. I liked the combination -
-                    you actually need to understand the biology to build the right software.
-                  </p>
-                  <p>
-                    So I started by building software - as a full-stack developer at Zifo and Boehringer
-                    Ingelheim. That&apos;s why I think of agents as software systems first.
-                  </p>
-                  <p>
-                    Now I&apos;m doing my{' '}
-                    <strong className="text-blue-300">MS in Bioinformatics at Northeastern (3.95/4.00)</strong>,
-                    building production-grade multi-agentic AI platforms with LangGraph, FastAPI and AWS Bedrock for
-                    multi-omics biomarker discovery - fine-tuning LLMs with QLoRA and DPO to cut hallucination rates
-                    from 34% to 8%, and designing de novo peptide sequences with ProteinMPNN, ThermoMPNN, Chai-1
-                    and Boltz-2 across 10,000+ variants.
-                  </p>
-                  <p>
-                    In parallel, I architect autonomous multi-agent RAG systems for HPC support serving{' '}
-                    <strong className="text-violet-300">12,000+ users</strong>, run deep learning pipelines for
-                    tau/tubulin gel image classification and IDP structure prediction.
-                  </p>
-                </div>
-              </GlassCard>
-              <GlassCard className="p-7 flex-1">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 ring-1 ring-violet-400/20">
-                    <Heart className="h-4 w-4 text-violet-300" strokeWidth={1.75} />
-                  </div>
-                  <h3 className="text-sm font-semibold text-white">What I care about</h3>
-                </div>
-                <p className="text-[14px] text-gray-400 leading-relaxed">
-                  I&apos;m most interested in problems where the biology is hard and the engineering is hard at the
-                  same time. Lately that means thinking about drug discovery less as a pipeline of one-off analyses
-                  and more as a closed loop - agents that reason over literature and experimental data, models that
-                  stay uncertain until the evidence says otherwise, and systems that get a little sharper with every
-                  new result. Drug discovery is a good place for that: models need to be correct, fast, and
-                  trustworthy. I want to keep building in this space.
+        {/* Highlights */}
+        <section className="mt-14">
+          <Heading label="Highlights" tone="green">
+            Numbers I&apos;m proud of
+          </Heading>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+            {highlights.map((h) => (
+              <SpotlightCard key={h.label} accent={h.c} className="p-4">
+                <p className="text-3xl font-bold tracking-tight" style={{ color: h.c }}>
+                  <AnimatedCounter end={h.end} suffix={h.suffix} />
                 </p>
-              </GlassCard>
-            </div>
-
-            {/* Side cards */}
-            <div className="lg:col-span-2 flex flex-col gap-4">
-              <GlassCard className="p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 ring-1 ring-blue-400/20">
-                    <GraduationCap className="h-4 w-4 text-blue-300" strokeWidth={1.75} />
-                  </div>
-                  <h3 className="text-sm font-semibold text-white">Education</h3>
-                </div>
-                <div className="space-y-3 text-sm">
-                  <div>
-                    <p className="font-medium text-white">MS Bioinformatics</p>
-                    <p className="text-xs text-blue-300/80">Northeastern University · CGPA 3.95/4.00</p>
-                    <p className="text-xs text-gray-500 mt-0.5">Expected Dec 2026 · ML/AI, Computational Biology, PLMs</p>
-                  </div>
-                  <div className="h-px bg-white/10" />
-                  <div>
-                    <p className="font-medium text-white">BTech Biotechnology</p>
-                    <p className="text-xs text-blue-300/80">Anna University · CGPA 9.4/10 (Top 5%)</p>
-                    <p className="text-xs text-gray-500 mt-0.5">Aug 2019 – May 2023 · Bioinformatics, Data Science</p>
-                  </div>
-                </div>
-              </GlassCard>
-
-              <GlassCard className="p-6 flex-1">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 ring-1 ring-emerald-400/20">
-                    <Award className="h-4 w-4 text-emerald-300" strokeWidth={1.75} />
-                  </div>
-                  <h3 className="text-sm font-semibold text-white">Highlights</h3>
-                </div>
-                <ul className="space-y-2">
-                  {highlights.map((h) => (
-                    <li key={h} className="flex gap-2 text-[13px] text-gray-300/90 leading-relaxed">
-                      <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-emerald-400/60" />
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </GlassCard>
-
-            </div>
+                <p className="mt-1 text-sm font-semibold text-white">{h.label}</p>
+                <p className="text-xs text-gray-500">{h.sub}</p>
+              </SpotlightCard>
+            ))}
           </div>
         </section>
 
         {/* Experience timeline */}
-        <section className="mt-20">
-          <div className="text-center mb-10">
-            <SectionLabel tone="purple">Experience &amp; Education</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
-              My Journey
-            </GradientHeading>
-          </div>
-
+        <section className="mt-14">
+          <Heading label="Experience & Education" tone="purple">
+            My Journey
+          </Heading>
           <JourneyTimeline items={journey} />
         </section>
 
         {/* CTA */}
-        <section className="mt-20">
-          <GlassCard className="overflow-hidden">
-            <div className="relative p-10 md:p-14 text-center">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
+        <section className="mt-14">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10 p-7 text-center backdrop-blur-xl md:p-10">
+            <div className="absolute -left-20 -top-20 h-56 w-56 rounded-full bg-blue-500/20 blur-3xl" />
+            <div className="absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-violet-500/20 blur-3xl" />
+            <div className="relative">
               <SectionLabel tone="green">Open to opportunities</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+              <GradientHeading as="h2" className="mt-3 text-2xl font-semibold md:text-3xl">
                 Want to work together?
               </GradientHeading>
-              <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
-                I&apos;m always open to interesting problems in computational biology, drug discovery AI,
-                or ML infrastructure. Drop me a line.
+              <p className="mx-auto mt-3 max-w-xl text-gray-400">
+                Looking for AI/ML roles in drug discovery - agents, LLMs and protein models.
               </p>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <a
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <Link
                   href="/projects"
-                  className="group inline-flex items-center gap-2 rounded-lg bg-white text-black px-5 py-2.5 text-sm font-semibold transition-transform hover:scale-[1.02]"
+                  className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
                 >
                   <Sparkles className="h-4 w-4" />
                   View projects
-                </a>
+                </Link>
                 <a
                   href="mailto:murugan.g@northeastern.edu"
-                  className="group inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] backdrop-blur px-5 py-2.5 text-sm font-semibold text-white hover:border-white/30 hover:bg-white/[0.08] transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-white backdrop-blur transition-colors hover:border-white/30 hover:bg-white/[0.08]"
                 >
                   <Mail className="h-4 w-4 text-blue-300" />
                   Email me
                 </a>
               </div>
             </div>
-          </GlassCard>
+          </div>
         </section>
       </div>
     </PageShell>

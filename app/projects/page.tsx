@@ -429,7 +429,7 @@ function ProjectTile({ project, onOpen }: { project: Project; onOpen: () => void
         setTilt({ x: -((e.clientY - r.top) / r.height - 0.5) * 6, y: ((e.clientX - r.left) / r.width - 0.5) * 8 });
       }}
       onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      className="group relative block aspect-[4/5] w-full overflow-hidden rounded-2xl border border-white/10 text-left outline-none transition-[border-color,box-shadow] duration-300 hover:border-white/25 focus-visible:ring-2 focus-visible:ring-white/40"
+      className="group relative block aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 text-left outline-none transition-[border-color,box-shadow] duration-300 hover:border-white/25 focus-visible:ring-2 focus-visible:ring-white/40"
       style={{
         transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
         transition: 'transform 200ms ease-out, border-color 300ms, box-shadow 300ms',
@@ -517,11 +517,11 @@ export default function Projects() {
 
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-16 pb-16">
+      <div className="container mx-auto px-6 pt-10 pb-12">
         {/* Hero */}
         <section className="text-center">
           <HeroBadge>Projects &amp; Research · Agentic AI first</HeroBadge>
-          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
             <GradientHeading as="span">Projects</GradientHeading>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 md:text-lg">
@@ -547,7 +547,7 @@ export default function Projects() {
         </section>
 
         {/* Featured spotlight */}
-        <section className="mt-16">
+        <section className="mt-12">
           <button
             type="button"
             onClick={openFeatured}
@@ -608,7 +608,7 @@ export default function Projects() {
         </section>
 
         {/* Filters */}
-        <section className="mt-16">
+        <section className="mt-12">
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map((cat) => {
               const active = activeFilter === cat;
@@ -652,7 +652,7 @@ export default function Projects() {
         </section>
 
         {/* Tech marquee */}
-        <section className="mt-20">
+        <section className="mt-14">
           <p className="mb-4 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-500">
             Built with
           </p>
@@ -675,13 +675,13 @@ export default function Projects() {
         </section>
 
         {/* CTA */}
-        <section className="mt-20">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-500/10 via-blue-500/10 to-emerald-500/10 p-10 text-center backdrop-blur-xl md:p-14">
+        <section className="mt-14">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-500/10 via-blue-500/10 to-emerald-500/10 p-7 text-center backdrop-blur-xl md:p-10">
             <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-violet-500/20 blur-3xl" />
             <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-emerald-500/15 blur-3xl" />
             <div className="relative">
               <SectionLabel tone="purple">Want to dig deeper?</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
                 Let&apos;s talk
               </GradientHeading>
               <p className="mx-auto mt-4 max-w-2xl text-gray-400">

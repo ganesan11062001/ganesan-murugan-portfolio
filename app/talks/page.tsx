@@ -161,7 +161,7 @@ function FeaturedTalk({ talk, upcoming }: { talk: Talk; upcoming: boolean }) {
           <span className="text-sm font-bold uppercase tracking-[0.3em]" style={{ color: talk.accent }}>
             {f.month}
           </span>
-          <span className="text-8xl font-bold leading-none tracking-tighter text-white">{f.day}</span>
+          <span className="text-7xl font-bold leading-none tracking-tighter text-white">{f.day}</span>
           <span className="text-sm font-medium text-gray-400">{f.year}</span>
           {upcoming && (
             <div className="mt-4">
@@ -294,11 +294,11 @@ export default function Talks() {
 
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-16 pb-16">
+      <div className="container mx-auto px-6 pt-10 pb-12">
         {/* Hero */}
         <section className="text-center">
           <HeroBadge>On stage</HeroBadge>
-          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
             <GradientHeading as="span">Talks &amp; Presentations</GradientHeading>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 md:text-lg">
@@ -330,7 +330,7 @@ export default function Talks() {
           </div>
         </section>
 
-        <div className="mx-auto mt-16 max-w-5xl space-y-14">
+        <div className="mx-auto mt-12 max-w-5xl space-y-14">
           {/* Featured */}
           {featured && (
             <section>
@@ -375,13 +375,13 @@ export default function Talks() {
         </div>
 
         {/* CTA */}
-        <section className="mt-20">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-500/10 via-blue-500/10 to-cyan-500/10 p-10 text-center backdrop-blur-xl md:p-14">
+        <section className="mt-14">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-500/10 via-blue-500/10 to-cyan-500/10 p-7 text-center backdrop-blur-xl md:p-10">
             <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-violet-500/20 blur-3xl" />
             <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-cyan-500/20 blur-3xl" />
             <div className="relative">
               <SectionLabel tone="purple">Speaking</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
                 Want me to speak or run a workshop?
               </GradientHeading>
               <p className="mx-auto mt-4 max-w-2xl text-gray-400">

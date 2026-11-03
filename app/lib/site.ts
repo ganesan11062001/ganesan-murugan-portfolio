@@ -3,13 +3,17 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://ganesanmur
 
 export const SITE_NAME = 'Ganesan Murugan';
 
-export const SITE_TITLE = 'Ganesan Murugan - AI/ML Engineer · Agentic AI & Multi-Agent Systems';
+export const SITE_TITLE = 'Ganesan Murugan - AI/ML for Drug Discovery · Agentic AI';
 
 export const SITE_DESCRIPTION =
-  'Ganesan Murugan is an AI/ML engineer building agentic AI and multi-agent LLM systems - LangGraph, RAG, LLM fine-tuning (QLoRA, DPO) - applied to biology with protein language models. MS Bioinformatics, Northeastern University, Boston.';
+  'Ganesan Murugan is an AI/ML engineer passionate about drug discovery - building agentic AI, multi-agent LLM systems and protein language model pipelines for biomarker discovery, protein design and molecular design. MS Bioinformatics, Northeastern University, Boston.';
 
 export const SITE_KEYWORDS = [
   'Ganesan Murugan',
+  'AI for Drug Discovery',
+  'AI/ML for Drug Discovery',
+  'Machine Learning for Drug Discovery',
+  'Computational Drug Discovery',
   'AI/ML Engineer',
   'Machine Learning Engineer',
   'Agentic AI Engineer',
@@ -28,7 +32,8 @@ export const SITE_KEYWORDS = [
   'AWS Bedrock',
   'Protein Language Models',
   'Protein Design',
-  'AI for Drug Discovery',
+  'Molecular Design',
+  'Biomarker Discovery',
   'Computational Biology',
   'Bioinformatics',
   'Single-Cell Foundation Models',

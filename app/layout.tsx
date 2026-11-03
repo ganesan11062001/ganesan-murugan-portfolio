@@ -61,7 +61,7 @@ const jsonLd = {
       '@id': `${SITE_URL}/#person`,
       name: SITE_NAME,
       url: SITE_URL,
-      jobTitle: 'AI/ML Engineer - Agentic AI',
+      jobTitle: 'AI/ML Engineer - Drug Discovery',
       description: SITE_DESCRIPTION,
       email: 'mailto:murugan.g@northeastern.edu',
       address: { '@type': 'PostalAddress', addressLocality: 'Boston', addressRegion: 'MA', addressCountry: 'US' },
@@ -70,6 +70,8 @@ const jsonLd = {
         { '@type': 'CollegeOrUniversity', name: 'Anna University' },
       ],
       knowsAbout: [
+        'Drug Discovery',
+        'AI for Drug Discovery',
         'Agentic AI',
         'Multi-Agent Systems',
         'Large Language Models',

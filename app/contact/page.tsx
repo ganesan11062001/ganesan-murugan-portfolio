@@ -41,13 +41,13 @@ import { RotatingWord, SpotlightCard } from '../components/Effects';
 const EMAIL = 'murugan.g@northeastern.edu';
 
 const topics = [
+  'AI/ML for drug discovery',
   'agentic AI & multi-agent systems',
-  'LLM fine-tuning, RAG & LLMOps',
-  'protein language models',
+  'protein language models & molecular design',
   'AI/ML roles & research collaborations',
 ];
 
-const interests = ['AI/ML Engineering', 'Agentic AI', 'LLM Applications', 'ML for Biology & PLMs'];
+const interests = ['AI/ML for Drug Discovery', 'Agentic AI', 'LLM Applications', 'Protein Language Models'];
 
 const socials = [
   {
@@ -133,7 +133,7 @@ export default function Contact() {
 
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-16 pb-16">
+      <div className="container mx-auto px-6 pt-10 pb-12">
         {/* Hero */}
         <section className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div className="text-center lg:text-left">
@@ -142,12 +142,12 @@ export default function Contact() {
                 <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/70" />
                 <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              Open to full-time AI/ML roles · Graduating Dec 2026
+              Open to AI/ML roles in drug discovery · Graduating Dec 2026
             </div>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-              Let&apos;s build agents that{' '}
+            <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
+              Let&apos;s use AI to{' '}
               <GradientHeading as="span" className="inline">
-                do real work
+                discover drugs faster
               </GradientHeading>
             </h1>
             <p className="mt-6 min-h-[3.5rem] text-lg text-gray-400 md:text-xl">
@@ -201,7 +201,7 @@ export default function Contact() {
         </section>
 
         {/* Contact methods */}
-        <section className="mt-16">
+        <section className="mt-12">
           <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
             <SpotlightCard accent="#60a5fa" className="h-full p-7">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl" style={{ background: '#60a5fa1a', boxShadow: 'inset 0 0 0 1px #60a5fa44' }}>
@@ -239,10 +239,10 @@ export default function Contact() {
         </section>
 
         {/* Socials */}
-        <section className="mt-20">
+        <section className="mt-14">
           <div className="mb-8 text-center">
             <SectionLabel tone="purple">Connect online</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
               Follow my work
             </GradientHeading>
           </div>
@@ -274,8 +274,8 @@ export default function Contact() {
         </section>
 
         {/* Quick links */}
-        <section className="mt-20">
-          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10 p-8 text-center backdrop-blur-xl md:p-10">
+        <section className="mt-14">
+          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10 p-8 text-center backdrop-blur-xl md:p-8">
             <div className="absolute -left-20 -top-20 h-56 w-56 rounded-full bg-blue-500/20 blur-3xl" />
             <div className="absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-violet-500/20 blur-3xl" />
             <div className="relative">

@@ -22,11 +22,11 @@ import { Marquee, RotatingWord, SpotlightCard } from './components/Effects';
 import { GradientHeading, HeroBadge, SectionLabel } from './components/Section';
 
 const roles = [
-  'multi-agent LLM systems',
-  'agents that reason over biological data',
-  'fine-tuned LLMs that hallucinate less',
-  'protein language model pipelines',
-  'agentic RAG for 12,000+ HPC users',
+  'AI agents that accelerate drug discovery',
+  'multi-agent systems for biomarker discovery',
+  'protein language model pipelines for new therapeutics',
+  'ML for molecule & peptide design',
+  'LLMs grounded in biological data',
 ];
 
 const logos = [
@@ -35,6 +35,7 @@ const logos = [
   { src: '/solid-biosciences.png', alt: 'Solid Biosciences' },
   { src: '/COE.png', alt: 'Northeastern University College of Engineering' },
   { src: '/NCOS.jpg', alt: 'Northeastern University College of Science' },
+  { src: '/northeastern-rc.png', alt: 'Northeastern University Research Computing' },
   { src: '/anna-university.png', alt: 'Anna University' },
 ];
 
@@ -89,7 +90,7 @@ const featured = [
 const arc = [
   { step: '01', era: '2023 – 2025', title: 'Full-stack software', where: 'Zifo · Boehringer Ingelheim', accent: '#a3e635' },
   { step: '02', era: '2024 – 2026', title: 'ML & foundation models', where: 'Northeastern · Research', accent: '#34d399' },
-  { step: '03', era: 'Now', title: 'Agentic AI', where: 'Multi-agent systems in production', accent: '#a78bfa' },
+  { step: '03', era: 'Now', title: 'AI for drug discovery', where: 'Agents, LLMs & protein models', accent: '#a78bfa' },
 ];
 
 const ACCENT_HEX: Record<string, string> = {
@@ -202,20 +203,20 @@ const stackGroups = [
 export default function Home() {
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-14 pb-16">
+      <div className="container mx-auto px-6 pt-10 pb-12">
         {/* Hero */}
         <section className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
           <div className="text-center lg:text-left">
-            <HeroBadge>Open to full-time AI/ML roles · Graduating Dec 2026</HeroBadge>
+            <HeroBadge>Open to AI/ML roles in drug discovery · Graduating Dec 2026</HeroBadge>
 
-            <h1 className="mt-6 text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
+            <h1 className="mt-6 text-5xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
               Hi, I&apos;m{' '}
               <GradientHeading as="span" className="inline">
                 Ganesan
               </GradientHeading>
             </h1>
             <p className="mt-4 text-2xl font-medium text-white/90 md:text-3xl">
-              AI/ML Engineer &middot; Agentic AI &times; Biology
+              AI/ML for Drug Discovery
             </p>
 
             <p className="mt-6 min-h-[3.5rem] text-lg text-gray-400 md:text-xl">
@@ -223,7 +224,7 @@ export default function Home() {
             </p>
 
             <p className="mt-2 text-sm font-medium tracking-wide text-blue-300/80">
-              Full-stack roots · Multi-agent systems · LLM fine-tuning · Protein language models
+              Full-stack roots · Agentic AI · LLMs · Protein language models · Drug discovery
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
@@ -245,7 +246,7 @@ export default function Home() {
           </div>
 
           {/* Helix visual with floating metric chips */}
-          <div className="relative mx-auto h-[380px] w-full max-w-[520px] md:h-[460px]">
+          <div className="relative mx-auto h-[320px] w-full max-w-[520px] md:h-[380px]">
             <div className="absolute inset-8 rounded-full bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10 blur-3xl" />
             <HelixCanvas />
             {[
@@ -305,7 +306,7 @@ export default function Home() {
         </section>
 
         {/* Latest */}
-        <section className="mt-16">
+        <section className="mt-12">
           <div className="mb-6 flex items-center justify-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/70" />
@@ -342,10 +343,10 @@ export default function Home() {
         </section>
 
         {/* The arc: software -> ML -> agents */}
-        <section className="mt-24">
-          <div className="mb-10 text-center">
+        <section className="mt-16">
+          <div className="mb-7 text-center">
             <SectionLabel tone="green">The arc</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
               From shipping software to shipping agents
             </GradientHeading>
             <p className="mx-auto mt-3 max-w-2xl text-gray-400">
@@ -378,11 +379,11 @@ export default function Home() {
         </section>
 
         {/* Featured projects */}
-        <section className="mt-24">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <section className="mt-16">
+          <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
             <div>
               <SectionLabel tone="purple">Featured work</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
                 Selected projects
               </GradientHeading>
             </div>
@@ -399,7 +400,7 @@ export default function Home() {
               <Link
                 key={p.title}
                 href="/projects"
-                className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10"
+                className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-white/10"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -433,14 +434,14 @@ export default function Home() {
         </section>
 
         {/* Focus areas */}
-        <section className="mt-24">
-          <div className="mb-10 text-center">
+        <section className="mt-16">
+          <div className="mb-7 text-center">
             <SectionLabel tone="blue">What I work on</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
-              Agents first, grounded in biology
+            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
+              AI that moves drug discovery forward
             </GradientHeading>
             <p className="mx-auto mt-3 max-w-2xl text-gray-400">
-              AI/ML engineering where the models have to be right about the science.
+              Agents, LLMs and protein models built for the design-make-test-analyze loop.
             </p>
           </div>
 
@@ -475,10 +476,10 @@ export default function Home() {
         </section>
 
         {/* Stack marquee */}
-        <section className="mt-24">
+        <section className="mt-16">
           <div className="mb-8 text-center">
             <SectionLabel tone="purple">Stack</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
+            <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-3xl">
               Tools I reach for
             </GradientHeading>
           </div>
@@ -502,18 +503,18 @@ export default function Home() {
         </section>
 
         {/* CTA */}
-        <section className="mt-24">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10 p-10 text-center backdrop-blur-xl md:p-14">
+        <section className="mt-16">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10 p-7 text-center backdrop-blur-xl md:p-10">
             <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl" />
             <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-violet-500/20 blur-3xl" />
             <div className="relative">
               <SectionLabel tone="green">Open to opportunities</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-5xl">
+              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
                 Let&apos;s build something that matters
               </GradientHeading>
               <p className="mx-auto mt-4 max-w-2xl text-gray-400">
-                Multi-agent systems, LLM fine-tuning, RAG, or protein language models - I&apos;m looking for AI/ML
-                roles building agents that do real work, especially where the science is hard.
+                I&apos;m looking for AI/ML roles in drug discovery - building agents, LLMs and protein models that
+                help get better medicines to patients faster.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <a

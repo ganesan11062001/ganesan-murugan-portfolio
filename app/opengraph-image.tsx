@@ -1,11 +1,11 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Ganesan Murugan - AI/ML Engineer · Agentic AI';
+export const alt = 'Ganesan Murugan - AI/ML for Drug Discovery';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 export default function OpengraphImage() {
-  const chips = ['Agentic AI', 'Multi-Agent Systems', 'LLM Fine-Tuning', 'RAG', 'Protein Language Models'];
+  const chips = ['Drug Discovery', 'Agentic AI', 'Multi-Agent Systems', 'LLMs', 'Protein Language Models'];
   return new ImageResponse(
     (
       <div
@@ -23,7 +23,7 @@ export default function OpengraphImage() {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 26, color: '#6ee7b7' }}>
           <div style={{ width: 14, height: 14, borderRadius: 999, background: '#34d399' }} />
-          Open to full-time AI/ML roles · Graduating Dec 2026
+          Open to AI/ML roles in drug discovery · Graduating Dec 2026
         </div>
         <div style={{ marginTop: 28, fontSize: 92, fontWeight: 700, letterSpacing: -3, display: 'flex' }}>
           Ganesan Murugan
@@ -39,7 +39,7 @@ export default function OpengraphImage() {
             display: 'flex',
           }}
         >
-          AI/ML Engineer · Agentic AI × Biology
+          AI/ML for Drug Discovery
         </div>
         <div style={{ marginTop: 44, display: 'flex', flexWrap: 'wrap', gap: 14 }}>
           {chips.map((c) => (

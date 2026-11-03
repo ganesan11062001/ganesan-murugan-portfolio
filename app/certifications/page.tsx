@@ -560,7 +560,7 @@ function BadgeTile({ cert }: { cert: Cert }) {
   const toggle = () => setFlipped((f) => !f);
 
   return (
-    <div className="group relative h-[400px]" style={{ perspective: 1200 }}>
+    <div className="group relative h-[340px]" style={{ perspective: 1200 }}>
       <div
         role="button"
         tabIndex={0}
@@ -597,7 +597,7 @@ function BadgeTile({ cert }: { cert: Cert }) {
           >
             {/* ambient glow */}
             <div
-              className="pointer-events-none absolute left-1/2 top-10 h-52 w-52 -translate-x-1/2 rounded-full opacity-25 blur-3xl transition-opacity duration-500 group-hover:opacity-50"
+              className="pointer-events-none absolute left-1/2 top-10 h-40 w-40 -translate-x-1/2 rounded-full opacity-25 blur-3xl transition-opacity duration-500 group-hover:opacity-50"
               style={{ background: accent }}
             />
             {cert.featured && (
@@ -620,7 +620,7 @@ function BadgeTile({ cert }: { cert: Cert }) {
             </span>
 
             <div
-              className="relative h-52 w-52 transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.04]"
+              className="relative h-40 w-40 transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.04]"
               style={{ transform: 'translateZ(40px)', filter: `drop-shadow(0 18px 30px ${accent}40)` }}
             >
               {cert.badge ? (
@@ -760,11 +760,11 @@ export default function Certifications() {
 
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-20 pb-24">
+      <div className="container mx-auto px-6 pt-12 pb-16">
         {/* Hero */}
         <section className="text-center">
           <HeroBadge>Professional Certifications</HeroBadge>
-          <h1 className="mt-6 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
+          <h1 className="mt-6 text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]">
             <GradientHeading as="span">Certifications</GradientHeading>
           </h1>
           <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
@@ -780,7 +780,7 @@ export default function Certifications() {
         </section>
 
         {/* Filter */}
-        <section className="mt-16">
+        <section className="mt-12">
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map((cat) => {
               const active = selected === cat;
@@ -819,10 +819,10 @@ export default function Certifications() {
         </section>
 
         {/* Upcoming */}
-        <section className="mt-24">
-          <div className="text-center mb-10">
+        <section className="mt-16">
+          <div className="text-center mb-7">
             <SectionLabel tone="purple">Next goals</SectionLabel>
-            <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+            <GradientHeading as="h2" className="mt-4 text-3xl md:text-3xl font-semibold">
               Upcoming
             </GradientHeading>
           </div>
@@ -850,12 +850,12 @@ export default function Certifications() {
         </section>
 
         {/* CTA */}
-        <section className="mt-24">
+        <section className="mt-16">
           <GlassCard className="overflow-hidden">
-            <div className="relative p-10 md:p-14 text-center">
+            <div className="relative p-7 md:p-10 text-center">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
               <SectionLabel tone="green">Continuous learning</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+              <GradientHeading as="h2" className="mt-4 text-3xl md:text-3xl font-semibold">
                 Always growing
               </GradientHeading>
               <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
