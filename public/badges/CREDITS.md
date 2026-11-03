@@ -13,3 +13,4 @@ badge artwork for a credential verified as belonging to Ganesan Murugan.
 - databricks-ai-agent-fundamentals.png - AI Agent Fundamentals (Databricks) - https://credentials.databricks.com/d4feaa0c-715d-4815-99e9-dd030bf18574
 - oci-devops-professional.png - Oracle Cloud Infrastructure 2025 Certified DevOps Professional - https://catalog-education.oracle.com/ords/certview/sharebadge?id=448E98842880E651092E414E13518BC7B2B20F91F0621A48905389D9E79EBE5A
 - oracle-apex-professional.png - Oracle APEX Cloud Developer Certified Professional - https://catalog-education.oracle.com/ords/certview/sharebadge?id=DC9C6BC5EFA430548883137FB81F0E1521744124B9093B205EE2A7FFBA07841A
+- aws-cloud-practitioner.png - AWS Certified Cloud Practitioner - https://www.credly.com/badges/45c380eb-178b-4d77-aa78-b6b6752ce4db/public_url

@@ -125,7 +125,7 @@ export default function Home() {
 
           <h1 className="mt-6 text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05]">
             Hi, I&apos;m{' '}
-            <GradientHeading as="h1" className="inline">
+            <GradientHeading as="span" className="inline">
               Ganesan
             </GradientHeading>
             <span className="block text-white/90 text-3xl md:text-5xl font-medium mt-3">

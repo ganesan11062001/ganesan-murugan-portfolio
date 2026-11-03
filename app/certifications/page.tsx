@@ -6,7 +6,6 @@ import {
   Bot,
   BookOpen,
   BrainCircuit,
-  ChevronDown,
   Cloud,
   Code2,
   Database,
@@ -80,6 +79,24 @@ type Cert = {
 };
 
 const certifications: Cert[] = [
+  {
+    title: 'AWS Certified Cloud Practitioner',
+    issuer: 'Amazon Web Services',
+    date: 'Nov 2026',
+    year: 2026,
+    month: 11,
+    status: 'Certified',
+    description:
+      'Foundational AWS certification validating understanding of core AWS services, cloud concepts, security and compliance, and billing and pricing.',
+    skills: ['AWS Core Services', 'Cloud Concepts', 'Security & Compliance', 'Billing & Pricing'],
+    category: 'Cloud Development',
+    icon: Cloud,
+    verificationUrl: 'https://www.credly.com/badges/45c380eb-178b-4d77-aa78-b6b6752ce4db/public_url',
+    expires: 'Nov 2029',
+    tint: 'text-amber-300 ring-amber-400/30 bg-amber-500/10',
+    badge: '/badges/aws-cloud-practitioner.png',
+    featured: true,
+  },
   {
     title: 'Oracle Cloud Infrastructure Certified Architect Associate',
     issuer: 'Oracle',
@@ -411,18 +428,18 @@ const upcoming = [
   {
     title: 'Claude Certified Architect - Professional',
     issuer: 'Anthropic',
-    targetMonth: 'Early 2027',
+    targetMonth: 'Late 2026',
     description: 'Professional-level certification covering advanced architecture and deployment patterns for production Claude-based systems.',
     category: 'AI Fluency & Agents',
     icon: BrainCircuit,
   },
   {
-    title: 'AWS Cloud Practitioner',
-    issuer: 'Amazon Web Services',
+    title: 'LangChain Certified Agent Engineer',
+    issuer: 'LangChain',
     targetMonth: 'Late 2026',
-    description: 'Foundational certification covering core AWS services, cloud concepts, security, and billing.',
-    category: 'Cloud Development',
-    icon: Cloud,
+    description: 'Certification covering building, orchestrating, and evaluating LLM agents with LangChain and LangGraph.',
+    category: 'AI Fluency & Agents',
+    icon: Bot,
   },
 ];
 
@@ -440,9 +457,305 @@ const categories = [
   'Bioinformatics',
 ];
 
+const ACCENTS: Record<string, string> = {
+  orange: '#fb923c',
+  yellow: '#facc15',
+  amber: '#fbbf24',
+  fuchsia: '#e879f9',
+  rose: '#fb7185',
+  sky: '#38bdf8',
+  lime: '#a3e635',
+  violet: '#a78bfa',
+  red: '#f87171',
+  blue: '#60a5fa',
+  indigo: '#818cf8',
+  emerald: '#34d399',
+  cyan: '#22d3ee',
+  teal: '#2dd4bf',
+  pink: '#f472b6',
+};
+
+function accentOf(cert: Cert) {
+  const m = cert.tint.match(/text-(\w+)-300/);
+  return ACCENTS[m?.[1] ?? 'blue'] ?? ACCENTS.blue;
+}
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function parseMonth(s: string) {
+  const [mon, yr] = s.split(' ');
+  const idx = MONTHS.indexOf(mon);
+  return idx < 0 || !yr ? null : Number(yr) * 12 + idx;
+}
+
+function validity(cert: Cert) {
+  if (!cert.expires) return null;
+  const start = parseMonth(cert.date);
+  const end = parseMonth(cert.expires);
+  if (start === null || end === null || end <= start) return null;
+  const now = new Date();
+  const cur = now.getFullYear() * 12 + now.getMonth();
+  const left = end - cur;
+  const pct = Math.min(Math.max((cur - start) / (end - start), 0), 1);
+  const label =
+    left <= 0
+      ? 'Expired'
+      : left >= 12
+        ? `${Math.floor(left / 12)}y ${left % 12}m left`
+        : `${left}m left`;
+  return { pct, label, expired: left <= 0 };
+}
+
+const HEX = 'polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)';
+
+/** Generated AWS-style hexagon badge for certs without an official badge image. */
+function HexBadge({ cert, accent }: { cert: Cert; accent: string }) {
+  const Icon = cert.icon;
+  const titleSize =
+    cert.title.length > 34 ? 'text-[11px]' : cert.title.length > 18 ? 'text-[13px]' : 'text-[17px]';
+  return (
+    <div
+      className="relative h-full w-full"
+      style={{ clipPath: HEX, background: `linear-gradient(160deg, #e5e7eb, ${accent} 55%, #6b7280)` }}
+    >
+      <div
+        className="absolute inset-[5px] flex flex-col items-center justify-center px-[17%] text-center"
+        style={{
+          clipPath: HEX,
+          background: `radial-gradient(120% 80% at 30% 15%, ${accent}55, transparent 60%), linear-gradient(165deg, #1f2937, #0b1020)`,
+        }}
+      >
+        <div className="flex items-center gap-1">
+          <span className="text-[11px] font-semibold lowercase tracking-tight text-white/90">
+            {cert.issuer.split(' ')[0]}
+          </span>
+          <Icon className="h-3 w-3" style={{ color: accent }} strokeWidth={2.25} />
+        </div>
+        <span className="text-[9px] font-light text-white/60">certified</span>
+        <div className="my-1.5 h-px w-full bg-white/40" />
+        <span className={`${titleSize} font-bold leading-tight text-white`}>{cert.title}</span>
+        <div className="my-1.5 h-px w-full bg-white/40" />
+        <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-white/85">
+          {cert.category}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function BadgeTile({ cert }: { cert: Cert }) {
+  const [flipped, setFlipped] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const accent = accentOf(cert);
+  const v = validity(cert);
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    setTilt({ x: -py * 10, y: px * 12 });
+  };
+
+  const toggle = () => setFlipped((f) => !f);
+
+  return (
+    <div className="group relative h-[400px]" style={{ perspective: 1200 }}>
+      <div
+        role="button"
+        tabIndex={0}
+        aria-pressed={flipped}
+        aria-label={`${cert.title} - ${flipped ? 'hide' : 'show'} details`}
+        onClick={toggle}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+        }}
+        onMouseMove={onMove}
+        onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+        className="relative h-full w-full cursor-pointer rounded-3xl outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+          transition: 'transform 200ms ease-out',
+        }}
+      >
+        <div
+          className="relative h-full w-full"
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: `rotateY(${flipped ? 180 : 0}deg)`,
+            transition: 'transform 700ms cubic-bezier(.2,.8,.2,1)',
+          }}
+        >
+          {/* Front: the badge is the hero */}
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-start rounded-3xl px-5 pt-8"
+            style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+          >
+            {/* ambient glow */}
+            <div
+              className="pointer-events-none absolute left-1/2 top-10 h-52 w-52 -translate-x-1/2 rounded-full opacity-25 blur-3xl transition-opacity duration-500 group-hover:opacity-50"
+              style={{ background: accent }}
+            />
+            {cert.featured && (
+              <span
+                className="absolute left-4 top-4 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest ring-1"
+                style={{ color: accent, background: `${accent}1a`, boxShadow: `inset 0 0 0 1px ${accent}55` }}
+              >
+                Top
+              </span>
+            )}
+            <span
+              className={`absolute right-4 top-4 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 ${
+                cert.status === 'Certified'
+                  ? 'bg-emerald-500/10 text-emerald-300 ring-emerald-400/30'
+                  : 'bg-blue-500/10 text-blue-300 ring-blue-400/30'
+              }`}
+            >
+              <BadgeCheck className="h-3 w-3" strokeWidth={2.25} />
+              {cert.status}
+            </span>
+
+            <div
+              className="relative h-52 w-52 transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.04]"
+              style={{ transform: 'translateZ(40px)', filter: `drop-shadow(0 18px 30px ${accent}40)` }}
+            >
+              {cert.badge ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={cert.badge} alt={`${cert.title} badge`} className="h-full w-full object-contain" />
+              ) : (
+                <HexBadge cert={cert} accent={accent} />
+              )}
+              {/* shine sweep, masked to the badge silhouette */}
+              <div
+                className="pointer-events-none absolute inset-0 overflow-hidden"
+                style={
+                  cert.badge
+                    ? {
+                        WebkitMaskImage: `url(${cert.badge})`,
+                        maskImage: `url(${cert.badge})`,
+                        WebkitMaskSize: 'contain',
+                        maskSize: 'contain',
+                        WebkitMaskRepeat: 'no-repeat',
+                        maskRepeat: 'no-repeat',
+                        WebkitMaskPosition: 'center',
+                        maskPosition: 'center',
+                      }
+                    : { clipPath: HEX }
+                }
+              >
+                <div className="absolute inset-y-0 -left-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-1000 ease-out group-hover:left-[150%]" />
+              </div>
+            </div>
+
+            <h3 className="relative mt-6 line-clamp-2 text-center text-[15px] font-semibold leading-snug tracking-tight text-white">
+              {cert.title}
+            </h3>
+            <p className="relative mt-1.5 text-xs font-medium" style={{ color: accent }}>
+              {cert.issuer} <span className="text-gray-500">· {cert.date}</span>
+            </p>
+            <span className="absolute bottom-4 text-[10px] font-medium uppercase tracking-widest text-gray-600 transition-colors group-hover:text-gray-400">
+              Tap to flip ↻
+            </span>
+          </div>
+
+          {/* Back: the details */}
+          <div
+            className="absolute inset-0 flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0b0f1a]/95 p-6 text-left backdrop-blur-xl"
+            style={{
+              transform: 'rotateY(180deg)',
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              boxShadow: `0 0 60px -20px ${accent}66`,
+            }}
+          >
+            <div
+              className="absolute inset-x-0 top-0 h-px"
+              style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
+            />
+            <div className="flex items-center gap-3">
+              <div className="h-14 w-14 flex-shrink-0">
+                {cert.badge ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={cert.badge} alt="" className="h-full w-full object-contain" />
+                ) : (
+                  <div
+                    className="h-full w-full"
+                    style={{ clipPath: HEX, background: `linear-gradient(160deg, ${accent}, #1f2937)` }}
+                  />
+                )}
+              </div>
+              <div className="min-w-0">
+                <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-white">{cert.title}</h3>
+                <p className="mt-0.5 text-[11px] font-medium" style={{ color: accent }}>
+                  {cert.issuer}
+                </p>
+              </div>
+            </div>
+
+            <p className="mt-4 line-clamp-5 text-[13px] leading-relaxed text-gray-400">{cert.description}</p>
+
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {cert.skills.map((s) => (
+                <span
+                  key={s}
+                  className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-gray-300"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-auto pt-4">
+              {v && (
+                <div className="mb-3">
+                  <div className="mb-1 flex justify-between text-[10px] font-medium uppercase tracking-wider text-gray-500">
+                    <span>Validity</span>
+                    <span className={v.expired ? 'text-rose-300' : 'text-gray-300'}>{v.label}</span>
+                  </div>
+                  <div className="h-1 overflow-hidden rounded-full bg-white/10">
+                    <div
+                      className="h-full rounded-full"
+                      style={{ width: `${Math.max(v.pct * 100, 3)}%`, background: accent }}
+                    />
+                  </div>
+                </div>
+              )}
+              <div className="flex items-center justify-between gap-2 border-t border-white/10 pt-3 text-xs">
+                <span className="text-gray-500">
+                  {cert.date}
+                  {cert.expires && <span className="text-gray-600"> → {cert.expires}</span>}
+                </span>
+                {cert.verificationUrl ? (
+                  <a
+                    href={cert.verificationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    onKeyDown={(e) => e.stopPropagation()}
+                    tabIndex={flipped ? 0 : -1}
+                    className="inline-flex flex-shrink-0 items-center gap-1 rounded-full px-3 py-1 font-semibold text-black transition-transform hover:scale-105"
+                    style={{ background: accent }}
+                  >
+                    Verify <ExternalLink className="h-3 w-3" />
+                  </a>
+                ) : cert.credentialNote ? (
+                  <span className="flex-shrink-0 text-gray-500">{cert.credentialNote}</span>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Certifications() {
   const [selected, setSelected] = useState('All');
-  const [expanded, setExpanded] = useState<number | null>(null);
   const filtered = selected === 'All' ? certifications : certifications.filter((c) => c.category === selected);
 
   return (
@@ -498,81 +811,10 @@ export default function Certifications() {
 
         {/* Grid */}
         <section className="mt-10">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map((cert, idx) => {
-              const Icon = cert.icon;
-              const isOpen = expanded === idx;
-              return (
-                <GlassCard key={cert.title} className="p-6 flex flex-col items-center text-center">
-                  <div className="relative">
-                    {cert.badge ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={cert.badge} alt={`${cert.title} badge`} className="h-28 w-28 object-contain" />
-                    ) : (
-                      <div className={`flex h-20 w-20 items-center justify-center rounded-2xl ring-1 ${cert.tint}`}>
-                        <Icon className="h-8 w-8" strokeWidth={1.5} />
-                      </div>
-                    )}
-                    <span
-                      className={`absolute -top-1 -right-1 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 backdrop-blur-sm ${
-                        cert.status === 'Certified'
-                          ? 'bg-emerald-500/10 text-emerald-300 ring-emerald-400/30'
-                          : 'bg-blue-500/10 text-blue-300 ring-blue-400/30'
-                      }`}
-                    >
-                      <BadgeCheck className="h-3 w-3" strokeWidth={2.25} />
-                      {cert.status}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-4 text-[15px] font-semibold text-white tracking-tight leading-snug">
-                    {cert.title}
-                  </h3>
-                  <p className="mt-1 text-xs font-medium text-blue-300/80">{cert.issuer}</p>
-
-                  <button
-                    onClick={() => setExpanded(isOpen ? null : idx)}
-                    className="mt-3 inline-flex items-center gap-1 text-[11px] font-medium text-gray-500 hover:text-gray-300"
-                  >
-                    {isOpen ? 'Show less' : 'Details'}
-                    <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  {isOpen && (
-                    <div className="mt-4 w-full border-t border-white/10 pt-4 text-left">
-                      <p className="text-[13px] text-gray-400 leading-relaxed">{cert.description}</p>
-
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        {cert.skills.map((s) => (
-                          <span key={s} className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-gray-300">
-                            {s}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="mt-4 flex items-center justify-between gap-2 text-xs">
-                        <span className="text-gray-500">
-                          {cert.date}
-                          {cert.expires && <span className="text-gray-600"> · Expires {cert.expires}</span>}
-                        </span>
-                        {cert.verificationUrl ? (
-                          <a
-                            href={cert.verificationUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex flex-shrink-0 items-center gap-1 text-blue-300 hover:text-blue-200"
-                          >
-                            Verify <ExternalLink className="h-3 w-3" />
-                          </a>
-                        ) : cert.credentialNote ? (
-                          <span className="flex-shrink-0 text-gray-500">{cert.credentialNote}</span>
-                        ) : null}
-                      </div>
-                    </div>
-                  )}
-                </GlassCard>
-              );
-            })}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((cert) => (
+              <BadgeTile key={cert.title} cert={cert} />
+            ))}
           </div>
         </section>
 
