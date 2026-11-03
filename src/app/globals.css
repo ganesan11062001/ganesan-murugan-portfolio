@@ -120,6 +120,21 @@ body {
   100% { transform: translateX(100%); }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(0.4em); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+.animate-marquee { animation: marquee var(--marquee-duration, 40s) linear infinite; }
+.animate-marquee-reverse { animation: marquee var(--marquee-duration, 40s) linear infinite reverse; }
+.marquee-pause:hover .animate-marquee,
+.marquee-pause:hover .animate-marquee-reverse { animation-play-state: paused; }
+.animate-word-in { animation: word-in 500ms cubic-bezier(.2,.8,.2,1) both; }
+
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-float-delayed { animation: float-delayed 8s ease-in-out infinite; }
 .animate-gradient { animation: gradient-shift 6s ease infinite; }
@@ -130,7 +145,10 @@ body {
   .animate-float,
   .animate-float-delayed,
   .animate-gradient,
-  .animate-pulse-soft {
+  .animate-pulse-soft,
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-word-in {
     animation: none !important;
   }
 }

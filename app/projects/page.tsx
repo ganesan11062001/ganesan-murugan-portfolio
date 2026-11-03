@@ -1,53 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
+  ArrowRight,
   Bot,
   Check,
+  ChevronLeft,
+  ChevronRight,
   Cpu,
   Database,
   Dna,
   FlaskConical,
+  Layers,
+  Mail,
+  Sparkles,
+  X,
 } from 'lucide-react';
 import PageShell from '../components/PageShell';
-import {
-  GlassCard,
-  GradientHeading,
-  HeroBadge,
-  SectionLabel,
-  StatTile,
-} from '../components/Section';
-
-function AnimatedCounter({
-  end,
-  duration = 2000,
-  suffix = '',
-}: {
-  end: number;
-  duration?: number;
-  suffix?: string;
-}) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    let startTime: number | undefined;
-    let frame: number;
-    const tick = (t: number) => {
-      if (!startTime) startTime = t;
-      const progress = Math.min((t - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(eased * end));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [end, duration]);
-  return (
-    <>
-      {count}
-      {suffix}
-    </>
-  );
-}
+import AnimatedCounter from '../components/AnimatedCounter';
+import { Marquee, SpotlightCard } from '../components/Effects';
+import { GradientHeading, HeroBadge, SectionLabel } from '../components/Section';
 
 type Category = 'Agentic AI' | 'Protein Design' | 'ML/AI' | 'Bioinformatics' | 'Genomics';
 
@@ -285,36 +257,354 @@ const projects: Project[] = [
   },
 ];
 
-const categories: ('All' | Category)[] = ['All', 'Agentic AI', 'Protein Design', 'ML/AI', 'Bioinformatics', 'Genomics'];
+const ORDER: Category[] = ['Agentic AI', 'Protein Design', 'ML/AI', 'Bioinformatics', 'Genomics'];
+const categories: ('All' | Category)[] = ['All', ...ORDER];
+
+const ACCENT: Record<Category, string> = {
+  'Agentic AI': '#a78bfa',
+  'Protein Design': '#38bdf8',
+  'ML/AI': '#fbbf24',
+  Bioinformatics: '#34d399',
+  Genomics: '#2dd4bf',
+};
+
+// Agentic AI first, then the rest in category order (stable within a category).
+const sorted = [...projects].sort((a, b) => ORDER.indexOf(a.category) - ORDER.indexOf(b.category));
+const FEATURED_TITLE = 'Multi-Agentic AI Platform for Multi-Omics Biomarker Discovery';
+const featured = sorted.find((p) => p.title === FEATURED_TITLE) ?? sorted[0];
+const allTech = Array.from(new Set(sorted.flatMap((p) => p.technologies)));
 
 // Tile images are sourced from Wikimedia Commons / public domain.
 // Several are CC BY / CC BY-SA, which requires attribution - see
 // public/projects/CREDITS.md for the source + license of each file.
 
+function CategoryPill({ category }: { category: Category }) {
+  const accent = ACCENT[category];
+  const Icon = categoryStyle[category].icon;
+  return (
+    <span
+      className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm"
+      style={{
+        color: accent,
+        background: `linear-gradient(${accent}26, ${accent}26), rgba(5,5,7,0.75)`,
+        boxShadow: `inset 0 0 0 1px ${accent}66`,
+      }}
+    >
+      <Icon className="h-3 w-3" strokeWidth={2.25} />
+      {category}
+    </span>
+  );
+}
+
+function ProjectModal({
+  project,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  project: Project;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  const accent = ACCENT[project.category];
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') onPrev();
+      if (e.key === 'ArrowRight') onNext();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [onClose, onPrev, onNext]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={project.title}
+    >
+      <div
+        className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-white/10 bg-[#0b0f1a]"
+        style={{ boxShadow: `0 0 80px -20px ${accent}80` }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header image */}
+        <div className="relative h-56 overflow-hidden md:h-64">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={project.image} alt="" className="h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f1a] via-[#0b0f1a]/50 to-transparent" />
+          <div
+            className="absolute inset-x-0 top-0 h-px"
+            style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
+          />
+          <button
+            ref={closeRef}
+            onClick={onClose}
+            aria-label="Close"
+            className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white ring-1 ring-white/20 transition hover:bg-black/80"
+          >
+            <X className="h-4 w-4" />
+          </button>
+          <div className="absolute inset-x-0 bottom-0 p-6">
+            <CategoryPill category={project.category} />
+            <h2 className="mt-3 text-xl font-semibold leading-snug tracking-tight text-white md:text-2xl">
+              {project.title}
+            </h2>
+            <p className="mt-1 text-xs font-medium text-gray-400">
+              <span style={{ color: accent }}>{project.type}</span> · {project.period}
+            </p>
+          </div>
+        </div>
+
+        <div className="p-6 pt-4">
+          <p className="text-[14px] leading-relaxed text-gray-300">{project.description}</p>
+
+          <h3 className="mt-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">Highlights</h3>
+          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+            {project.achievements.map((a) => (
+              <li
+                key={a}
+                className="flex gap-2 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-[13px] leading-relaxed text-gray-200"
+              >
+                <Check className="mt-0.5 h-4 w-4 flex-shrink-0" style={{ color: accent }} strokeWidth={2.5} />
+                <span>{a}</span>
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="mt-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">Stack</h3>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {project.technologies.map((t) => (
+              <span
+                key={t}
+                className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-gray-300"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
+            <button
+              onClick={onPrev}
+              className="inline-flex items-center gap-1 text-xs font-medium text-gray-400 hover:text-white"
+            >
+              <ChevronLeft className="h-4 w-4" /> Previous
+            </button>
+            <span className="text-[10px] uppercase tracking-widest text-gray-600">Esc to close · ← →</span>
+            <button
+              onClick={onNext}
+              className="inline-flex items-center gap-1 text-xs font-medium text-gray-400 hover:text-white"
+            >
+              Next <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectTile({ project, onOpen }: { project: Project; onOpen: () => void }) {
+  const accent = ACCENT[project.category];
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      onMouseMove={(e) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const r = e.currentTarget.getBoundingClientRect();
+        setTilt({ x: -((e.clientY - r.top) / r.height - 0.5) * 6, y: ((e.clientX - r.left) / r.width - 0.5) * 8 });
+      }}
+      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+      className="group relative block aspect-[4/5] w-full overflow-hidden rounded-2xl border border-white/10 text-left outline-none transition-[border-color,box-shadow] duration-300 hover:border-white/25 focus-visible:ring-2 focus-visible:ring-white/40"
+      style={{
+        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transition: 'transform 200ms ease-out, border-color 300ms, box-shadow 300ms',
+        boxShadow: tilt.x || tilt.y ? `0 20px 50px -20px ${accent}80` : undefined,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={project.image}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40" />
+      <div
+        className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{ background: `linear-gradient(to top, ${accent}38, transparent 65%)` }}
+      />
+      <div
+        className="absolute inset-x-0 top-0 h-px opacity-70"
+        style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
+      />
+
+      <div className="absolute left-4 top-4">
+        <CategoryPill category={project.category} />
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 p-5">
+        <p className="text-[11px] font-medium text-gray-400">
+          <span style={{ color: accent }}>{project.type}</span> · {project.period}
+        </p>
+        <h3 className="mt-1.5 line-clamp-2 text-[16px] font-semibold leading-snug tracking-tight text-white">
+          {project.title}
+        </h3>
+
+        {/* Revealed on hover */}
+        <div className="grid grid-rows-[0fr] transition-all duration-500 group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr]">
+          <div className="overflow-hidden">
+            <ul className="mt-3 space-y-1.5">
+              {project.achievements.slice(0, 2).map((a) => (
+                <li key={a} className="flex gap-1.5 text-[12px] leading-snug text-gray-200">
+                  <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0" style={{ color: accent }} strokeWidth={2.5} />
+                  <span>{a}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-3 flex flex-wrap gap-1">
+              {project.technologies.slice(0, 4).map((t) => (
+                <span key={t} className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-medium text-gray-200">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium" style={{ color: accent }}>
+          View details <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+        </span>
+      </div>
+    </button>
+  );
+}
+
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<'All' | Category>('All');
-  const filtered = activeFilter === 'All' ? projects : projects.filter((p) => p.category === activeFilter);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const filtered = activeFilter === 'All' ? sorted : sorted.filter((p) => p.category === activeFilter);
+
+  const close = useCallback(() => setOpenIdx(null), []);
+  const prev = useCallback(
+    () => setOpenIdx((i) => (i === null ? i : (i - 1 + filtered.length) % filtered.length)),
+    [filtered.length],
+  );
+  const next = useCallback(
+    () => setOpenIdx((i) => (i === null ? i : (i + 1) % filtered.length)),
+    [filtered.length],
+  );
+  const openFeatured = () => {
+    setActiveFilter('All');
+    setOpenIdx(sorted.indexOf(featured));
+  };
+
+  const fAccent = ACCENT[featured.category];
+  const agenticCount = projects.filter((p) => p.category === 'Agentic AI').length;
 
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-20 pb-24">
+      <div className="container mx-auto px-6 pt-16 pb-16">
         {/* Hero */}
         <section className="text-center">
-          <HeroBadge>Projects &amp; Research</HeroBadge>
-          <h1 className="mt-6 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
+          <HeroBadge>Projects &amp; Research · Agentic AI first</HeroBadge>
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
             <GradientHeading as="span">Projects</GradientHeading>
           </h1>
-          <p className="mt-6 mx-auto max-w-2xl text-base md:text-lg text-gray-400 leading-relaxed">
-            A mix of industry platforms, academic research, and personal projects - mostly centered on
-            protein design, multi-omics, agentic AI, and genomics.
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 md:text-lg">
+            Multi-agent LLM systems, fine-tuned models, and protein language model pipelines - plus the deep
+            learning and bioinformatics underneath them. Industry platforms, academic research, and personal builds.
           </p>
 
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
-            <StatTile value={<AnimatedCounter end={12} />} label="Projects" accent="from-blue-300 to-cyan-300" />
-            <StatTile value={<AnimatedCounter end={5} suffix="M+" />} label="Single-cell profiles" accent="from-emerald-300 to-teal-300" />
-            <StatTile value={<AnimatedCounter end={10} suffix="K+" />} label="Peptide variants" accent="from-violet-300 to-pink-300" />
-            <StatTile value={<AnimatedCounter end={60} suffix="%" />} label="Latency reduction" accent="from-amber-300 to-orange-300" />
+          <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { end: projects.length, suffix: '', label: 'Projects', c: '#60a5fa' },
+              { end: agenticCount, suffix: '', label: 'Agentic AI builds', c: '#a78bfa' },
+              { end: 60, suffix: '%', label: 'Latency reduction', c: '#fbbf24' },
+              { end: 10, suffix: 'K+', label: 'Peptide variants', c: '#38bdf8' },
+            ].map((st) => (
+              <SpotlightCard key={st.label} accent={st.c} className="p-4 text-center">
+                <p className="text-2xl font-bold tracking-tight" style={{ color: st.c }}>
+                  <AnimatedCounter end={st.end} suffix={st.suffix} />
+                </p>
+                <p className="mt-1 text-xs font-medium text-gray-400">{st.label}</p>
+              </SpotlightCard>
+            ))}
           </div>
+        </section>
+
+        {/* Featured spotlight */}
+        <section className="mt-16">
+          <button
+            type="button"
+            onClick={openFeatured}
+            className="group relative grid w-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] text-left backdrop-blur-xl transition-colors hover:border-white/25 lg:grid-cols-[1.1fr_1fr]"
+            style={{ boxShadow: `0 30px 80px -40px ${fAccent}90` }}
+          >
+            <div
+              className="relative h-64 overflow-hidden lg:h-auto lg:min-h-[360px]"
+              style={{ background: `radial-gradient(circle at 40% 50%, ${fAccent}30, transparent 70%), #0b0d14` }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={featured.image}
+                alt=""
+                className="absolute inset-0 h-full w-full object-contain p-8 opacity-90 transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-black/20 lg:to-[#0b0d14]" />
+              <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white ring-1 ring-white/20 backdrop-blur">
+                <Sparkles className="h-3 w-3 text-amber-300" />
+                Featured
+              </span>
+            </div>
+            <div className="relative p-7 md:p-9">
+              <div
+                className="absolute inset-x-0 top-0 h-px"
+                style={{ background: `linear-gradient(90deg, transparent, ${fAccent}, transparent)` }}
+              />
+              <CategoryPill category={featured.category} />
+              <h2 className="mt-4 text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl">
+                {featured.title}
+              </h2>
+              <p className="mt-2 text-xs font-medium text-gray-400">
+                <span style={{ color: fAccent }}>{featured.type}</span> · {featured.period}
+              </p>
+              <ul className="mt-5 space-y-2.5">
+                {featured.achievements.map((a) => (
+                  <li key={a} className="flex gap-2 text-[14px] leading-relaxed text-gray-200">
+                    <Check className="mt-1 h-4 w-4 flex-shrink-0" style={{ color: fAccent }} strokeWidth={2.5} />
+                    <span>{a}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {featured.technologies.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-gray-300"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <span className="mt-6 inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black transition-transform group-hover:scale-[1.02]">
+                Read the full story <ArrowRight className="h-4 w-4" />
+              </span>
+            </div>
+          </button>
         </section>
 
         {/* Filters */}
@@ -323,20 +613,25 @@ export default function Projects() {
             {categories.map((cat) => {
               const active = activeFilter === cat;
               const count = cat === 'All' ? projects.length : projects.filter((p) => p.category === cat).length;
+              const accent = cat === 'All' ? '#ffffff' : ACCENT[cat];
+              const Icon = cat === 'All' ? Layers : categoryStyle[cat].icon;
               return (
                 <button
                   key={cat}
-                  onClick={() => setActiveFilter(cat)}
-                  className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-                    active
-                      ? 'border-white/30 bg-white text-black'
-                      : 'border-white/10 bg-white/[0.04] text-gray-300 hover:border-white/25 hover:text-white'
+                  onClick={() => {
+                    setActiveFilter(cat);
+                    setOpenIdx(null);
+                  }}
+                  className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all ${
+                    active ? 'text-black' : 'border-white/10 bg-white/[0.04] text-gray-300 hover:border-white/25 hover:text-white'
                   }`}
+                  style={active ? { background: accent, borderColor: accent, boxShadow: `0 0 24px -6px ${accent}` } : undefined}
                 >
+                  <Icon className="h-3.5 w-3.5" strokeWidth={2} style={active ? undefined : { color: accent }} />
                   {cat}
                   <span
                     className={`rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${
-                      active ? 'bg-black/10 text-black/70' : 'bg-white/10 text-gray-400'
+                      active ? 'bg-black/15 text-black/70' : 'bg-white/10 text-gray-400'
                     }`}
                   >
                     {count}
@@ -349,101 +644,66 @@ export default function Projects() {
 
         {/* Project tiles */}
         <section className="mt-10">
-          <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((project) => {
-              const style = categoryStyle[project.category];
-              const Icon = style.icon;
-              return (
-                <GlassCard key={project.title} className="flex flex-col overflow-hidden">
-                  {/* Cover */}
-                  <div className={`relative h-40 shrink-0 overflow-hidden bg-gradient-to-br ${style.cover} bg-[#0b0b10] flex items-center justify-center p-4`}>
-                    <div
-                      className="absolute inset-0 opacity-30"
-                      style={{
-                        backgroundImage: 'radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)',
-                        backgroundSize: '14px 14px',
-                      }}
-                    />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={project.image}
-                      alt=""
-                      className="relative max-h-full max-w-full rounded-md object-contain shadow-lg"
-                    />
-                    <div className={`absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-lg ring-1 backdrop-blur-sm ${style.tint}`}>
-                      <Icon className="h-4 w-4" strokeWidth={1.75} />
-                    </div>
-                    <span className={`absolute top-3 right-3 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 backdrop-blur-sm ${style.tint}`}>
-                      {project.category}
+          <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((project, i) => (
+              <ProjectTile key={project.title} project={project} onOpen={() => setOpenIdx(i)} />
+            ))}
+          </div>
+        </section>
+
+        {/* Tech marquee */}
+        <section className="mt-20">
+          <p className="mb-4 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-500">
+            Built with
+          </p>
+          <div className="space-y-3">
+            {[allTech.slice(0, Math.ceil(allTech.length / 2)), allTech.slice(Math.ceil(allTech.length / 2))].map(
+              (row, ri) => (
+                <Marquee key={ri} reverse={ri === 1} duration={50 + ri * 10}>
+                  {row.map((t) => (
+                    <span
+                      key={t}
+                      className="flex-shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-gray-200"
+                    >
+                      {t}
                     </span>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex flex-1 flex-col p-5">
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-gray-500">
-                      <span className="font-medium text-blue-300/80">{project.type}</span>
-                      <span>· {project.period}</span>
-                    </div>
-                    <h2 className="mt-1.5 text-[15px] font-semibold text-white leading-snug tracking-tight line-clamp-2">
-                      {project.title}
-                    </h2>
-                    <p className="mt-2 text-[13px] text-gray-400 leading-relaxed line-clamp-3">
-                      {project.description}
-                    </p>
-
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {project.technologies.slice(0, 4).map((tech) => (
-                        <span
-                          key={tech}
-                          className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-medium text-gray-300"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 4 && (
-                        <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-medium text-gray-500">
-                          +{project.technologies.length - 4}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="mt-auto pt-4 border-t border-white/5">
-                      <p className="flex items-start gap-1.5 text-[12px] text-gray-300/90">
-                        <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-400" strokeWidth={2.5} />
-                        <span className="line-clamp-2">{project.achievements[0]}</span>
-                      </p>
-                    </div>
-                  </div>
-                </GlassCard>
-              );
-            })}
+                  ))}
+                </Marquee>
+              ),
+            )}
           </div>
         </section>
 
         {/* CTA */}
-        <section className="mt-28">
-          <GlassCard className="overflow-hidden">
-            <div className="relative p-10 md:p-14 text-center">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/40 to-transparent" />
+        <section className="mt-20">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-500/10 via-blue-500/10 to-emerald-500/10 p-10 text-center backdrop-blur-xl md:p-14">
+            <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-violet-500/20 blur-3xl" />
+            <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-emerald-500/15 blur-3xl" />
+            <div className="relative">
               <SectionLabel tone="purple">Want to dig deeper?</SectionLabel>
-              <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
+              <GradientHeading as="h2" className="mt-4 text-3xl font-semibold md:text-4xl">
                 Let&apos;s talk
               </GradientHeading>
-              <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+              <p className="mx-auto mt-4 max-w-2xl text-gray-400">
                 Happy to walk through any of these in detail - architecture, results, lessons learned.
               </p>
               <div className="mt-8">
                 <a
                   href="mailto:murugan.g@northeastern.edu"
-                  className="inline-flex items-center gap-2 rounded-lg bg-white text-black px-5 py-2.5 text-sm font-semibold transition-transform hover:scale-[1.02]"
+                  className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
                 >
+                  <Mail className="h-4 w-4" />
                   Get in touch
                 </a>
               </div>
             </div>
-          </GlassCard>
+          </div>
         </section>
       </div>
+
+      {openIdx !== null && filtered[openIdx] && (
+        <ProjectModal project={filtered[openIdx]} onClose={close} onPrev={prev} onNext={next} />
+      )}
     </PageShell>
   );
 }

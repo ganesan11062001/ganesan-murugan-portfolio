@@ -6,10 +6,10 @@ import {
   GraduationCap,
   Heart,
   Mail,
-  MapPin,
   Sparkles,
 } from 'lucide-react';
 import PageShell from '../components/PageShell';
+import JourneyTimeline, { type JourneyItem } from '../components/JourneyTimeline';
 import {
   GlassCard,
   GradientHeading,
@@ -49,62 +49,115 @@ function AnimatedCounter({
   );
 }
 
-const experiences = [
+const journey: JourneyItem[] = [
   {
-    title: 'Lead Graduate Research Assistant - Research Computing',
-    company: 'Northeastern University',
-    location: 'Boston, MA',
-    period: 'Jan 2026 – Present',
-    logo: '/COE.png',
-    accent: 'text-rose-300',
-  },
-  {
-    title: 'Programming Assistant - Lee Makowski Lab',
-    company: 'Northeastern University',
-    location: 'Boston, MA',
-    period: 'May 2025 – Present',
-    logo: '/COE.png',
-    accent: 'text-cyan-300',
-  },
-  {
-    title: 'Computational Biology, Predictive Sciences Co-op',
-    company: 'Solid Biosciences',
-    location: 'Charlestown, MA',
-    period: 'Jan 2026 – Aug 2026',
-    logo: '/solid-biosciences.png',
-    accent: 'text-blue-300',
-  },
-  {
-    title: 'Digital Transformation, Biotherapeutics Research Data & Automation',
-    company: 'Boehringer Ingelheim Pharmaceuticals',
-    location: 'Ridgefield, CT',
-    period: 'May 2025 – Aug 2025',
-    logo: '/BI.png',
-    accent: 'text-emerald-300',
-  },
-  {
-    title: 'Bioinformatics Teaching Assistant',
-    company: 'Northeastern University, College of Science',
-    location: 'Boston, MA',
-    period: 'Jan 2025 – Dec 2025',
-    logo: '/NCOS.jpg',
-    accent: 'text-violet-300',
-  },
-  {
-    title: 'Graduate Research Assistant - Ondrechen Research Group',
-    company: 'Northeastern University',
-    location: 'Boston, MA',
-    period: 'Sep 2024 – Apr 2025',
-    logo: '/COE.png',
-    accent: 'text-amber-300',
+    title: 'Bachelors (Biotechnology)',
+    org: 'Anna University',
+    location: 'Chennai, India',
+    start: 'Aug 2019',
+    end: 'May 2023',
+    kind: 'education',
+    logo: '/anna-university.png',
+    accent: '#f87171',
   },
   {
     title: 'Scientific Application Analyst',
-    company: 'Zifo Technologies',
+    chapter: 'Full-stack',
+    org: 'Zifo Technologies',
     location: 'Chennai, India',
-    period: 'Jan 2023 – Aug 2024',
-    logo: '/Zifo.webp',
-    accent: 'text-orange-300',
+    start: 'Jan 2023',
+    end: 'Aug 2024',
+    kind: 'work',
+    logo: '/zifo-logo.png',
+    accent: '#a3e635',
+  },
+  {
+    title: 'Masters (Bioinformatics)',
+    org: 'Northeastern University',
+    location: 'Boston, MA',
+    start: 'Sep 2024',
+    end: 'Dec 2026',
+    kind: 'education',
+    logo: '/NCOS.jpg',
+    accent: '#fb7185',
+  },
+  {
+    title: 'Graduate Research Assistant',
+    chapter: 'Structural bio',
+    org: 'Ondrechen Research Group',
+    location: 'Boston, MA',
+    start: 'Sep 2024',
+    end: 'Apr 2025',
+    kind: 'work',
+    logo: '/COE.png',
+    accent: '#fbbf24',
+  },
+  {
+    title: 'Bioinformatics Teaching Assistant',
+    chapter: 'Teaching',
+    org: 'Northeastern, College of Science',
+    location: 'Boston, MA',
+    start: 'Jan 2025',
+    end: 'Dec 2025',
+    kind: 'work',
+    logo: '/NCOS.jpg',
+    accent: '#a78bfa',
+  },
+  {
+    title: 'Digital Transformation Intern',
+    chapter: 'Full-stack · ML',
+    org: 'Boehringer Ingelheim',
+    location: 'Ridgefield, CT',
+    start: 'May 2025',
+    end: 'Aug 2025',
+    kind: 'work',
+    logo: '/BI.png',
+    accent: '#34d399',
+  },
+  {
+    title: 'Computational Biology Co-op',
+    chapter: 'PLMs · Agents',
+    org: 'Solid Biosciences',
+    location: 'Charlestown, MA',
+    start: 'Jan 2026',
+    end: 'Aug 2026',
+    kind: 'work',
+    logo: '/solid-biosciences.png',
+    accent: '#fb923c',
+  },
+  {
+    title: 'Programming Assistant',
+    chapter: 'Deep learning',
+    org: 'Lee Makowski Lab',
+    location: 'Boston, MA',
+    start: 'May 2025',
+    end: 'Present',
+    kind: 'work',
+    logo: '/COE.png',
+    accent: '#22d3ee',
+    status: 'current',
+  },
+  {
+    title: 'Lead Graduate Research Assistant',
+    chapter: 'Agentic AI',
+    org: 'Northeastern Research Computing',
+    location: 'Boston, MA',
+    start: 'Jan 2026',
+    end: 'Present',
+    kind: 'work',
+    logo: '/COE.png',
+    accent: '#f472b6',
+    status: 'current',
+  },
+  {
+    title: 'Graduating',
+    org: 'MS Bioinformatics · Northeastern',
+    location: 'Boston, MA',
+    start: 'Dec 2026',
+    kind: 'education',
+    logo: '/graduation-cap.png',
+    accent: '#facc15',
+    status: 'incoming',
   },
 ];
 
@@ -120,65 +173,86 @@ const highlights = [
 export default function About() {
   return (
     <PageShell>
-      <div className="container mx-auto px-6 pt-20 pb-24">
+      <div className="container mx-auto px-6 pt-16 pb-16">
         {/* Hero */}
         <section className="text-center">
-          <HeroBadge>About - Computational Biology &amp; AI</HeroBadge>
+          <HeroBadge>About - AI/ML · Agentic AI · Biology</HeroBadge>
           <h1 className="mt-6 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
             <GradientHeading as="span">About me</GradientHeading>
           </h1>
           <p className="mt-6 mx-auto max-w-3xl text-base md:text-lg text-gray-400 leading-relaxed">
-            MS Bioinformatics student at Northeastern building AI systems for drug discovery -
-            <span className="text-blue-300 font-medium"> agentic LLM platforms, multi-omics, protein design</span>,
-            and the infrastructure to run them at scale.
+            AI/ML engineer focused on <span className="text-violet-300 font-medium">agentic AI</span> -
+            multi-agent LLM systems, fine-tuning, and RAG - applied to biology through{' '}
+            <span className="text-emerald-300 font-medium">protein language models</span> and single-cell foundation
+            models. MS Bioinformatics at Northeastern.
           </p>
 
           <div className="mt-10 grid grid-cols-3 gap-3 max-w-2xl mx-auto">
-            <StatTile value={<AnimatedCounter end={5} suffix="M+" />} label="Single-cell profiles" accent="from-blue-300 to-cyan-300" />
-            <StatTile value={<AnimatedCounter end={100} suffix="+" />} label="Students mentored" accent="from-emerald-300 to-teal-300" />
-            <StatTile value={<AnimatedCounter end={12} suffix="K+" />} label="HPC users supported" accent="from-violet-300 to-pink-300" />
+            <StatTile value={<AnimatedCounter end={60} suffix="%" />} label="Latency cut by agents" accent="from-violet-300 to-pink-300" />
+            <StatTile value={<AnimatedCounter end={10} suffix="K+" />} label="PLM-designed peptides" accent="from-emerald-300 to-teal-300" />
+            <StatTile value={<AnimatedCounter end={12} suffix="K+" />} label="Users served by agentic RAG" accent="from-blue-300 to-cyan-300" />
           </div>
         </section>
 
         {/* Journey */}
-        <section className="mt-28">
-          <div className="text-center mb-12">
-            <SectionLabel tone="blue">My Journey</SectionLabel>
+        <section className="mt-20">
+          <div className="text-center mb-10">
+            <SectionLabel tone="blue">My Story</SectionLabel>
             <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
               From wet-lab beginnings to production AI
             </GradientHeading>
           </div>
 
           <div className="grid lg:grid-cols-5 gap-6">
-            {/* Story */}
-            <GlassCard className="p-7 lg:col-span-3">
-              <div className="space-y-4 text-[15px] text-gray-300 leading-relaxed">
-                <p>
-                  I started out as a{' '}
-                  <strong className="text-white">Biotechnology student at Anna University (9.4/10 CGPA)</strong>,
-                  where I got pulled into bioinformatics and data science. I liked the combination -
-                  you actually need to understand the biology to build the right software.
+            {/* Story + values */}
+            <div className="lg:col-span-3 flex flex-col gap-4">
+              <GlassCard className="p-7">
+                <div className="space-y-4 text-[15px] text-gray-300 leading-relaxed">
+                  <p>
+                    I started out as a{' '}
+                    <strong className="text-white">Biotechnology student at Anna University (9.4/10 CGPA)</strong>,
+                    where I got pulled into bioinformatics and data science. I liked the combination -
+                    you actually need to understand the biology to build the right software.
+                  </p>
+                  <p>
+                    So I started by building software - as a full-stack developer at Zifo and Boehringer
+                    Ingelheim. That&apos;s why I think of agents as software systems first.
+                  </p>
+                  <p>
+                    Now I&apos;m doing my{' '}
+                    <strong className="text-blue-300">MS in Bioinformatics at Northeastern (3.95/4.00)</strong>,
+                    building production-grade multi-agentic AI platforms with LangGraph, FastAPI and AWS Bedrock for
+                    multi-omics biomarker discovery - fine-tuning LLMs with QLoRA and DPO to cut hallucination rates
+                    from 34% to 8%, and designing de novo peptide sequences with ProteinMPNN, ThermoMPNN, Chai-1
+                    and Boltz-2 across 10,000+ variants.
+                  </p>
+                  <p>
+                    In parallel, I architect autonomous multi-agent RAG systems for HPC support serving{' '}
+                    <strong className="text-violet-300">12,000+ users</strong>, run deep learning pipelines for
+                    tau/tubulin gel image classification and IDP structure prediction.
+                  </p>
+                </div>
+              </GlassCard>
+              <GlassCard className="p-7 flex-1">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 ring-1 ring-violet-400/20">
+                    <Heart className="h-4 w-4 text-violet-300" strokeWidth={1.75} />
+                  </div>
+                  <h3 className="text-sm font-semibold text-white">What I care about</h3>
+                </div>
+                <p className="text-[14px] text-gray-400 leading-relaxed">
+                  I&apos;m most interested in problems where the biology is hard and the engineering is hard at the
+                  same time. Lately that means thinking about drug discovery less as a pipeline of one-off analyses
+                  and more as a closed loop - agents that reason over literature and experimental data, models that
+                  stay uncertain until the evidence says otherwise, and systems that get a little sharper with every
+                  new result. Drug discovery is a good place for that: models need to be correct, fast, and
+                  trustworthy. I want to keep building in this space.
                 </p>
-                <p>
-                  Now I&apos;m doing my{' '}
-                  <strong className="text-blue-300">MS in Bioinformatics at Northeastern (3.95/4.00)</strong>,
-                  building production-grade multi-agentic AI platforms with LangGraph, FastAPI and AWS Bedrock for
-                  multi-omics biomarker discovery - fine-tuning LLMs with QLoRA and DPO to cut hallucination rates
-                  from 34% to 8%, and designing de novo peptide sequences with ProteinMPNN, ThermoMPNN, Chai-1
-                  and Boltz-2 across 10,000+ variants.
-                </p>
-                <p>
-                  In parallel, I architect autonomous multi-agent RAG systems for HPC support serving{' '}
-                  <strong className="text-violet-300">12,000+ users</strong>, run deep learning pipelines for
-                  tau/tubulin gel image classification and IDP structure prediction, and previously built an
-                  end-to-end scRNA-seq + spatial transcriptomics platform (3M+ cells, scGPT/Geneformer
-                  fine-tuned on 5M+ profiles) during a biotech digital transformation internship.
-                </p>
-              </div>
-            </GlassCard>
+              </GlassCard>
+            </div>
 
             {/* Side cards */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 flex flex-col gap-4">
               <GlassCard className="p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 ring-1 ring-blue-400/20">
@@ -201,7 +275,7 @@ export default function About() {
                 </div>
               </GlassCard>
 
-              <GlassCard className="p-6">
+              <GlassCard className="p-6 flex-1">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 ring-1 ring-emerald-400/20">
                     <Award className="h-4 w-4 text-emerald-300" strokeWidth={1.75} />
@@ -218,75 +292,24 @@ export default function About() {
                 </ul>
               </GlassCard>
 
-              <GlassCard className="p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 ring-1 ring-violet-400/20">
-                    <Heart className="h-4 w-4 text-violet-300" strokeWidth={1.75} />
-                  </div>
-                  <h3 className="text-sm font-semibold text-white">What I care about</h3>
-                </div>
-                <p className="text-[13px] text-gray-400 leading-relaxed">
-                  I&apos;m most interested in problems where the biology is hard and the engineering is hard at the
-                  same time. Lately that means thinking about drug discovery less as a pipeline of one-off analyses
-                  and more as a closed loop - agents that reason over literature and experimental data, models that
-                  stay uncertain until the evidence says otherwise, and systems that get a little sharper with every
-                  new result. Drug discovery is a good place for that: models need to be correct, fast, and
-                  trustworthy. I want to keep building in this space.
-                </p>
-              </GlassCard>
             </div>
           </div>
         </section>
 
         {/* Experience timeline */}
-        <section className="mt-28">
-          <div className="text-center mb-12">
-            <SectionLabel tone="purple">Experience</SectionLabel>
+        <section className="mt-20">
+          <div className="text-center mb-10">
+            <SectionLabel tone="purple">Experience &amp; Education</SectionLabel>
             <GradientHeading as="h2" className="mt-4 text-3xl md:text-4xl font-semibold">
-              Where I&apos;ve worked
+              My Journey
             </GradientHeading>
           </div>
 
-          <div className="relative max-w-4xl mx-auto">
-            {/* Timeline rail */}
-            <div className="absolute left-6 top-2 bottom-2 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent hidden sm:block" />
-
-            <div className="space-y-3">
-              {experiences.map((exp) => (
-                <div key={exp.title} className="relative sm:pl-16">
-                  {/* Timeline dot */}
-                  <div className="absolute left-6 top-7 hidden sm:flex h-2 w-2 -translate-x-1/2 rounded-full bg-white/40 ring-4 ring-[#050507]" />
-                  <GlassCard className="p-4">
-                    <div className="flex items-center gap-4">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={exp.logo}
-                        alt={exp.company}
-                        className="h-11 w-11 flex-shrink-0 rounded-lg object-contain bg-white p-1.5"
-                      />
-                      <div className="min-w-0 flex-1">
-                        <h3 className="text-sm md:text-base font-semibold text-white truncate">
-                          {exp.title}
-                        </h3>
-                        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400">
-                          <span className={`font-medium ${exp.accent}`}>{exp.company}</span>
-                          <span className="inline-flex items-center gap-1">
-                            <MapPin className="h-3 w-3" />
-                            {exp.location}
-                          </span>
-                          <span className="text-gray-500">· {exp.period}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </GlassCard>
-                </div>
-              ))}
-            </div>
-          </div>
+          <JourneyTimeline items={journey} />
         </section>
 
         {/* CTA */}
-        <section className="mt-28">
+        <section className="mt-20">
           <GlassCard className="overflow-hidden">
             <div className="relative p-10 md:p-14 text-center">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
