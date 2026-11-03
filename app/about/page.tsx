@@ -99,7 +99,7 @@ const journey: JourneyItem[] = [
   },
   {
     title: 'Lead Graduate Research Assistant',
-    chapter: 'Agentic AI',
+    chapter: 'HPC · AI Agents',
     org: 'Northeastern Research Computing',
     location: 'Boston, MA',
     start: 'Jan 2026',
